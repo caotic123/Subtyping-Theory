@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(lambdapi check:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
