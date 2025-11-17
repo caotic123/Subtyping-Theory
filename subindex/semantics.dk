@@ -1,0 +1,46 @@
+
+universe : Type.
+fixed : Type.
+def symbol : Type.
+[] symbol --> fixed.
+
+nat : Type.
+Z : nat.
+S : nat -> nat.
+
+typed : universe -> Type.
+
+unit : Type.
+u : unit.
+
+indexes_type : Type.
+static_symbol : symbol -> indexes_type -> Type.
+
+mk_static_symbol : (ss : symbol) -> (indexs: indexes_type) -> static_symbol ss indexs -> universe.
+
+index_null : indexes_type.
+index_succ : universe -> indexes_type -> indexes_type.
+
+def unroll : indexes_type -> Type.
+[] unroll index_null --> unit
+[s, ts] unroll (index_succ s ts) --> P: (typed s) -> (unroll ts).
+
+signature : nat -> universe.
+
+(; here we could universe signature_universe : symbol -> nat -> Type so we could force that the signature shares the same symbol, but it's more funny this way ;)
+signature_bottom : (typed (signature Z)).
+signature_cons : (n : nat) -> universe -> (typed (signature n)) -> (typed (signature (S n))).
+
+def choose : (n : nat) -> typed (signature n) -> nat -> universe.
+[n, u] choose (S n) (signature_cons n u _) Z --> u.
+[n, i, rs] choose (S n) (signature_cons _ _ rs) (S i) --> choose n rs i.
+
+
+(; example nat ;)
+
+def nat_symbol : symbol.
+def Nat : Type.
+[] Nat --> (static_symbol nat_symbol index_null).
+z_nat : Nat.
+s_nat : Nat -> Nat.
+

@@ -1,0 +1,10 @@
+foo : Type.
+bar : Type.
+
+foo_: foo.
+bar_ : bar.
+
+def eqv : foo -> bar.
+[] eqv (foo_) --> bar_.
+
+#ASSERT (eqv foo_) == bar_.
