@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(lambdapi check:*)"
+      "Bash(lambdapi check:*)",
+      "Bash(pdflatex:*)",
+      "Bash(bibtex:*)",
+      "Bash(pdfinfo:*)"
     ],
     "deny": [],
     "ask": []

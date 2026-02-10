@@ -246,6 +246,11 @@ rule extracted_from_longer ↪ head Nat (succ z) nev_longer;
 
 assert ⊢ extracted_from_longer : typed Nat;
 
+// Test: Verify NonEmptyVector is a subtype of VectorSig (constructor subset subtyping)
+// This is the KEY relationship from the paper - NonEmptyVector has only 'cons', VectorSig has 'empty' and 'cons'
+assert ⊢ subtype (S Z) (S (S Z)) (NonEmptyVector Nat z) (VectorSig Nat (succ z)) : TYPE;
+assert ⊢ subtype (S Z) (S (S Z)) (NonEmptyVector Nat (succ z)) (VectorSig Nat (succ (succ z))) : TYPE;
+
 symbol NonZero: typed (signature (S Z));
 rule NonZero ↪ mk_signature (constructor_append Nat (constructor_null Nat)) succ_base;
 
@@ -406,3 +411,16 @@ assert ⊢ subtype (S Z) (S (S Z)) NonEmpty NatSig : TYPE;
 // Test: Cast a NonEmpty value to NatSig
 assert ⊢ cast (S Z) (S (S Z)) NonEmpty NatSig u (inject Z NonEmpty Nat (succ_base z_base))
   : typed (interpret (S (S Z)) NatSig);
+
+// Test: Cast NonEmptyVector values to VectorSig type using the subtyping relationship
+// This demonstrates the KEY contribution from the paper: NonEmptyVector values can be used where VectorSig values are expected
+symbol casted_nev : typed (interpret (S (S Z)) (VectorSig Nat (succ z)));
+rule casted_nev ↪ cast (S Z) (S (S Z)) (NonEmptyVector Nat z) (VectorSig Nat (succ z)) u nev_0;
+
+assert ⊢ casted_nev : typed (interpret (S (S Z)) (VectorSig Nat (succ z)));
+
+// Test: Cast another NonEmptyVector value
+symbol casted_nev_2 : typed (interpret (S (S Z)) (VectorSig Nat (succ z)));
+rule casted_nev_2 ↪ cast (S Z) (S (S Z)) (NonEmptyVector Nat z) (VectorSig Nat (succ z)) u nev_2;
+
+assert ⊢ casted_nev_2 : typed (interpret (S (S Z)) (VectorSig Nat (succ z)));
