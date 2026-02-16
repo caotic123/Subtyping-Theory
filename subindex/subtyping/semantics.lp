@@ -7,11 +7,15 @@ symbol typed : kind → TYPE;
 rule (typed set1) ↪ kind;
 constant symbol unit : TYPE;
 constant symbol u : unit;
+constant symbol nothing: kind;
+constant symbol par :  Π (k : kind) (k' : kind), kind;
+constant symbol mk_par : Π (k : kind) (k' : kind), typed (par k k');
 constant symbol indexes_type : TYPE;
 symbol static_symbol : indexes_type → kind;
 symbol arrow : kind → kind → kind;
 constant symbol sigma : Π (P : Π (k: kind), kind), TYPE;
 constant symbol mk_sigma : Π (P : Π (k: kind), kind) (k : kind), typed (P k) → (sigma P);
+
 
 constant symbol index_null : indexes_type;
 constant symbol index_succ : kind → indexes_type → indexes_type;
@@ -19,65 +23,63 @@ constant symbol index_succ : kind → indexes_type → indexes_type;
 rule (typed (static_symbol (index_null))) ↪ kind;
 rule (typed (static_symbol (index_succ $k $res))) ↪ Π (n : (typed $k)), (typed (static_symbol $res));
 
-symbol Constructors : Π (k: kind), typed k → typed k → unit;
-constant symbol signature : nat → kind;
-constant symbol signature_bottom : typed (signature Z);
+symbol pi_nul : kind;
+symbol pi_append : kind → kind → kind;
+
+rule typed (pi_nul) ↪ (typed nothing);
+rule typed (pi_append $k $a) ↪ Π (n : (typed $k)), (typed $a);
+
+symbol Constructor : Π (p: kind) (k: kind), kind;
+rule (typed (Constructor pi_nul $k)) ↪ (typed $k);
+rule (typed (Constructor (pi_append  ) $k)) ↪ typed $p → typed $k;
+
+constant symbol signature : nat → kind → kind;
+constant symbol signature_bottom : Π (k : kind), typed (signature Z k);
 constant symbol signature_cons
-  : Π (n : nat) (k : kind), typed k → typed (signature n) → typed (signature (S n));
-
-symbol constructor_null : Π (k : kind), kind;
-symbol constructor_append : kind → kind → kind;
-
-rule typed (constructor_null $k) ↪ (typed $k);
-rule typed (constructor_append $k $a) ↪ Π (n : (typed $k)), (typed $a);
-
-// set to return the signature type, and if there is a constructor by lookup the index
-symbol choose : Π (n : nat), typed (signature n) → nat → (sigma (λ (k : kind), k));
-rule choose (S $n) (signature_cons $n $k $p _) Z ↪ (mk_sigma (λ (k : kind), k) $k $p);
-rule choose (S $n) (signature_cons $n _ _ $rs) (S $i) ↪ choose $n $rs $i;
+  : Π (n : nat) (r: kind) (k : kind), typed (Constructor r k) → typed (signature n k) → typed (signature (S n) k);
 
 symbol Nat : typed (static_symbol index_null);
 
 // Declare NatSig first
-symbol NatSig : typed (signature (S (S Z)));
+symbol NatSig : typed (signature (S (S Z)) Nat);
 
 // Interpret a signature as a kind (type)
 // This creates a distinct type for each signature, preserving signature information
 // No reduction rules - interpret remains abstract to maintain distinctness
-symbol interpret : Π (n : nat), typed (signature n) → kind;
+symbol interpret : Π (n : nat) (k : kind), typed (signature n k) → kind;
 
 // Injection function: inject values from base types into signature types
 // Takes a value of a base type and wraps it as being typed by the signature
 // This is opaque - no reduction - maintaining type distinction
-symbol inject : Π (n : nat) (sig : typed (signature (S n))) (base : kind),
-  typed base → typed (interpret (S n) sig);
+symbol inject : Π (n : nat) (k : kind) (sig : typed (signature (S n) k)) (base : kind),
+  typed base → typed (interpret (S n) k sig);
 
 // Helper: convert a constructor kind to the type of its case handler
-// For constructor_null: the case takes no arguments, just returns typed Q
-// For constructor_append: the case takes an argument and continues
+// For pi_nul: the case takes no arguments, just returns typed Q
+// For pi_append: the case takes an argument and continues
 symbol constructor_case_type : kind → kind → TYPE;
-rule constructor_case_type (constructor_null $base) $Q ↪ typed $Q;
-rule constructor_case_type (constructor_append $arg $rest) $Q ↪
+rule constructor_case_type (pi_nul $base) $Q ↪ typed $Q;
+rule constructor_case_type (pi_append $arg $rest) $Q ↪
   Π (x : typed $arg), constructor_case_type $rest $Q;
 
 // Helper: type representing cases for all constructors in a signature
 // For signature_bottom (0 constructors): unit (no cases needed)
 // For signature with 1 constructor: just the case type
 // For signature with 2+ constructors: case for first, then Pi for rest
-symbol match_cases : Π (n : nat), typed (signature n) → kind → TYPE;
-rule match_cases Z signature_bottom $Q ↪ unit;
-rule match_cases (S Z) (signature_cons Z $k $p signature_bottom) $Q ↪
+symbol match_cases : Π (n : nat) (k : kind), typed (signature n k) → kind → TYPE;
+rule match_cases Z $k (signature_bottom $k) $Q ↪ unit;
+rule match_cases (S Z) $k (signature_cons Z $k $p (signature_bottom $k)) $Q ↪
   constructor_case_type $k $Q;
-rule match_cases (S (S $n)) (signature_cons (S $n) $k $p $rest) $Q ↪
-  Π (case : constructor_case_type $k $Q), match_cases (S $n) $rest $Q;
+rule match_cases (S (S $n)) $k (signature_cons (S $n) $r $k $p $rest) $Q ↪
+  Π (case : constructor_case_type $k $Q), match_cases (S $n) $k $rest $Q;
 
 // Match/case expression for interpreted signature values
 // Takes a value of type typed (interpret n sig) and cases for each constructor
 // Returns a result of type typed Q
 symbol match_interpret :
-  Π (n : nat) (sig : typed (signature n)) (Q : kind),
-  typed (interpret n sig) →  // Value to match on
-  match_cases n sig Q →      // Cases for each constructor in sig
+  Π (n : nat) (k : kind) (sig : typed (signature n k)) (Q : kind),
+  typed (interpret n k sig) →  // Value to match on
+  match_cases n k sig Q →      // Cases for each constructor in sig
   typed Q;
 
 // Base constructors for internal use only
@@ -85,20 +87,20 @@ symbol z_base : typed Nat;
 symbol succ_base : typed Nat → typed Nat;  // Base successor for internal signatures
 
 // Public constructors work on signature types
-symbol z : typed (interpret (S (S Z)) NatSig);
-rule z ↪ inject (S Z) NatSig Nat z_base;
+symbol z : typed (interpret (S (S Z)) Nat NatSig);
+rule z ↪ inject (S Z) Nat NatSig Nat z_base;
 
-symbol s : typed (interpret (S (S Z)) NatSig) → typed Nat;  // Destructor for NatSig
-symbol succ : typed (interpret (S (S Z)) NatSig) → typed (interpret (S (S Z)) NatSig);  // Successor for signature-typed Nat
+symbol s : typed (interpret (S (S Z)) Nat NatSig) → typed Nat;  // Destructor for NatSig
+symbol succ : typed (interpret (S (S Z)) Nat NatSig) → typed (interpret (S (S Z)) Nat NatSig);  // Successor for signature-typed Nat
+
+assert ⊢ (typed Nat) ≡ typed (Constructor nothing Nat);
 
 // Complete Nat signature with both z and s constructors
 rule NatSig ↪ signature_cons (S Z)
-                (constructor_null Nat)  // z constructor: no arguments, returns Nat
+                nothing
+                Nat  // z constructor: no arguments, returns Nat
                 z_base
-                (signature_cons Z
-                  (constructor_append (interpret (S (S Z)) NatSig) (constructor_null Nat))  // s constructor: takes signature-typed Nat, returns Nat
-                  s
-                  signature_bottom);
+                  (signature_bottom Nat);
 
 // Subtyping relation: signature_bottom is a subtype of everything,
 // and signature_cons inherits subtyping from its parent signature
@@ -124,10 +126,10 @@ symbol cons_base : Π (A : typed set1) (n : typed (interpret (S (S Z)) NatSig)),
 // Define VectorSig with empty and cons constructors
 // Each VectorSig A n describes operations for vectors of element type A and length n
 rule VectorSig $A $n ↪ signature_cons (S Z)
-  (constructor_null (Vector $A z))  // empty constructor: returns Vector A z
+  (pi_nul (Vector $A z))  // empty constructor: returns Vector A z
   (empty_base $A)
   (signature_cons Z
-    (constructor_append $A (constructor_append (interpret (S (S Z)) (VectorSig $A $n)) (constructor_null (Vector $A (succ $n)))))  // cons constructor
+    (pi_append $A (pi_append (interpret (S (S Z)) (VectorSig $A $n)) (pi_nul (Vector $A (succ $n)))))  // cons constructor
     (cons_base $A $n)
     signature_bottom);
 
@@ -149,7 +151,7 @@ symbol cons_vec_base : Π (A : typed set1) (n : typed (interpret (S (S Z)) NatSi
 
 symbol NonEmptyVector : Π (A : typed set1) (n : typed (interpret (S (S Z)) NatSig)), typed (signature (S Z));
 rule NonEmptyVector $A $n ↪ mk_signature
-  (constructor_append $A (constructor_append (interpret (S (S Z)) (VectorSig $A $n)) (constructor_null (Vector $A (succ $n)))))
+  (pi_append $A (pi_append (interpret (S (S Z)) (VectorSig $A $n)) (pi_nul (Vector $A (succ $n)))))
   (cons_vec_base $A $n);
 
 // Head function for non-empty vectors
@@ -252,7 +254,7 @@ assert ⊢ subtype (S Z) (S (S Z)) (NonEmptyVector Nat z) (VectorSig Nat (succ z
 assert ⊢ subtype (S Z) (S (S Z)) (NonEmptyVector Nat (succ z)) (VectorSig Nat (succ (succ z))) : TYPE;
 
 symbol NonZero: typed (signature (S Z));
-rule NonZero ↪ mk_signature (constructor_append Nat (constructor_null Nat)) succ_base;
+rule NonZero ↪ mk_signature (pi_append Nat (pi_nul Nat)) succ_base;
 
 // Constructor application: get a constructor from a signature
 // The constructor is typed by its kind (from the signature)
@@ -270,30 +272,30 @@ rule mk_constructor (S $n) (signature_cons (S $n) $k $p $rest) (S $i) ↪
 // NonEmpty signature - similar to NonZero, represents non-zero natural numbers
 // Has only the successor constructor
 symbol NonEmpty : typed (signature (S Z));
-rule NonEmpty ↪ mk_signature (constructor_append Nat (constructor_null Nat)) succ_base;
+rule NonEmpty ↪ mk_signature (pi_append Nat (pi_nul Nat)) succ_base;
 
 // Test: Verify that NonZero is a subtype of signature_bottom
 // The subtype relation should have type TYPE and reduce to unit
 assert ⊢ subtype (S Z) Z NonZero signature_bottom : TYPE;
 
 // Test: Get the z constructor from NatSig
-// Returns the z constructor with its type (constructor_null Nat)
+// Returns the z constructor with its type (pi_nul Nat)
 assert ⊢ mk_constructor (S Z) NatSig Z ≡
-  mk_sigma (λ (k : kind), k) (constructor_null Nat) z_base;
+  mk_sigma (λ (k : kind), k) (pi_nul Nat) z_base;
 
 // Test: Get the s constructor from NatSig (index 1)
 // The result is equivalent to using mk_signature directly
 assert ⊢ mk_constructor (S Z) NatSig (S Z) ≡
-  mk_sigma (λ (k : kind), k) (constructor_append (interpret (S (S Z)) NatSig) (constructor_null Nat)) s;
+  mk_sigma (λ (k : kind), k) (pi_append (interpret (S (S Z)) NatSig) (pi_nul Nat)) s;
 
 // Test: Get the s constructor from NonEmpty
 // Demonstrates that mk_constructor extracts the same constructor used in mk_signature
 assert ⊢ mk_constructor Z NonEmpty Z ≡
-  mk_sigma (λ (k : kind), k) (constructor_append Nat (constructor_null Nat)) succ_base;
+  mk_sigma (λ (k : kind), k) (pi_append Nat (pi_nul Nat)) succ_base;
 
 // Test: mk_signature creates the same signature as the explicit signature_cons
-assert ⊢ mk_signature (constructor_null Nat) z_base ≡
-  signature_cons Z (constructor_null Nat) z_base signature_bottom;
+assert ⊢ mk_signature (pi_nul Nat) z_base ≡
+  signature_cons Z (pi_nul Nat) z_base signature_bottom;
 
 // Test: Verify NonEmpty is a subtype of signature_bottom
 assert ⊢ subtype (S Z) Z NonEmpty signature_bottom : TYPE;
@@ -304,16 +306,16 @@ assert ⊢ NonEmpty ≡ NonZero;
 // Extract the s constructor from NonZero and verify it's the same s we use
 // This shows that (s z) is constructed using a constructor from NonZero
 assert ⊢ mk_constructor Z NonZero Z ≡
-  mk_sigma (λ (k : kind), k) (constructor_append Nat (constructor_null Nat)) succ_base;
+  mk_sigma (λ (k : kind), k) (pi_append Nat (pi_nul Nat)) succ_base;
 
 // Similarly for NonEmpty - the s constructor is contained in it
 assert ⊢ mk_constructor Z NonEmpty Z ≡
-  mk_sigma (λ (k : kind), k) (constructor_append Nat (constructor_null Nat)) succ_base;
+  mk_sigma (λ (k : kind), k) (pi_append Nat (pi_nul Nat)) succ_base;
 
 // Test: interpret preserves signature information - no reduction
 // Different signatures create different types
 symbol JustZero : typed (signature (S Z));
-rule JustZero ↪ mk_signature (constructor_null Nat) z_base;
+rule JustZero ↪ mk_signature (pi_nul Nat) z_base;
 
 // Test: Using inject to type values by signatures
 // inject now requires specifying the base type (Nat) explicitly

@@ -3,50 +3,65 @@
 \bibitem{AspinallCompagnoni}
 D.~Aspinall and A.~Compagnoni.
 \newblock Subtyping dependent types.
-\newblock In {\em Proceedings 11th Annual IEEE Symposium on Logic in Computer Science}, pages 86--97, 1996.
-\newblock \href {https://doi.org/10.1109/LICS.1996.561307} {\path{doi:10.1109/LICS.1996.561307}}.
+\newblock In {\em Proceedings 11th Annual IEEE Symposium on Logic in Computer
+  Science}, pages 86--97, 1996.
+\newblock \href {https://doi.org/10.1109/LICS.1996.561307}
+  {\path{doi:10.1109/LICS.1996.561307}}.
 
 \bibitem{barthe}
 Gilles Barthe.
 \newblock Order-sorted inductive types.
 \newblock {\em Information and Computation}, 149(1):42--76, 1999.
-\newblock URL: \url{https://www.sciencedirect.com/science/article/pii/S0890540198927511}, \href {https://doi.org/10.1006/inco.1998.2751} {\path{doi:10.1006/inco.1998.2751}}.
+\newblock URL:
+  \url{https://www.sciencedirect.com/science/article/pii/S0890540198927511},
+  \href {https://doi.org/https://doi.org/10.1006/inco.1998.2751}
+  {\path{doi:https://doi.org/10.1006/inco.1998.2751}}.
 
 \bibitem{BatheGillesFradeMaria}
 Gilles Barthe and Maria Jo\~{a}o Frade.
 \newblock Constructor subtyping.
-\newblock In {\em Proceedings of the 8th European Symposium on Programming Languages and Systems}, ESOP '99, page 109–127, Berlin, Heidelberg, 1999. Springer-Verlag.
+\newblock In {\em Proceedings of the 8th European Symposium on Programming
+  Languages and Systems}, ESOP '99, page 109–127, Berlin, Heidelberg, 1999.
+  Springer-Verlag.
 
 \bibitem{fluet2005practical}
 Matthew Fluet and Riccardo Pucella.
-\newblock Practical datatype specializations with phantom types and recursion schemes, 2005.
-\newblock \href {https://arxiv.org/abs/cs/0510074} {\path{arXiv:cs/0510074}}.
+\newblock Practical datatype specializations with phantom types and recursion
+  schemes, 2005.
+\newblock \href {http://arxiv.org/abs/cs/0510074} {\path{arXiv:cs/0510074}}.
 
 \bibitem{mariaJoaoFrade}
 Maria~Jo{\~a}o Frade.
-\newblock Type-based termination of recursive definitions and constructor subtyping in typed lambda calculi.
+\newblock Type-based termination of recursive definitions and constructor
+  subtyping in typed lambda calculi.
 \newblock 2003.
 \newblock URL: \url{https://api.semanticscholar.org/CorpusID:115763806}.
 
 \bibitem{jenkins2019elaborating}
 Christopher Jenkins, Colin McDonald, and Aaron Stump.
-\newblock Elaborating inductive definitions and course-of-values induction in cedille, 2019.
-\newblock \href {https://arxiv.org/abs/1903.08233} {\path{arXiv:1903.08233}}.
+\newblock Elaborating inductive definitions and course-of-values induction in
+  cedille, 2019.
+\newblock \href {http://arxiv.org/abs/1903.08233} {\path{arXiv:1903.08233}}.
 
 \bibitem{MarmadukeJenkinsStump}
 Andrew Marmaduke, Christopher Jenkins, and Aaron Stump.
 \newblock Zero-cost constructor subtyping.
-\newblock In Olaf Chitil, editor, {\em IFL 2020: 32nd Symposium on Implementation and Application of Functional Languages, Virtual Event / Canterbury, UK, September 2-4, 2020}, pages 93--103. ACM, 2020.
-\newblock \href {https://doi.org/10.1145/3462172.3462194} {\path{doi:10.1145/3462172.3462194}}.
+\newblock In Olaf Chitil, editor, {\em IFL 2020: 32nd Symposium on
+  Implementation and Application of Functional Languages, Virtual Event /
+  Canterbury, UK, September 2-4, 2020}, pages 93--103. ACM, 2020.
+\newblock \href {https://doi.org/10.1145/3462172.3462194}
+  {\path{doi:10.1145/3462172.3462194}}.
 
 \bibitem{MarquesFloridoVasconcelos2024}
 Rodrigo Marques, M{\'a}rio Florido, and Pedro Vasconcelos.
 \newblock Towards algebraic subtyping for extensible records, 2024.
-\newblock URL: \url{https://arxiv.org/abs/2407.06747}, \href {https://arxiv.org/abs/2407.06747} {\path{arXiv:2407.06747}}.
+\newblock URL: \url{https://arxiv.org/abs/2407.06747}, \href
+  {http://arxiv.org/abs/2407.06747} {\path{arXiv:2407.06747}}.
 
 \bibitem{martin2021intuitionistic}
 Per Martin-L{\"o}f.
-\newblock Intuitionistic type theory by per martin-l{\"o}f. notes by giovanni sambin of a series of lectures given in padova, june 1980.
+\newblock Intuitionistic type theory by per martin-l{\"o}f. notes by giovanni
+  sambin of a series of lectures given in padova, june 1980.
 \newblock 2021.
 
 \bibitem{Nordlander987777}
@@ -54,17 +69,21 @@ Johan Nordlander.
 \newblock Polymorphic subtyping in o'haskell.
 \newblock {\em Science of Computer Programming}, 43(2-3):93--127, 2002.
 \newblock Validerad; 2002; 20070227 (ysko).
-\newblock \href {https://doi.org/10.1016/S0167-6423(02)00026-6} {\path{doi:10.1016/S0167-6423(02)00026-6}}.
+\newblock \href {https://doi.org/10.1016/S0167-6423(02)00026-6}
+  {\path{doi:10.1016/S0167-6423(02)00026-6}}.
 
 \bibitem{Norell2007TowardsAP}
 Ulf Norell.
-\newblock Towards a practical programming language based on dependent type theory.
+\newblock Towards a practical programming language based on dependent type
+  theory.
 \newblock 2007.
 \newblock URL: \url{https://api.semanticscholar.org/CorpusID:118357515}.
 
 \bibitem{Saillard}
 Ronan Saillard.
-\newblock Typechecking in the lambda-pi-calculus modulo : Theory and practice. (v{\'e}rification de typage pour le lambda-pi-calcul modulo : th{\'e}orie et pratique).
+\newblock Typechecking in the lambda-pi-calculus modulo : Theory and practice.
+  (v{\'e}rification de typage pour le lambda-pi-calcul modulo : th{\'e}orie et
+  pratique).
 \newblock 2015.
 \newblock URL: \url{https://api.semanticscholar.org/CorpusID:2853829}.
 

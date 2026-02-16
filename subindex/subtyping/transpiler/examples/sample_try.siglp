@@ -1,0 +1,20 @@
+// Minimal surface-language sample
+Inductive nat : TYPE ≔
+| _0 : nat
+| +1 : nat → nat;
+
+Inductive vec : Set → {nat | 0 | 1} → TYPE ≔
+| empty : Π (s : Set), vec s _0
+| cons : Π (s : Set) (n : nat), vec s n → lift s → vec s (+1 n);
+
+Def id_sig : Π (v : nat), {vec nat v | cons | empty} → {vec nat v | cons | empty} :=
+  λ (v : nat) (m : {vec nat v | cons | empty}), m;
+
+Def head_nonempty : Π (v : nat), {vec nat (+1 v) | cons} → {nat | 0 | +1} :=
+  λ (v : nat) (m : {vec nat (+1 v) | cons}),
+    match m as {vec nat (+1 v) | cons} return {nat | 0 | +1} with
+    | cons k => (+1 _0)
+    end;
+
+Def vec_to_nonempty_append : Π (v : nat), {vec nat v | cons | empty} → nat → {vec nat (+1 v) | cons} :=
+  λ (v : nat) (m : {vec nat v | cons | empty}) (x : nat), cons v m x;

@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2023)
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: paper.aux
 The style file: plainurl.bst
@@ -13,16 +13,16 @@ Warning--empty journal in martin2021intuitionistic
 Warning--empty booktitle in Norell2007TowardsAP
 Warning--empty booktitle in Saillard
 You've used 12 entries,
-            2943 wiz_defined-function locations,
-            981 strings with 13016 characters,
-and the built_in function-call counts, 5332 in all, are:
-= -- 562
+            2882 wiz_defined-function locations,
+            970 strings with 12980 characters,
+and the built_in function-call counts, 5283 in all, are:
+= -- 550
 > -- 154
 < -- 3
-+ -- 57
++ -- 55
 - -- 43
-* -- 246
-:= -- 735
+* -- 256
+:= -- 726
 add.period$ -- 46
 call.type$ -- 12
 change.case$ -- 57
@@ -31,21 +31,21 @@ cite$ -- 16
 duplicate$ -- 177
 empty$ -- 548
 format.name$ -- 43
-if$ -- 1434
+if$ -- 1422
 int.to.chr$ -- 0
 int.to.str$ -- 12
 missing$ -- 9
 newline$ -- 71
 num.names$ -- 26
-pop$ -- 148
+pop$ -- 144
 preamble$ -- 1
 purify$ -- 45
 quote$ -- 0
 skip$ -- 402
 stack$ -- 0
-substring$ -- 168
+substring$ -- 158
 swap$ -- 60
-text.length$ -- 13
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 48
