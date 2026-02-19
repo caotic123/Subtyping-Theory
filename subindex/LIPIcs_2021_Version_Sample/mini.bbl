@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{AspinallCompagnoni}
+D.~Aspinall and A.~Compagnoni.
+\newblock Subtyping dependent types.
+\newblock In {\em Proceedings 11th Annual IEEE Symposium on Logic in Computer
+  Science}, pages 86--97, 1996.
+\newblock \href {https://doi.org/10.1109/LICS.1996.561307}
+  {\path{doi:10.1109/LICS.1996.561307}}.
+
+\bibitem{Saillard}
+Ronan Saillard.
+\newblock Typechecking in the lambda-pi-calculus modulo : Theory and practice.
+  (v{\'e}rification de typage pour le lambda-pi-calcul modulo : th{\'e}orie et
+  pratique).
+\newblock 2015.
+\newblock URL: \url{https://api.semanticscholar.org/CorpusID:2853829}.
+
+\end{thebibliography}
