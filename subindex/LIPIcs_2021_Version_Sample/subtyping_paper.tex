@@ -210,7 +210,7 @@
 \lstset{style=mystyle}
 
 % Title and author information
-\title{Constructor subtyping with indexed types}
+\title{First-Class Constructor Subsets for Pattern Matching on Indexed Families}
 
 \author{Tiago Campos}{UFMG, Brazil}{camposferreiratiago@gmail.com}{https://orcid.org/0000-0002-1825-0097}{}
 
@@ -233,8 +233,7 @@ Pattern matching is a powerful feature of functional and dependently typed langu
 
 We present a subtyping discipline for constructor subsets, where first-class signatures describe which constructors of a family are available. These signatures make the intended subset explicit at the type level, enabling pattern matching to rule out impossible branches without generating spurious obligations. Our prototype indicates that this approach can eliminate many trivial proof obligations while preserving type safety.
 
-We implement our encoding in Lambdapi and test it against a fragment of the type system. Building on this implementation, we also develop a small proof assistant that uses constructor-subset subtyping.
-
+We implemented a small proof assistant that supports constructor subsets (signatures), and we developed a small prototype that translates its theory to the Lambdapi framework. We can encode the entire type system in fewer than 600 lines, supporting our claim that the approach is simple and lightweight.
 
 %Edit: Clarified (in the Introduction below) what ``available'' means operationally: signatures constrain the \emph{outermost} constructor observed by pattern matching, which is exactly what removes unreachable branches without forcing deep/recursive constructor closure.
 \end{abstract}
@@ -249,7 +248,7 @@ One common technique is to maintain the original datatype together with a propos
 Constructor subtyping has been explored in other settings. In O'Haskell~\cite{Nordlander987777}, records and algebraic datatypes can be equipped with an optional subtyping relation inferred from the usage of constructors and fields. For example, a non-empty list type can be extended with an empty constructor to obtain a standard list type. More recent work on zero-cost constructor subtyping in Cedille~\cite{MarmadukeJenkinsStump,jenkins2019elaborating}, on order-sorted inductive types and overloading~\cite{BatheGillesFradeMaria,barthe}, and on algebraic subtyping for extensible records~\cite{MarquesFloridoVasconcelos2024} shows how rich subtyping disciplines can be added to strongly typed systems. However, these systems are tailored to specific core calculi or to non-dependent settings, and do not directly address the combination of constructor subtyping with indexed families in a general dependently typed setting.
 
 %Edit: Clarified the intended meaning of constructor subsets to match the operational goal (coverage of pattern matching) and the later examples.
-In this paper we focus on a simple but expressive fragment of constructor subtyping aimed at eliminating trivial proof obligations. Rather than allowing arbitrary constructor overloading, we work with \emph{constructor subsets}: first-class types of the form $\{T :: \Phi\}$, where $T$ is an inductive family and $\Phi$ is a finite list of its constructors. Intuitively, $\{T :: \Phi\}$ denotes those values of $T$ whose \emph{outermost (head) constructor}, when inspected in canonical form, is drawn from $\Phi$. This is the information that coverage checking for pattern matching consumes directly, and it is exactly what makes types such as ``non-empty lists'' inhabited (the tail may still be empty). We restrict attention to subtyping relations induced by inclusion of constructor sets and by compatibility of the indices of $T$.
+In this paper we focus on a simple but expressive fragment of constructor subtyping aimed at eliminating trivial proof obligations. Rather than allowing arbitrary constructor overloading, we work with \emph{constructor subsets}: first-class types of the form $\{T :: \Phi\}$, where $T$ is an inductive family and $\Phi$ is a finite list of its constructors. Intuitively, $\{T :: \Phi\}$ denotes those values of $T$ whose \emph{outermost (head) constructor}, when inspected in canonical form, is drawn from $\Phi$. This is the information that coverage checking for pattern matching consumes directly, and it is exactly what makes types such as ``non-empty lists'' inhabited (the tail may still be empty). 
 
 Our contributions are as follows.
 \begin{itemize}
@@ -259,7 +258,9 @@ Our contributions are as follows.
 \end{itemize}
 
 \paragraph*{Structure of the paper.}
-Section~\ref{sec:rules} introduces the core type system and subtyping rules. Section~\ref{sec:cases} presents case studies illustrating how constructor subsets simplify programming with indexed families. Section~\ref{sec:implementation} sketches the implementation and discusses practical considerations, and Section~\ref{sec:conclusion} concludes with directions for future work.
+Section~\ref{sec:rules} introduces the core type system and subtyping rules.
+Section~\ref{sec:cases} presents case studies illustrating how constructor subsets simplify programming with indexed families.
+Section~\ref{sec:implementation} sketches the implementation and discusses practical considerations, and Section~\ref{sec:conclusion} concludes with directions for future work.
 
 \begin{figure}
 \begin{lstlisting}[language=Coq]
@@ -318,8 +319,8 @@ Given such a telescope and a type family $T$, we write $T\,\Delta$ for the appli
 To refer to individual arguments in a telescope we use subscripts: if $\Delta = (a_{1} : A_{1})\dots(a_{n} : A_{n})$ then $\Delta_i$ denotes $(a_i : A_i)$ and $\Delta^{*}_{i}$ denotes the corresponding index, for $1 \leq i \leq n$. For a term $T$ we use the side condition $T_{\beta\eta}$ to indicate that we inspect the $\beta\eta$-normal form of $T$.
 
 We write $\mathcal{C}_{\text{all}}$ for the finite set of static constructor declarations provided by the programmer. 
-A static definition is a name of the constructor, notice that we do not care how constructors are labeled, we only need to know when they are equal, one may use unique names or hashes for that.
-The order of static definitions is stored in $\mathcal{C}_{\text{all}}$; in particular, mutually recursive definitions can be handled by first registering every constructor in $\mathcal{C}_{\text{all}}$ and only then checking the rules below. A \emph{signature} $\Phi$ is a finite list of constructor names drawn from $\mathcal{C}_{\text{all}}$, and a type of the form $\{T\,\Delta^{*} :: \Phi\}$ maps each constructor in $\Phi$ to the restricted type $T\,\Delta^{*}$. We use a side predicate $\mathsf{AGAINST}(\Delta^{*},\Delta'^{*})$, defined later in this section, to ensure that indices in different constructors remain compatible. Because $\mathcal{C}_{\text{all}}$ is finite, the side conditions that test membership in $\mathcal{C}_{\text{all}}$ are decidable.
+A static definition stores a constructor name. We do not rely on any particular labeling scheme; we only need to decide constructor equality, so one may use unique names or hashes.
+The order of static definitions is stored in $\mathcal{C}_{\text{all}}$; in particular, mutually recursive definitions can be handled by first registering every constructor in $\mathcal{C}_{\text{all}}$ and only then checking the rules below. A \emph{signature} $\Phi$ is a finite list of constructor names drawn from $\mathcal{C}_{\text{all}}$, and a type of the form $\{T\,\Delta^{*} :: \Phi\}$ maps each constructor in $\Phi$ to the restricted type $T\,\Delta^{*}$. Formation is intentionally liberal: signatures may include constructors that are incompatible with the current index instance $\Delta^{*}$, which yields uninhabited refinements but does not introduce inconsistency. We use a side predicate $\mathsf{AGAINST}$ only for elimination-time pruning (Rule~7), not for signature formation. Because $\mathcal{C}_{\text{all}}$ is finite, the side conditions that test membership in $\mathcal{C}_{\text{all}}$ are decidable.
 
 %Edit: The rules below were rewritten to make the quantification over constructors and their result indices explicit (the intended meaning of the original rules), while preserving the same information/content.
 \begin{center}
@@ -327,8 +328,7 @@ The order of static definitions is stored in $\mathcal{C}_{\text{all}}$; in part
 
 \inferrule* [left=Rule 1]{%
 \Gamma \vdash T\:\Delta^{*} : Type \quad \Phi = (C_{1}, \ldots, C_{n}) \quad (C_{1} \ldots C_{n}) \subseteq \mathcal{C}_{\text{all}} \\
-\forall i,\, 1 \le i \le n,\ \Gamma \vdash C_{i} : \Delta_{i} \rightarrow T\:\Delta_{i}'^{*} \\
-\forall i,\, 1 \le i \le n,\ \forall j,\, 1 \le j \le |\Delta^{*}|,\ \mathsf{AGAINST}(\Delta^{*}_{j},\:\Delta_{i,j}'^{*})%
+\forall i,\, 1 \le i \le n,\ \Gamma \vdash C_{i} : \Delta_{i} \rightarrow T\:\Delta_{i}'^{*}%
 }{%
 \Gamma \vdash \{T \Delta^{*} :: \Phi \} : Type%
 } \\
@@ -341,7 +341,7 @@ The order of static definitions is stored in $\mathcal{C}_{\text{all}}$; in part
 
 %Edit: Rule 3 was rewritten for clarity: it introduces a constructor application into the corresponding signature type when the constructor is listed in the signature and the result indices match (up to $\beta\eta$) the signature's indices.
 \inferrule* [left=Rule 3, right=$C\:\in\:\mathcal{C}_{\text{all}}$]{%
-\Gamma \vdash T\:\Delta^{*} : Type \quad \Phi = (C_{1}, \ldots, C_{n}) \\
+\Gamma \vdash T\:\Delta^{*} : Type \\
 \Gamma\:\vdash\:C:\Delta_{C} \rightarrow T\:\Delta_{C}'^{*} \quad C \in \Phi \\
 \Gamma \vdash \overrightarrow{u} : \Delta_C \\
 (T\:\Delta_{C}'^{*}[\overrightarrow{u}/\Delta_C])_{\beta\eta} = (T\:\Delta^{*})_{\beta\eta}%
@@ -351,7 +351,7 @@ The order of static definitions is stored in $\mathcal{C}_{\text{all}}$; in part
 
 %Edit: Rule 4 kept the original intent but makes the index application of $T$/$T'$ explicit.
 \inferrule* [left=Rule 4]{%
-(T\:\Delta^{*})=_{\beta\eta}(T'\:\Delta^{*}) \quad \Phi' \subseteq \Phi%
+(T\:\Delta^{*})_{\beta\eta} = (T'\:\Delta^{*})_{\beta\eta} \quad \Phi' \subseteq \Phi%
 }{%
 \Gamma \vdash \{T' \Delta^{*} :: \Phi' \} \sqsubseteq \{T \Delta^{*} :: \Phi \}%
 } \\
@@ -361,8 +361,8 @@ The order of static definitions is stored in $\mathcal{C}_{\text{all}}$; in part
 \end{mathpar}
 \end{center}
 
-\paragraph*{Rule 5 (algorithmic only).}
-We keep the following rule as an implementation-level checking convenience (not part of the declarative calculus above). It is derivable from standard application typing plus subsumption:
+\paragraph*{Rule 5}
+We keep the following rule as an implementation-level checking convenience (not part of the declarative calculus above). It is derivable from standard application typing plus subsumption, but it is convenient to have it as a direct check in the implementation to avoid unnecessary normalization if $F$ is not a constructor application:
 \begin{mathpar}
 \inferrule* [left=Rule 5, right=$F\notin\mathcal{C}_{\text{all}}$]{%
 \Gamma \vdash F : \Delta \rightarrow A \\
@@ -375,40 +375,60 @@ We keep the following rule as an implementation-level checking convenience (not 
 
 A term annotated as $T_{\beta\eta}$ is considered in $\beta\eta$-normal form. In practice we only normalize enough to inspect the outermost constructor when applying Rule~3 (and the algorithmic Rule~5 check in the implementation); there is no global requirement that all terms be strongly normalizing. The choice of how aggressively to normalize is left to the implementation and presents the usual trade-off between completeness of simplification and performance.
 
-It is trivial to see that $\text{cons}\:\Delta$ has type $\{\text{Vector}\:\Delta^* :: |\text{cons}\}$. One may either infer this type and then check it against some expected type $T$, or attempt to check $\text{cons}\:\Delta$ directly against $T$. In our prototype we follow the former strategy—first infer, then check—because it tends to reduce the number of normalisation steps needed during type checking.
+It is straightforward to see that $\text{cons}\:\Delta$ has type $\{\text{Vector}\:\Delta^* :: |\text{cons}\}$. One may either infer this type and then check it against an expected type $T$, or attempt to check $\text{cons}\:\Delta$ directly against $T$. In our prototype we follow the former strategy, inferring first and checking second, because it tends to reduce the number of normalization steps needed during type checking.
 
 %Edit: Added a short operational reading to align the rules with the coverage-checking motivation and the head-constructor interpretation stated in the Introduction.
 \paragraph*{Operational reading.}
 Under the usual canonical forms lemma for inductive values, a closed value of a signature type $\{T\:\Delta^{*} :: \Phi\}$ reduces (in weak head normal form) to a constructor application $C\:\overrightarrow{u}$ with $C \in \Phi$ and $(T\:\Delta_{C}'^{*}[\overrightarrow{u}/\Delta_C])_{\beta\eta} = (T\:\Delta^{*})_{\beta\eta}$. Thus, signature types refine \emph{which head constructors} can appear at a given program point, exactly the information required to remove unreachable branches in pattern matching.
 
-The \textsc{Against} rule ensures that indices can be properly generalized to avoid false positive subtyping that would result in empty types. Consider, for instance, a type signature $T$ defined as:
+Signatures may contain constructors that are incompatible with the current indices. For example,
+\[
+T \coloneqq \{\text{Vector}\:A\:(S\;N)\:::\:|\text{empty}|\text{cons}\}
+\]
+is well-formed, but $\text{empty}$ cannot inhabit $T$. These trivial subsets are harmless: they are simply uninhabited refinements, and there is no rule that introduces $\{T\:\Delta^{*}::\Phi\}$ from $T\:\Delta^{*}$ without constructor evidence.
 
-\begin{mathpar}
-T \coloneqq \{\text{Vector}\:A\:0\:::\:|\text{cons}\}
-\end{mathpar}
+To eliminate unreachable branches in pattern matching, we define a pruned constructor list:
+\begin{math}
+\Phi_{\mathsf{ok}}
+\;\coloneqq\;
+\mathsf{OK}(\Gamma,T,\Delta^{*},\Phi)
+\;\equiv\; 
+\bigl[\; C \in \Phi \ \big|\ 
+  C \in \mathcal{C}_{\text{all}}
+  \ \land\ 
+  \Gamma \vdash C : \Delta_C \rightarrow T\,\Delta_C'^{*}
+  \ \land\ \\
+  \forall j \in \{1,\dots,|\Delta^{*}|\}.\;
+    \mathsf{AGAINST}\bigl((\Delta^{*}_j),(\Delta_{C,j}'^{*})\bigr)
+\;\bigr]
+\end{math}, where $\Delta^{*}$ denotes the index tuple of type $T$.
 
-Such a type $T$ leads to trivial proofs in dependent pattern matching unification—precisely what we aim to avoid, since $T$ has no inhabitants, as can be trivially observed. More generally, any type constructor $B$ can be represented as the bottom type $\bot$ if it takes the form $\{B\:::\:|\emptyset\}$. 
-
-The intuitionistic logical explosion can be obtained through these types, commonly represented as $\Gamma, B \vdash A$, where $A$ is any proposition \cite{martin2021intuitionistic}. It is important to note that while $\{B\:::\:|\emptyset\}$ is intuitionistically explosive, its subtype $B$ remains inoffensive. This property offers significant potential for representing proofs while preserving consistency, even when dealing with bottom types. We will discuss these properties in greater detail in the following sections.
-
-%Edit: Rewrote the lead-in to AGAINST to state it as a (decidable) matching/generalization relation, while preserving the original rules verbatim below.
-Now we can introduce the $\mathsf{AGAINST}$ rules that try to generalize indexed datatypes between constructors. Operationally, $\mathsf{AGAINST}(p,t)$ can be read as a \emph{first-order matching} or \emph{generalization} check: the signature indices $p$ (which may contain variables) must be general enough to accommodate the constructor result indices $t$. This is a predicate, so indexed values of different constructors have to respect these rules. The equality $=_{\alpha}$ simply means the alpha-equivalence relation. 
-
-\begin{mathpar}
-\inferrule* []{ }{\mathsf{AGAINST}(\emptyset, \emptyset)}
-\inferrule* []{\mathsf{AGAINST}(\Delta, \Delta') \quad v\:is\:Var}{\mathsf{AGAINST}(v\:...\:\Delta, c\:...\:\:\Delta')} \\
-
-\inferrule* []{\mathsf{AGAINST}(\Delta, \Delta') \quad (c, c') \subseteq \mathcal{C}_{\text{all}} \quad \quad c\:\Delta^{c} =_{\alpha} \:c' \Delta^{c'} }{\mathsf{AGAINST}((c\:\Delta^{c}) \:...\:\Delta, (c'\:\Delta^{c'}) \:...\:\Delta')} \\
-
-\end{mathpar}
+The predicate $\mathsf{AGAINST}$ is given below:
+\[
+\mathsf{AGAINST}(p,t) \text{ is defined by the following decision procedure:}
+\]
+\[
+\mathsf{AGAINST}(p,t) \;\equiv\;
+\begin{cases}
+\top
+  & \text{if } p \text{ is a variable} \\
+\bigwedge_{i=1}^{k}\mathsf{AGAINST}(p_i,t_i)
+  & \text{if } p = c\,p_1\ldots p_k \text{ and } t = c\,t_1\ldots t_k \\
+\bot
+  & \text{if } p = c\,\overrightarrow{p'} \text{ and } t = c'\,\overrightarrow{t'}
+    \text{ with } c \neq c' \\
+\top
+  & \text{otherwise.}
+\end{cases}
+\]
 
 Rule~2 allows us to forget signature information at the same index instance: any value of type $\{T\:\Delta^{*} :: \Phi' \}$ can be viewed as a value of the underlying type $T\:\Delta^{*}$. In this sense constructor subsets behave like \emph{phantom types}~\cite{fluet2005practical}: the extra information carried by the signature is present at type-checking time but is not reflected in the runtime representation of values.
 	
-Though phantom types are not widely known across programming languages—being primarily used in Haskell—they possess important properties for representing types that carry no information during runtime; that is, they are purely erased types~\cite{fluet2005practical}. In our system there is no dedicated elimination rule for pure phantom signatures, and Rule~7 only permits case analysis on signatures that still expose constructors.
+Although phantom types are not widely known across programming languages and are used primarily in Haskell, they have important properties for representing types that carry no runtime information; that is, they are purely erased types~\cite{fluet2005practical}. In our system, there is no dedicated elimination rule for pure phantom signatures, and Rule~7 only permits case analysis on signatures that still expose constructors.
 
 A constructor $C$ must adhere to certain restrictions in its definition. For example, the signature (i.e., a type $\{T\:\Delta^* \:::\:\Phi\}$) cannot occur freely in $C$. This restriction prohibits constructor types such as $\text{succ}:\{\text{nat} :: |\text{succ}\:|\:0\} \rightarrow \{\text{nat} :: |\text{succ}\:|\:0\}$, which would lead to problematic self-reference, as $\text{succ}$ would require itself in its own definition.
 
-It is important to note that even $succ: nat \rightarrow nat$ constitutes an invalid definition in this system. This is because the predecessor is a phantom type; therefore, for $C$ to satisfy the inductive criteria, a signature must occur freely only in the positive position in the $\Delta$ of $\text{succ}$.
+It is important to note that even $succ: nat \rightarrow nat$ constitutes an invalid definition in this system. This is because its predecessor argument is a phantom type; therefore, for $C$ to satisfy the inductive criteria, a signature must occur freely only in a positive position in the $\Delta$ of $\text{succ}$.
 
 %Edit: Added a clarifying remark about what is (and is not) covered regarding positivity/inductive well-formedness, without removing the original discussion.
 \paragraph*{Remark (inductive well-formedness).}
@@ -419,47 +439,107 @@ We do not cover index matching (from dependent (co)pattern matching) rules and c
 \begin{center}
 \begin{mathpar}
 \inferrule* [left=Rule 7]{%
-\Gamma \vdash T\:\Delta^* : Type \quad \Gamma \vdash Q : Type \\
-\Phi = (C_{1}, ..., C_{n}) \\
-\Gamma \vdash M :\{T\:\Delta^* :: \Phi\} \\
-\forall i,\ 1 \le i \le n,\ \Gamma \vdash C_i : \Delta_i \rightarrow T\:\Delta_i'^* \\
-\forall i,\ 1 \le i \le n,\ \Gamma \vdash N_{i} : \Delta_{i} \rightarrow Q%
+\Gamma \vdash T\:\Delta^* : Type
+\quad
+\Gamma \vdash Q : Type
+\\
+\Gamma \vdash M :\{T\:\Delta^* :: \Phi\}
+\quad
+\Phi_{\mathsf{ok}} = \mathsf{OK}(\Gamma,T,\Delta^{*},\Phi)
+\\
+\Phi_{\mathsf{ok}} \subseteq \Psi \subseteq \Phi
+\quad
+\Psi = (D_{1},\ldots,D_{m})
+\\
+\forall k,\ 1 \le k \le m,\ 
+\Gamma \vdash D_{k} : \Delta_{D_k} \rightarrow T\:\Delta_{D_k}'^*
+\\
+\forall k,\ 1 \le k \le m,\ 
+\Gamma \vdash N_{k} : \Delta_{D_k} \rightarrow Q%
 }{%
-\Gamma \vdash case\:M\:of\:Q\:\{C_{i}\:\Delta_{i} => N_{i}\:\Delta_{i} {,}...\}: Q%
+\Gamma \vdash
+\textsf{case}\; M\; \textsf{of}\; Q\;
+\{\, D_{k}\,\Delta_{D_k} \Rightarrow N_{k}\,\Delta_{D_k} \,\}_{k=1}^{m}
+: Q%
 } \\
 \end{mathpar}
 \end{center}
 
-It's easy to see that the first-class $\{T\:\Delta:: \Phi\}$ corresponds to the types discussed above with type constructors specialization. The advantage is that eliminates any form of proposition holding these types. In proof assistants like Coq, this could be seen as the elimination of some proof obligation steps.  
+Rule~7 requests branches only for constructors in a branch list $\Psi$ that covers the obviously compatible constructors: $\Phi_{\mathsf{ok}} \subseteq \Psi \subseteq \Phi$. In practice one chooses $\Psi = \Phi_{\mathsf{ok}}$, which removes unreachable branches while keeping the rule conservative.
+There is yet a fancy way of dealing with signatures that contains trivial subsets, we could normalize them to their pruned version $\Phi_{\mathsf{ok}}$.
+We model this as an optional normalization step $\longrightarrow_{\phi}$ on signature types.
+
+Any conservative $\mathsf{AGAINST}$ definition that is sound for pruning is admissible: 
+if it rejects a constructor at some index position, then Rule~3's index equality cannot hold for that constructor at those indices.
+
+\begin{mathpar}
+\inferrule*[left=\textsc{Norm}$_\phi$]{
+  \Phi_{\mathsf{ok}} = \mathsf{OK}(\Gamma,T,\Delta^{*},\Phi)
+}{
+  \{T\,\Delta^{*} :: \Phi\} \longrightarrow_{\phi} \{T\,\Delta^{*} :: \Phi_{\mathsf{ok}}\}
+}
+\end{mathpar}
+
+As a further (optional) convenience, one may treat $\phi$-normalization as part of
+definitional equality. We write $\Gamma \vdash A \equiv_{\beta\eta\phi} B$ for
+conversion that closes $\beta\eta$-conversion with $\phi$-simplification on signatures.
+This can be read operationally as: normalize both sides by $\beta\eta$ and repeatedly
+apply \textsc{Norm}$_\phi$ at signature nodes, then compare up to $\alpha$-equivalence.
+We do not develop the meta-theory of $\equiv_{\beta\eta\phi}$ in this paper; although still simple to adhere to. In fact, many rules will be just simplified.
+It is presented as a design option that matches the implementation strategy of keeping signatures pruned. Although there is a cost of augmenting the complexity of the formalism, since you need to carry a new conversion relation.
+
+\begin{mathpar}
+\inferrule*[left=Eq$_\phi$]{
+  \Phi_{\mathsf{ok}} = \mathsf{OK}(\Gamma,T,\Delta^{*},\Phi)
+}{
+  \Gamma \vdash \{T\,\Delta^{*} :: \Phi\} \equiv_{\beta\eta\phi} \{T\,\Delta^{*} :: \Phi_{\mathsf{ok}}\}
+}
+\end{mathpar}
+
+\begin{mathpar}
+\inferrule* [left=Conversion$_\phi$]
+{\Gamma \vdash t : A \\
+ \Gamma \vdash B : s \\
+ \Gamma \vdash A \equiv_{\beta\eta\phi} B}
+{\Gamma \vdash t : B}
+\end{mathpar}
+
+$\equiv_{\beta\eta\phi}$ is the smallest congruence containing $\beta\eta$-conversion modulo $\mathrm{Eq}_{\phi}$. We state some properties of the rules 1-7 the system above:
 
 %Edit: The statement below is preserved but clarified: the ``$\simeq$'' correspondence is best understood as an external encoding/translation into a host theory with $\Sigma$-types; the reverse direction is not derivable in the presented core rules without an additional refinement-introduction principle.
 \begin{theorem}[Head-constructor refinement]
-Let $T$ be an inductive family with constructor set $C$, and let $S \subseteq C$.
-Define $D : T \to Type$ by inspecting only the \emph{head constructor} of
+Let $T$ be an inductive family with constructor set $C$, and let $\Phi \subseteq C$ be a signature at indices $\Delta^{*}$.
+Assume
+\[
+  \Gamma \vdash \{T\:\Delta^{*}::\Phi\} : Type
+  \quad\text{and}\quad
+  \Phi = \Phi_{\mathsf{ok}}.
+\]
+Define $D : T\:\Delta^{*} \to Type$ by inspecting only the \emph{head constructor} of
 the canonical form: for each constructor application $C'\,\overrightarrow{u}$,
 \[
   D(C'\,\overrightarrow{u}) \;\equiv\;
   \begin{cases}
-    \top & \text{if } C' \in S,\\
-    \bot & \text{if } C' \notin S.
+    \top & \text{if } C' \in \Phi,\\
+    \bot & \text{if } C' \notin \Phi.
   \end{cases}
 \]
 Then there is a definable map
 \[
-  f : \{T :: S\} \to \Sigma(x:T), D(x).
+  f : \{T\:\Delta^{*}::\Phi\} \to \Sigma(x:T\:\Delta^{*}), D(x).
 \]
 Moreover, in any host theory that validates refinement introduction
-(from $x:T$ and $D(x)$ to $x:\{T::S\}$), this map is part of an
-isomorphism $\{T::S\} \simeq \Sigma(x:T), D(x)$.
+(from $x:T\:\Delta^{*}$ and $D(x)$ to $x:\{T\:\Delta^{*}::\Phi\}$), this map is part of an
+isomorphism $\{T\:\Delta^{*}::\Phi\} \simeq \Sigma(x:T\:\Delta^{*}), D(x)$.
 \end{theorem}
-\begin{proof}[Proof sketch]
+\begin{proof}
 Define $f(x) \coloneqq (x, \star)$.
 To justify $\star : D(x)$, use the canonical-forms property for signature
-types: if $x : \{T::S\}$ is a value, its canonical form is
-$C\,\overrightarrow{u}$ with $C \in S$, hence $D(C\,\overrightarrow{u}) \equiv \top$.
+types: if $x : \{T\:\Delta^{*}::\Phi\}$ is a value, its canonical form is
+$C\,\overrightarrow{u}$ with $C \in \Phi$, hence $D(C\,\overrightarrow{u}) \equiv \top$.
 
 For the converse direction, assume refinement introduction:
-from $(y,d) : \Sigma(x:T), D(x)$ we obtain $y : \{T::S\}$ and define
+from $(y,d) : \Sigma(x:T\:\Delta^{*}), D(x)$ we obtain $y : \{T\:\Delta^{*}::\Phi\}$ and define
 $g(y,d) \coloneqq y$. Then $f$ and $g$ are mutually inverse.
 \end{proof}
 
@@ -487,17 +567,17 @@ $g(y,d) \coloneqq y$. Then $f$ and $g$ are mutually inverse.
   {case\:(C_{i}\:\Delta' )\:of\:Q\:\{C_{i}\:\Delta_{i} \Rightarrow N_{i}\:\Delta_{i} {,}...\} \longrightarrow N_i\:\Delta'}
 \end{mathpar}
 
-Metavariables \(M,N,S\) range over terms; \(V,W\) range over values (constructors in WHNF).
+Metavariables \(M,N,S\) range over terms; \(V,W\) range over values (lambda abstractions or constructor applications in WHNF).
 In the rule \(\xi\)-case above, the symbols \(v,v'\) denote arbitrary terms (not values).
 
 \begin{theorem}[Progress]
 If $\cdot \vdash M : \{T\:\Delta^{*} :: \Phi\}$, then either $M$ is a value or there exists $M'$ such that $M \longrightarrow M'$.
 \end{theorem}
-\begin{proof}[Proof sketch]
+\begin{proof}
 We reason by structural induction on $M$ and case analysis on its form.
 \begin{itemize}
 \item \emph{Application $M = M_1 \cdot M_2$.} If either $M_1$ or $M_2$ is not a value, the induction hypothesis yields $M_i'$ with $M_i \longrightarrow M_i'$, and we use the corresponding congruence rule $\xi$-app$_i$ to obtain a step for $M$. Otherwise both $M_1$ and $M_2$ are values. If $M_1$ is a lambda abstraction $\lambda x. N$, we can perform a $\beta$-reduction step. If $M_1$ is a constructor, then $M$ is already a value (an applied constructor) and the conclusion holds.
-\item \emph{Case expression $M = \text{case}\;v\;\text{of}\;Q\;\{C_i\:\Delta_i \Rightarrow N_i\:\Delta_i, \ldots\}$.} If $v$ is not a value, the induction hypothesis gives $v'$ with $v \longrightarrow v'$, and we use rule $\xi$-case. If $v$ is a value, then by typing rule~7 we have $v : \{T\:\Delta^{*} :: \Phi\}$. There must be some pattern $C_i : \Delta_i$ that matches $v$: by Rule~3 we know that the head constructor of $v$ lies in $\Phi$, and by Rule~7 we have a corresponding branch for every constructor listed in $\Phi$. In this situation we can apply rule $\xi$-case' and $M$ takes a step.
+\item \emph{Case expression $M = \text{case}\;v\;\text{of}\;Q\;\{C_i\:\Delta_i \Rightarrow N_i\:\Delta_i, \ldots\}$.} If $v$ is not a value, the induction hypothesis gives $v'$ with $v \longrightarrow v'$, and we use rule $\xi$-case. If $v$ is a value, typing gives $v : \{T\:\Delta^{*} :: \Phi\}$, so by canonical forms $v = C\,\overrightarrow{u}$ with $C \in \Phi$ and matching result indices. Therefore $C$ is not rejected by $\mathsf{AGAINST}$, hence $C \in \Phi_{\mathsf{ok}}$. Rule~7 requires a branch list $\Psi$ such that $\Phi_{\mathsf{ok}} \subseteq \Psi$, so the branch for $C$ is present and we apply \(\xi\)-case'.
 \item \emph{Other forms.} For variables, constructors, and abstractions the canonical forms analysis from the typing rules shows that well-typed closed terms of signature type are either values or reduce by one of the cases above.
 \end{itemize}
 In all cases, a closed term of type $\{T\:\Delta^{*} :: \Phi\}$ is either a value or can take a reduction step.
@@ -506,13 +586,15 @@ In all cases, a closed term of type $\{T\:\Delta^{*} :: \Phi\}$ is either a valu
 \begin{theorem}[Preservation]
 If $\Gamma \vdash M : R$ and $M \longrightarrow M'$, then $\Gamma \vdash M' : R$.
 \end{theorem}
-\begin{proof}[Proof sketch]
+\begin{proof}
 We proceed by induction on the evaluation derivation, considering the last reduction rule used.
 \begin{itemize}
 \item \emph{$\beta$-reduction.} If $M = (\lambda x. N) \cdot V$ and $M' = N[x := V]$, typing gives $\Gamma \vdash \lambda x. N : (x : A) \rightarrow B$ and $\Gamma \vdash V : A$. By the substitution lemma we obtain $\Gamma \vdash N[x := V] : B[x := V]$, which is the same type as $M$.
 \item \emph{$\xi$-app$_1$ and $\xi$-app$_2$.} In these cases we reduce a proper subterm of $M$. The induction hypothesis states that the reduced subterm preserves its type; reapplying the application typing rule reconstructs a typing derivation for $M'$ with the same type $R$.
 \item \emph{$\xi$-case.} Here $M = \text{case}\;v\;\text{of}\;Q\;\{\dots\}$ and $M' = \text{case}\;v'\;\text{of}\;Q\;\{\dots\}$ with $v \longrightarrow v'$. By the induction hypothesis $\Gamma \vdash v' : \{T\:\Delta^{*} :: \Phi\}$, and Rule~7 then re-establishes $\Gamma \vdash M' : Q = R$.
-\item \emph{$\xi$-case'.} In this case $M = \text{case}\;(C_i\:\Delta')\;\text{of}\;Q\;\{\dots\}$ reduces to $M' = N_i\:\Delta'$. Typing rule~7 requires that for each branch we have $\Gamma \vdash N_i : \Delta_i \rightarrow Q$, and that $C_i : \Delta_i \rightarrow T\:\Delta^*$. Instantiating with the actual arguments $\Delta'$ shows that $M'$ has type $Q$, the same type as $M$.
+\item \emph{$\xi$-case'.} In this case $M = \text{case}\;(C_i\:\Delta')\;\text{of}\;Q\;\{\dots\}$ reduces to $M' = N_i\:\Delta'$. Rule~7 gives $\Phi_{\mathsf{ok}} \subseteq \Psi \subseteq \Phi$ for the branch list and typing premises $\Gamma \vdash N_k : \Delta_{D_k} \rightarrow Q$ for every $D_k \in \Psi$. By canonical forms on the scrutinee, the head constructor satisfies $C_i \in \Phi_{\mathsf{ok}}$, hence $C_i \in \Psi$ and the corresponding branch exists. Instantiating with the actual arguments $\Delta'$ yields $\Gamma \vdash N_i\:\Delta' : Q$, so $M'$ has the same type as $M$.
+
+
 \end{itemize}
 All other reduction rules follow the same pattern: either a proper subterm reduces and the induction hypothesis applies, or a local computation such as $\beta$-reduction is justified by the typing rules. In each case the result has the same type $R$ as the original term.
 \end{proof}
@@ -532,6 +614,8 @@ We introduce a minimal language and its implementation to demonstrate the subtyp
 \end{figure}
 
 \paragraph{Mini-language overview.}
+We built a proof assistant in Haskell and implemented the type system described above, along with other features such as unification.
+
 Programs consist of a sequence of \emph{static declarations} followed by regular statements. Static declarations register constructors in $\mathcal{C}_{\text{all}}$ (Rule~1), whereas dynamic statements bind names to terms typed by the rules from Section~\ref{sec:rules}. Terms use the usual $\lambda$-abstractions, function types, applications, and pattern matches; the only novelty is that constructor signatures $\{T :: \Phi\}$ appear explicitly in types. These informal descriptions suffice for the examples below; the full concrete syntax is implemented in the prototype but omitted here.
 
 We exploit the capability to operate with dynamically defined constructor subsets without requiring trivial proof obligations. Since datatype signatures are first-class inhabitants in our system, we can instantiate varying constructor sets through definition aliasing. The following declarations register constructors for lists and expose two different signatures:
@@ -622,7 +706,7 @@ Nat :: {nat :: |0 |+1}.
 \end{lstlisting}
 
 Here the predecessor of \texttt{+1} would live in $\{nat :: |0 | +1\}$ but the constructor type mentions only the phantom \texttt{nat}. The checker's algorithmic Rule~5 rejects this definition, forcing us to use the recursive variant below:
-	
+
 \begin{lstlisting}[
 caption={Recursive definition accepted by the algorithmic Rule 5 check},
 language=ML,
@@ -639,11 +723,59 @@ Static 0 : nat.
 Static +1 : Nat> nat.
 Nat :: {nat :: |0 |+1}.
 \end{lstlisting}
-Because the predecessor now mentions the signature \texttt{Nat}, Rule~3 can derive the constructor typing judgment while the \textsf{AGAINST} predicate keeps indices aligned. This also demonstrates how $\{T :: \Phi\}$ can refer to itself without reintroducing the proof obligations we set out to eliminate~\cite{martin2021intuitionistic}.
+Because the predecessor now mentions the signature \texttt{Nat}, Rule~3 can derive the constructor typing judgment directly. The pruning function used by Rule~7 then removes obviously incompatible branches when matching on such signatures, avoiding unnecessary proof obligations~\cite{martin2021intuitionistic}.
 
 \section{Implementation}
 \label{sec:implementation}
-Our implementation now has two components. The backend encoding in Lambdapi (\texttt{encode.lp}, 666 lines) defines signatures, constructor-list well-formedness, subtyping checks, and signature-directed elimination on top of the $\lambda \Pi$ calculus modulo rewriting~\cite{Saillard}. The frontend transpiler (\texttt{Main.hs}, 956 lines) parses a restricted surface syntax and lowers it to backend terms. Both components are in \texttt{subindex/subtyping/}. The lowering mirrors Rules~1--7 from Section~\ref{sec:rules}. Signature annotations become \texttt{signature\_term}. Constructor introductions become \texttt{signature\_intro}. Signature-only matches become \texttt{signature\_case}. Appendix~\ref{app:transpiler} shows representative input and generated output.
+Our implementation now has three components.
+The first component is the minimal language implemented above, which supports inductive datatypes in a superset of the $\lambda \Pi$ calculus modulo (Figure~\ref{fig:lambdapi-figure3}).
+
+\begin{figure}[h]
+\begin{center}
+\begin{mathpar}
+\inferrule* [left=Sort]{ }{\Gamma;\Delta \vdash Type : Kind}
+
+\inferrule* [left=Variable]{(x : A) \in \Delta}{\Gamma;\Delta \vdash x : A}
+
+\inferrule* [left=Constant]{(c : A) \in \Gamma}{\Gamma;\Delta \vdash c : A}
+
+\inferrule* [left=Application]
+{\Gamma;\Delta \vdash t : \Pi x : A.\,B \\ \Gamma;\Delta \vdash u : A}
+{\Gamma;\Delta \vdash t\,u : B[x/u]}
+
+\inferrule* [left=Abstraction]
+{\Gamma;\Delta \vdash A : Type \\ \Gamma;\Delta(x : A) \vdash t : B \\ B \neq Kind}
+{\Gamma;\Delta \vdash \lambda x : A.\,t : \Pi x : A.\,B}
+
+\inferrule* [left=Product]
+{\Gamma;\Delta \vdash A : Type \\ \Gamma;\Delta(x : A) \vdash B : s}
+{\Gamma;\Delta \vdash \Pi x : A.\,B : s}
+
+\inferrule* [left=Conversion]
+{\Gamma;\Delta \vdash t : A \\ \Gamma;\Delta \vdash B : s \\ A \equiv_{\beta\Gamma} B}
+{\Gamma;\Delta \vdash t : B}
+\end{mathpar}
+\end{center}
+\caption{Typing rules for terms in the $\lambda\Pi$-calculus Modulo (Figure~3 in~\cite{Saillard}).}
+\label{fig:lambdapi-figure3}
+\end{figure}
+
+The backend encoding in Lambdapi (\texttt{encode.lp}, about 600 lines) defines signatures, constructor-list well-formedness, subtyping checks, and signature-directed elimination on top of the $\lambda \Pi$ calculus modulo rewriting~\cite{Saillard}; it is a shallow encoding of the rules from Section~\ref{sec:rules}. 
+The frontend transpiler parses a restricted surface syntax and lowers it to backend terms. In fact, it transpiles only a fragment of the minimal language proposed, but this is enough to demonstrate the simplicity and expressiveness of the system.
+The lowering mirrors Rules~1--7 from Section~\ref{sec:rules}. Signature annotations become \texttt{signature\_term}. Constructor introductions become \texttt{signature\_intro}. Signature-only matches become \texttt{signature\_case}. Appendix~\ref{app:transpiler} shows representative input and generated output.
+
+\section{Conclusion}
+\label{sec:conclusion}
+In this research, we introduced a compact yet powerful subtype system that demonstrates remarkable versatility and compatibility with various type theories. Our system effectively addresses the challenge of reusing and subtyping constructors in indexed datatypes through the novel introduction of first-class datatype signatures. A particularly notable feature of our approach is its ability to eliminate trivial proof obligations even when an arbitrary set of constructors is involved, significantly reducing the proof burden in practical applications. We have illustrated the system's flexibility through several practical examples drawn from real-world programming scenarios. Furthermore, we have provided a concise implementation that maintains simplicity without sacrificing expressiveness, making our approach accessible for integration into existing proof assistants and type systems.
+
+\section{Future Work}
+There are several directions in which we would like to extend this work.
+
+\begin{itemize}
+\item \emph{Mechanized meta-theory.} We plan to formalize the typing and subtyping rules, together with subject reduction and progress, in a proof assistant such as Coq or Agda, and connect the proofs to our prototype implementation.
+\item \emph{Larger case studies.} Our current examples are small; applying constructor subset signatures to larger developments in existing proof assistants (e.g.\ libraries of lists and vectors) would help validate their practical benefits.
+\item \emph{Richer signatures.} Finally, we intend to explore simple extensions of signatures with basic set operations on constructor sets (such as unions) while keeping the meta-theory and implementation lightweight.
+\end{itemize}
 
 \appendix
 
@@ -651,7 +783,7 @@ Our implementation now has two components. The backend encoding in Lambdapi (\te
 \label{app:transpiler}
 The current artifact is organized around a translation pipeline: users write a compact surface fragment, and \texttt{siglp-transpiler} lowers it to backend terms consumed by \texttt{subtyping.encode}. This keeps examples short while preserving explicit generated code.
 
-The supported surface fragment includes \texttt{Inductive} declarations, \texttt{Def} declarations, signature shorthand (\texttt{\{T :: c\_1 | \dots | c\_n\}}), and signature-only \texttt{match} expressions. For each inductive declaration, the transpiler generates helper symbols for target, index shape, telescope, and constructor list. It rewrites term-level signatures to \texttt{signature\_term}. It rewrites constructor applications to \texttt{signature\_intro}. It rewrites signature matches to \texttt{signature\_case}.
+The supported surface fragment translates LambdaPi \texttt{Inductive} declarations. We compile the \texttt{Def} declarations, signature shorthand (\texttt{\{T :: c\_1 | \dots | c\_n\}}), and signature-only \texttt{match} expressions. For each inductive declaration, the transpiler generates helper symbols for target, index shape, telescope, and constructor list. It rewrites term-level signatures to \texttt{signature\_term}. It rewrites constructor applications to \texttt{signature\_intro}. It rewrites signature matches to \texttt{signature\_case}.
 
 \begin{figure}[!ht]
 \begin{lstlisting}[language=ML, basicstyle=\ttfamily\small, keywordstyle=\bfseries\color{blue}, commentstyle=\itshape\color{gray}, stringstyle=\color{red}, numbers=left, numberstyle=\tiny\color{gray}, frame=single]
@@ -671,7 +803,7 @@ head_nonempty |v m :: nat -> (NonEmptyVecNat v) -> Nat =>
   |(cons k) => (+1 0)
 ].
 \end{lstlisting}
-\caption{Mini-language rendering of the non-empty vector example}
+\caption{Mini-language rendering of the non-empty vector example(\emph{The syntax was slightly modified to match the implementation of the minimal language in Haskell})}
 \label{fig:transpiler-surface}
 \end{figure}
 
@@ -726,7 +858,7 @@ inductive signature : Set → delta_tel → constructor_list → TYPE ≔
 symbol signature_subtypeb :
   Set → delta_tel → constructor_list →
   Set → delta_tel → constructor_list → Bool;
-
+  
 inductive signature_term : Set → delta_tel → constructor_list → TYPE ≔
 | signature_intro :
     Π (T : Set) (g : delta_tel) (phi : constructor_list) (c : labelConstructor),
@@ -749,18 +881,8 @@ coerce_rule coerce_signature
 \label{fig:encode-shallow}
 \end{figure}
 
-\section{Conclusion}
-\label{sec:conclusion}
-In this research, we introduced a compact yet powerful subtype system that demonstrates remarkable versatility and compatibility with various type theories. Our system effectively addresses the challenge of reusing and subtyping constructors in indexed datatypes through the novel introduction of first-class datatype signatures. A particularly notable feature of our approach is its ability to eliminate trivial proof obligations even when an arbitrary set of constructors is involved, significantly reducing the proof burden in practical applications. We have illustrated the system's flexibility through several practical examples drawn from real-world programming scenarios. Furthermore, we have provided a concise implementation that maintains simplicity without sacrificing expressiveness, making our approach accessible for integration into existing proof assistants and type systems.
-
-\section{Future Work}
-There are several directions in which we would like to extend this work.
-
-\begin{itemize}
-\item \emph{Mechanized meta-theory.} We plan to formalize the typing and subtyping rules, together with subject reduction and progress, in a proof assistant such as Coq or Agda, and connect the proofs to our prototype implementation.
-\item \emph{Larger case studies.} Our current examples are small; applying constructor subset signatures to larger developments in existing proof assistants (e.g.\ libraries of lists and vectors) would help validate their practical benefits.
-\item \emph{Richer signatures.} Finally, we intend to explore simple extensions of signatures with basic set operations on constructor sets (such as unions) while keeping the meta-theory and implementation lightweight.
-\end{itemize}
+\subsection{IA aid}
+Although the transpiler was made with IA aid, the mini language was before the popularization of the tool, and lambdapi encoding was done manually.
 
 \bibliography{lipics-v2021-sample-article}
 

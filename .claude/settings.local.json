@@ -4,7 +4,12 @@
       "Bash(lambdapi check:*)",
       "Bash(pdflatex:*)",
       "Bash(bibtex:*)",
-      "Bash(pdfinfo:*)"
+      "Bash(pdfinfo:*)",
+      "Bash(latexmk -pdf -interaction=nonstopmode subtyping_paper.tex)",
+      "Bash(latexmk -pdf -g -interaction=nonstopmode subtyping_paper.tex)",
+      "Bash(coqc --version)",
+      "Bash(rocq --version)",
+      "Bash(rocq compile *)"
     ],
     "deny": [],
     "ask": []

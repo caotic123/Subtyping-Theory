@@ -516,8 +516,6 @@ rule signature_subtypeb $T1 $g1 $phi1 $T2 $g2 $phi2 ↪
       (andb (tdelta_base_eqb $T1 $g1 $T2 $g2)
         (constructor_list_subsetb $phi1 $phi2)));
 
-// Rule 5 judgmental encoding:
-// if F is not a registered constructor and inferred A is a subtype of the target signature, then F Δ checks against it.
 symbol rule5_checkb :
   Bool →
   Set → delta_tel → constructor_list →
@@ -654,7 +652,6 @@ rule coerce_signature $T $g $phi1 $phi2 $x ↪
     $phi2
     $x;
 
-// Coercion proceeds only when the subtype checker validates the relation.
 rule coerce_signature_gate true $T $g $phi1 $phi2 $x ↪
   cast_signature $T $g $phi1 $phi2 $x;
 
