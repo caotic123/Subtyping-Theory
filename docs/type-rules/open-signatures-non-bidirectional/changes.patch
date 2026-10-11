@@ -1,0 +1,392 @@
+--- a/open-signatures-elaboration.tex
++++ b/open-signatures-elaboration.tex
+@@ -36,7 +36,7 @@
+ \]
+ This derived statement is unproved. Surface $\{R::\op{branches}\,R\}$
+ uses positive slots: $R\,j$ becomes $\code{\op{var}}\,j$.
+-The Rocq relation starts with those translated schemes.
++The relation starts with those translated schemes, as in the original Rocq presentation.
+ 
+ \textbf{Dispatcher and branch handlers (core terms).}
+ \[
+@@ -193,60 +193,80 @@
+ \]
+ 
+ \newpage
+-\sectiontitle{9}{Source synthesis and checking}
+-$\synth{e}{A}{t}$ synthesizes $A$ and generates $t$;
+-$\checkt{e}{A}{t}$ checks against $A$ and generates $t$.
+-\begin{mathpar}
+-\ruleof{es_var}{\wf\\x:A\in\Gamma}{\synth{x}{A}{x}}
++\sectiontitle{9}{Declarative source typing and elaboration}
++There is one source judgment:
++\[
++ \elab{e}{A}{t}.
++\]
++It relates a source expression $e$, a core type $A$, and its elaboration $t$.
++The core judgment remains $\jd{t}{A}$. There is no synthesis/checking split:
++$A$ is not assigned an input or output mode, and every source premise below
++uses the same relation. Annotations constrain types but are not mode switches.
++\begin{mathpar}
++\ruleof{el_var}{\wf\\x:A\in\Gamma}{\elab{x}{A}{x}}
+ \and
+-\ruleof{es_ann}{\jd{A}{\Set_k}\\\checkt{e}{A}{t}}
+- {\synth{(e:A)}{A}{t}}
+-\\
+-\ruleof{es_app}{\jd{\Pi x:A.\,B}{\Set_k}\\
+- \synth{f}{\Pi x:A.\,B}{t}\\\checkt{a}{A}{u}}
+- {\synth{f\,a}{B[u/x]}{t\,u}}
+-\\
+-\ruleof{ec_lam}{\jd{\Pi x:A.\,B}{\Set_k}\\
+- \Gamma,x:A\vdash e\Leftarrow B\rightsquigarrow t}
+- {\checkt{\lambda x.\,e}{\Pi x:A.\,B}{\lambda x.\,t}}
+-\\
+-\ruleof{ec_pair}{\jd{\Sigma x:A.\,B}{\Set_k}\\
+- \checkt{e}{A}{t}\\\checkt{f}{B[t/x]}{u}}
+- {\checkt{(e,f)}{\Sigma x:A.\,B}{(t,u)}}
+-\\
+-\ruleof{ec_core}{\jd{t}{A}}{\checkt{\op{core}(t)}{A}{t}}
+-\\
+-\ruleof{ec_conversion}{\synth{e}{A}{t}\\\jd{B}{\Set_k}\\A\equiv B}
+- {\checkt{e}{B}{t}}
+-\\
+-\ruleof{ec_target_conversion}{\checkt{e}{A}{t}\\\jd{B}{\Set_k}\\A\equiv B}
+- {\checkt{e}{B}{t}}
+-\\
+-\ruleof{ec_subsumption}{\synth{e}{A}{t}\\\subt{A}{B}{c}}
+- {\checkt{e}{B}{c\,t}}
+-\\
+-\ruleof{es_signature}{\jd{I}{\Set_0}\\
++\ruleof{el_ann}{\jd{A}{\Set_k}\\\elab{e}{A}{t}}
++ {\elab{(e:A)}{A}{t}}
++\\
++\ruleof{el_app}{\jd{\Pi x:A.\,B}{\Set_k}\\
++ \elab{f}{\Pi x:A.\,B}{t}\\\elab{a}{A}{u}}
++ {\elab{f\,a}{B[u/x]}{t\,u}}
++\\
++\ruleof{el_lam}{\jd{\Pi x:A.\,B}{\Set_k}\\
++ \Gamma,x:A\vdash e:B\rightsquigarrow t}
++ {\elab{\lambda x.\,e}{\Pi x:A.\,B}{\lambda x.\,t}}
++\\
++\ruleof{el_pair}{\jd{\Sigma x:A.\,B}{\Set_k}\\
++ \elab{e}{A}{t}\\\elab{f}{B[t/x]}{u}}
++ {\elab{(e,f)}{\Sigma x:A.\,B}{(t,u)}}
++\\
++\ruleof{el_core}{\jd{t}{A}}{\elab{\op{core}(t)}{A}{t}}
++\\
++\ruleof{el_conv}{\elab{e}{A}{t}\\\jd{B}{\Set_k}\\A\equiv B}
++ {\elab{e}{B}{t}}
++\\
++\ruleof{el_sub}{\elab{e}{A}{t}\\\subt{A}{B}{c}}
++ {\elab{e}{B}{c\,t}}
++\\
++\ruleof{el_signature}{\jd{I}{\Set_0}\\
+  \op{RowOK}_{\Gamma,i:I}(I,r_i)}
+- {\synth{\op{signature}\ I\ r}{\Defs\,I}{\lambda i.\,\rows{r_i}}}
+-\\
+-\ruleof{es_close}{\jd{I}{\Set_0}\\
+- \checkt{F}{\Defs\,I}{f}\\\checkt{G}{\Defs\,I}{g}}
+- {\synth{F(G)}{I\to\Set_0}{\cl{f}{g}}}
++ {\elab{\op{signature}\ I\ r}{\Defs\,I}{\lambda i.\,\rows{r_i}}}
++\\
++\ruleof{el_close}{\jd{I}{\Set_0}\\
++ \elab{F}{\Defs\,I}{f}\\\elab{G}{\Defs\,I}{g}}
++ {\elab{F(G)}{I\to\Set_0}{\cl{f}{g}}}
+ \end{mathpar}
+ For unindexed surface datatypes, the unit application is inserted:
+ $F(G)$ abbreviates $(\cl{f}{g})\,\unit$.
+-An embedded core term synthesizes only through an annotation.
+-These are relations, not a deterministic inference algorithm.
++Dependent substitution uses the elaborated core argument $u$ or component
++$t$, not the corresponding source expression.
++
++\textbf{Unrestricted conversion and subsumption.}
++\texttt{el\_conv} replaces both former conversion rules without inserting
++code. \texttt{el\_sub} may follow \emph{any} source derivation and inserts the
++chosen coercion; it is not restricted to variables, applications, or annotated
++terms. In particular, lambdas, pairs, constructors, and embedded core terms
++can occur directly as application operands.
++
++\textbf{Declarative, not an inference algorithm.}
++These rules impose no proof-search order, principal-type property, or
++uniqueness of elaboration. Erasing modes from an original derivation produces
++a derivation here (also rewriting its clause-compilation subderivations).
++The converse is not asserted: unrestricted composition admits new derivations.
++Coherence requires separate attention; see Section~13.
+ 
+ \newpage
+ \sectiontitle{10}{Named constructors and exhaustive cases}
+ \[
+-\ruleof{ec_constructor}{\jd{I}{\Set_0}\\\jd{F}{\Defs\,I}\\
++\ruleof{el_constructor}{\jd{I}{\Set_0}\\\jd{F}{\Defs\,I}\\
+  \jd{G}{\Defs\,I}\\\jd{i}{I}\\\view{F\,i}{r}\\
+- r[n]=(\ell,D)\\\checkt{e}{\interp{D}{X_G}}{x_s}}
+- {\checkt{\ell(e)}{C_{F,G}(i)}{\roll(\pos{n},x_s)}}
+-\]
+-The expected type determines the row, local tag, and recursive payload.
++ r[n]=(\ell,D)\\\elab{e}{\interp{D}{X_G}}{x_s}}
++ {\elab{\ell(e)}{C_{F,G}(i)}{\roll(\pos{n},x_s)}}
++\]
++The type $C_{F,G}(i)$ in the conclusion fixes the row, local tag, and
++recursive payload. It is a parameter of a declarative derivation, not a
++checking-mode input. A constructor identity alone need not determine a unique
++type; distinct derivations may instantiate $F,G,i$ differently.
+ 
+ \textbf{Clause compilation.}
+ Let $b_s$ be a list of clauses $(\ell,y.e)$, with $y$ bound in $e$.
+@@ -256,7 +276,7 @@
+ \ruleof{cases_nil}{}{\ecases{X}{Q}{b_s}{[]}{[]}}
+ \\
+ \ruleof{cases_live}{(\ell,y.e)\in b_s\\
+- \Gamma,y:\interp{D}{X}\vdash e\Leftarrow Q\rightsquigarrow t\\
++ \Gamma,y:\interp{D}{X}\vdash e:Q\rightsquigarrow t\\
+  \ecases{X}{Q}{b_s}{r}{h_s}}
+  {\ecases{X}{Q}{b_s}{(\ell,D)::r}{(\lambda y.\,t)::h_s}}
+ \\
+@@ -267,14 +287,14 @@
+ $Q$ is scoped in $\Gamma$, so $y$ does not occur free in $Q$.
+ An omitted clause needs a checked dead witness.
+ 
+-\textbf{Case synthesis.}
+-\[
+-\ruleof{es_case}{\jd{I}{\Set_0}\\\jd{F}{\Defs\,I}\\\jd{G}{\Defs\,I}\\
+- \jd{i}{I}\\\synth{e}{C_{F,G}(i)}{x}\\\jd{Q}{\Set_k}\\
++\textbf{Case typing and elaboration.}
++\[
++\ruleof{el_case}{\jd{I}{\Set_0}\\\jd{F}{\Defs\,I}\\\jd{G}{\Defs\,I}\\
++ \jd{i}{I}\\\elab{e}{C_{F,G}(i)}{x}\\\jd{Q}{\Set_k}\\
+  \view{F\,i}{r}\\\op{NoDup}(\op{names}(b_s))\\
+  \forall(\ell,y.e_\ell)\in b_s.\ \ell\in\op{names}(r)\\
+  \ecases{X_G}{Q}{b_s}{r}{h_s}}
+- {\synth{\op{case}_{Q}\ e\ \op{of}\ b_s}{Q}
++ {\elab{\op{case}_{Q}\ e\ \op{of}\ b_s}{Q}
+    {\op{closeCase}_k\,F\,G\,i\,(\lambda\_.\,Q)\,
+      (\op{dispatch}^{k}_{I,r,X_G,Q}(h_s))\,x}}
+ \]
+@@ -297,5 +317,6 @@
+       ([\lambda y.\,\op{fst}\,y])\bigr)\,x.
+ \end{gathered}
+ \]
+-Here $e$ synthesizes $\op{NonEmpty}\,A$ and generates $x$;
+-$L_A,U_A,K_A$ are defined next.
++Here $\elab{e}{\op{NonEmpty}\,A}{x}$;
++$L_A,U_A,K_A$ are defined next. The scrutinee and all live clause bodies use
++the same source relation, including its conversion and subsumption rules.
+--- a/open-signatures-examples.tex
++++ b/open-signatures-examples.tex
+@@ -41,7 +41,7 @@
+ \[
+ \begin{array}{@{}llll@{}}
+ \toprule
+-\text{Expected type}&\text{Identity}&\text{Position}&\text{Payload type}\\
++\text{Assigned type}&\text{Identity}&\text{Position}&\text{Payload type}\\
+ \midrule
+ \op{List}\,A&\op{nil}&0&\one\\
+ \op{List}\,A&\op{cons}&\op{s}\,0&A\times\op{List}\,A\\
+@@ -72,6 +72,16 @@
+ \end{aligned}
+ \]
+ 
++\textbf{Source constructor typing.}\par
++Using the same formation premises, combine \texttt{el\_core},
++\texttt{el\_pair}, and \texttt{el\_constructor}:
++\[
++ \elab{\op{cons}((\op{core}(a),\op{core}(x_s)))}
++       {\op{NonEmpty}\,A}{\roll(0,(a,x_s))}.
++\]
++This derivation assigns the constructor a type; it does not infer that type
++uniquely from the spelling $\op{cons}$.
++
+ \newpage
+ \sectiontitle{12}{Concrete widening, observers, and induction}
+ \textbf{Widening only the outer tag.}
+@@ -94,6 +104,15 @@
+        \rightsquigarrow q_{U,L}}
+  {\subt{\op{NonEmpty}\,A}{\op{List}\,A}{\op{toList}}}
+ \]
++\textbf{Source subsumption, independent of syntax.}
++\[
++\ruleof{NonEmpty-widen-source}{\elab{e}{\op{NonEmpty}\,A}{t}\\
++ \subt{\op{NonEmpty}\,A}{\op{List}\,A}{\op{toList}}}
++ {\elab{e}{\op{List}\,A}{\op{toList}\,t}}
++\]
++The premise can be the unannotated constructor derivation above; no change
++of source judgment or intervening annotation is required.
++
+ \textbf{Bottom-padded and compact rows.}
+ For each conversion, $X=X_{L_A}$ and $Y$ is the target layer type.
+ \[
+--- a/open-signatures-references.tex
++++ b/open-signatures-references.tex
+@@ -23,7 +23,9 @@
+ \end{center}
+ The direct $\code{\bot}$ code, reusable open signatures, $\op{close}\,F\,G$,
+ and generated coercions are the design of this discussion. The references
+-do not establish their metatheory.
++do not establish their metatheory. The single source typing-and-elaboration
++relation in Sections~9--10 is a declarative reformulation introduced in this
++revision, not a result supplied by those references.
+ 
+ \begin{thebibliography}{9}
+ \raggedright
+--- a/open-signatures-theorems.tex
++++ b/open-signatures-theorems.tex
+@@ -1,8 +1,11 @@
+ \newpage
+ \sectiontitle{13}{Selected theorem statements: unproved}
+-All 47 statements in \texttt{OpenSignaturesTheorems.v} are
+-\texttt{Conjecture}s. The following are representative; the example typing
+-and derived-rule claims above are also unproved.
++The original notes report 47 \texttt{Conjecture}s in
++\texttt{OpenSignaturesTheorems.v}. No Rocq files are included here.
++The statements below retain that unproved status; source soundness is
++reformulated for the new judgment. Example typing and derived-rule claims
++are also unproved. No equivalence or completeness theorem for the two
++presentations is asserted.
+ \[
+ \begin{array}{@{}ll@{}}
+  \text{Context validity}&
+@@ -36,16 +39,11 @@
+  \Gamma\vdash q:\interp{D}{X}\to\interp{D'}{X}.\\[4pt]
+  \text{Coercion soundness}&
+  \subt{A}{B}{c}\ \Longrightarrow\ \Gamma\vdash c:A\to B.\\[4pt]
+- \text{Synthesis soundness}&
+- \synth{e}{A}{t}\ \Longrightarrow\ \Gamma\vdash t:A.\\[4pt]
+- \text{Checking soundness}&
+- \checkt{e}{A}{t}\ \Longrightarrow\ \Gamma\vdash t:A.\\[4pt]
++ \text{Elaboration soundness}&
++ \elab{e}{A}{t}\ \Longrightarrow\ \Gamma\vdash t:A.\\[4pt]
+  \text{Coercion coherence}&
+  \subt{A}{B}{c},\ \subt{A}{B}{d}
+  \ \Longrightarrow\ c\approx_{A\to B}d.\\[4pt]
+- \text{Checking coherence}&
+- \checkt{e}{A}{t},\ \checkt{e}{A}{u}
+- \ \Longrightarrow\ t\approx_A u.\\[4pt]
+  \text{Roll/unroll}&
+  \Gamma\vdash x:C_{F,G}(i)
+  \ \Longrightarrow\ \roll(\unroll_{F,G,i}\,x)\approx_{C_{F,G}(i)}x.
+@@ -68,19 +66,71 @@
+  \neg\exists x.\ \varnothing\vdash x:C_{U_A,U_A}(\unit).
+ \end{gathered}
+ \]
+-Ten closed computation checks in \texttt{OpenSignaturesExamples.v} are
+-proved by reflexivity. They do not prove the general typing claims.
++The original notes report ten closed computation checks proved by
++reflexivity in \texttt{OpenSignaturesExamples.v}. These do not prove the
++general typing claims or the revised elaboration soundness statement.
+ 
+-\textbf{Source map.}
++\newpage
++\textbf{Why unrestricted source elaboration is not unconditionally coherent.}
++The former checking-coherence statement cannot simply be renamed. In this
++core syntax, an unannotated rolled value can have different types whose
++coercions into a common type retag it differently.
++Take $I=\one$, distinct literal identities $a,b$, and the closed rows
++\[
++\begin{aligned}
++ r_a&=[(a,\code{\one})],&
++ r_b&=[(b,\code{\one})],&
++ r_{ab}&=[(a,\code{\one}),(b,\code{\one})],\\
++ F_a&=\lambda i.\,\rows{r_a},&
++ F_b&=\lambda i.\,\rows{r_b},&
++ G&=\lambda i.\,\rows{r_{ab}}.
++\end{aligned}
++\]
++Let $A_a=C_{F_a,G}(\unit)$, $A_b=C_{F_b,G}(\unit)$,
++$T=C_{G,G}(\unit)$, and $v=\roll(0,\unit)$. With $\Gamma=\varnothing$,
++\[
++ \jd{v}{A_a},\qquad \jd{v}{A_b},\qquad
++ \subt{A_a}{T}{c_a},\qquad \subt{A_b}{T}{c_b}.
++\]
++Here $c_a$ uses the live handler $\op{retag}_0$, while $c_b$ uses
++$\op{retag}_1$. Applying \texttt{el\_core} and \texttt{el\_sub} gives
++\[
++ \elab{\op{core}(v)}{T}{c_a\,v},\qquad
++ \elab{\op{core}(v)}{T}{c_b\,v},
++\]
++with different observable constructor tags:
++\[
++ c_a\,v\leadsto^*\roll(0,\unit),\qquad
++ c_b\,v\leadsto^*\roll(\op{s}\,0,\unit).
++\]
++A $\op{closeCase}$ observer can return distinct Boolean values for the
++$a$ and $b$ branches. Thus the unrestricted relation does not satisfy
++\[
++ \elab{e}{A}{t},\ \elab{e}{A}{u}
++ \quad\Longrightarrow\quad t\approx_A u
++\]
++in general. This counterexample is a derivation-level argument, not a
++machine-checked proof. It does not refute coercion coherence for \emph{fixed}
++endpoints: the two coercions above have different source types.
++A coherent implementation would need additional restrictions or a specified
++resolution discipline. Merely placing an outer annotation on
++$\op{core}(v)$ does not remove this ambiguity, because \texttt{el\_sub} can
++still occur inside the annotation premise.
++
++\textbf{Relation to the original development.}
++The unchanged core computations, descriptions, row coercions, and common
++recursive definition in \texttt{su\_close} are retained. The source rules
++and live-clause premise have changed; no corresponding Rocq update or
++proof port is claimed.
+ \begin{center}
+ \begin{tabular}{@{}ll@{}}
+ \toprule
+-Sections & Rocq source\\
++Sections & Original Rocq source (not included)\\
+ \midrule
+-1--5 & \href{../../progress/OpenSignaturesCore.v}{\texttt{OpenSignaturesCore.v}}\\
+-6--10 & \href{../../progress/OpenSignaturesElaboration.v}{\texttt{OpenSignaturesElaboration.v}}\\
+-11--12 & \href{../../progress/OpenSignaturesExamples.v}{\texttt{OpenSignaturesExamples.v}}\\
+-13 & \href{../../progress/OpenSignaturesTheorems.v}{\texttt{OpenSignaturesTheorems.v}}\\
++1--5 & \texttt{OpenSignaturesCore.v}\\
++6--10 & \texttt{OpenSignaturesElaboration.v}\\
++11--12 & \texttt{OpenSignaturesExamples.v}\\
++13 & \texttt{OpenSignaturesTheorems.v}\\
+ \bottomrule
+ \end{tabular}
+ \end{center}
+--- a/open-signatures.tex
++++ b/open-signatures.tex
+@@ -6,7 +6,7 @@
+ \usepackage[dvipsnames]{xcolor}
+ \usepackage[colorlinks,linkcolor=MidnightBlue,citecolor=MidnightBlue,
+   urlcolor=MidnightBlue]{hyperref}
+-\hypersetup{pdftitle={PomPom: open signatures and parameterized closure},
++\hypersetup{pdftitle={PomPom: non-bidirectional elaboration of open signatures},
+   pdfauthor={PomPom Language}}
+ \setlength{\parindent}{0pt}
+ \setlength{\parskip}{3pt}
+@@ -25,8 +25,7 @@
+ \newcommand{\subt}[3]{\Gamma\vdash #1\sqsubseteq #2\rightsquigarrow #3}
+ \newcommand{\dsub}[4]{\Gamma\vdash #1\preceq^{I}_{#3}#2\rightsquigarrow #4}
+ \newcommand{\dead}[3]{\Gamma\vdash #1\mathrel{\op{dead}^{I}_{#2}}\rightsquigarrow #3}
+-\newcommand{\synth}[3]{\Gamma\vdash #1\Rightarrow #2\rightsquigarrow #3}
+-\newcommand{\checkt}[3]{\Gamma\vdash #1\Leftarrow #2\rightsquigarrow #3}
++\newcommand{\elab}[3]{\Gamma\vdash #1:#2\rightsquigarrow #3}
+ \newcommand{\ruleof}[3]{\inferrule*[right={\normalfont\ttfamily\footnotesize\detokenize{#1}}]{#2}{#3}}
+ \newcommand{\rows}[1]{\langle #1\rangle_I}
+ \newcommand{\rowok}[2]{\op{RowOK}_{\Gamma}(#1,#2)}
+@@ -44,14 +43,17 @@
+ \newcommand{\sectiontitle}[2]{\section*{#1.\quad #2}}
+ \begin{document}
+ \begin{center}
+-{\Large\bfseries Elaborating Constructor Subtyping for Indexed Datatypes}\\[3pt]
+-Typing, computation, elaboration, and examples
+-\quad{\small 9 September 2026}
++{\Large\bfseries Declarative Constructor Subtyping for Indexed Datatypes}\\[3pt]
++Non-bidirectional typing, computation, elaboration, and examples
++\quad{\small Revised 26 September 2026}
+ \end{center}
+ Named binders replace de Bruijn indices; substitutions are capture avoiding.
+-Rule labels are the exact Rocq constructor names. Formation premises are
+-displayed. $k,j\in\mathbb N$; $\pos{n}:=\op{s}^{n}0$;
+-$\id:=\lambda x.\,x$. A rule with no premises has an empty numerator.
++Core and auxiliary rules retain their original labels. The source rules
++\texttt{el\_*} and the revised clause relation specify a new, single-judgment
++elaboration; corresponding Rocq definitions and proofs are not supplied.
++Formation premises are displayed. $k,j\in\mathbb N$;
++$\pos{n}:=\op{s}^{n}0$; $\id:=\lambda x.\,x$.
++A rule with no premises has an empty numerator.
+ \input{open-signatures-core}
+ \input{open-signatures-elaboration}
+ \input{open-signatures-examples}

@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+This is BibTeX, Version 0.99e (TeX Live 2026)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: subtyping_paper.aux
 The style file: plainurl.bst
@@ -12,45 +12,45 @@ Warning--empty booktitle in mariaJoaoFrade
 Warning--empty journal in martin2021intuitionistic
 Warning--empty booktitle in Norell2007TowardsAP
 Warning--empty booktitle in Saillard
-You've used 12 entries,
-            2882 wiz_defined-function locations,
-            970 strings with 13000 characters,
-and the built_in function-call counts, 5283 in all, are:
-= -- 550
-> -- 154
-< -- 3
-+ -- 55
-- -- 43
-* -- 256
-:= -- 726
-add.period$ -- 46
-call.type$ -- 12
-change.case$ -- 57
+You've used 17 entries,
+            2943 wiz_defined-function locations,
+            1020 strings with 13912 characters,
+and the built_in function-call counts, 7820 in all, are:
+= -- 846
+> -- 214
+< -- 6
++ -- 79
+- -- 59
+* -- 377
+:= -- 1060
+add.period$ -- 67
+call.type$ -- 17
+change.case$ -- 80
 chr.to.int$ -- 0
-cite$ -- 16
-duplicate$ -- 177
-empty$ -- 548
-format.name$ -- 43
-if$ -- 1422
+cite$ -- 21
+duplicate$ -- 261
+empty$ -- 797
+format.name$ -- 59
+if$ -- 2102
 int.to.chr$ -- 0
-int.to.str$ -- 12
-missing$ -- 9
-newline$ -- 71
-num.names$ -- 26
-pop$ -- 144
+int.to.str$ -- 17
+missing$ -- 14
+newline$ -- 100
+num.names$ -- 36
+pop$ -- 199
 preamble$ -- 1
-purify$ -- 45
+purify$ -- 63
 quote$ -- 0
-skip$ -- 402
+skip$ -- 588
 stack$ -- 0
-substring$ -- 158
-swap$ -- 60
-text.length$ -- 3
+substring$ -- 286
+swap$ -- 96
+text.length$ -- 22
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 48
+type$ -- 68
 warning$ -- 4
-while$ -- 33
-width$ -- 14
-write$ -- 145
+while$ -- 51
+width$ -- 19
+write$ -- 211
 (There were 4 warnings)

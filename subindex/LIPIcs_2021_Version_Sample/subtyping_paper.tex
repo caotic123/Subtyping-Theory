@@ -210,7 +210,7 @@
 \lstset{style=mystyle}
 
 % Title and author information
-\title{First-Class Constructor Subsets for Pattern Matching on Indexed Families}
+\title{Elaborating First-Class Constructor Subsets on Indexed Families}
 
 \author{Tiago Campos}{UFMG, Brazil}{camposferreiratiago@gmail.com}{https://orcid.org/0000-0002-1825-0097}{}
 
@@ -229,32 +229,50 @@
 \bibliographystyle{plainurl}% the mandatory bibstyle
 
 \begin{abstract}
-Pattern matching is a powerful feature of functional and dependently typed languages, yet programmers often encounter unreachable clauses. This either leads to unsafe partial functions or, in safe settings, to proof obligations that require tedious resolution of trivial cases. The problem is particularly acute when programs operate on subsets of an inductive datatype. Standard encodings pair data with propositions or refactor datatypes into indexed families, but both approaches complicate composition and proof automation.
+(Dependent) pattern matching is a powerful feature of functional and dependently typed languages, yet programmers often encounter unreachable clauses. This either leads to unsafe partial functions or, in safe settings, to proof obligations that require the tedious resolution of trivial cases. The problem is particularly acute when programs operate on subsets of an inductive datatype. Standard encodings pair data with propositions or refactor datatypes into indexed families, but both approaches complicate composition and proof automation.
 
-We present a subtyping discipline for constructor subsets, where first-class signatures describe which constructors of a family are available. These signatures make the intended subset explicit at the type level, enabling pattern matching to rule out impossible branches without generating spurious obligations. Our prototype indicates that this approach can eliminate many trivial proof obligations while preserving type safety.
+The problem arises from two main factors: (1) the type system generates trivial obligations because it cannot express the intended nature of the data, and (2) the type system cannot reason computationally about constructors, so you could not write a procedure to remove these minor proof obligations.
+The first problem can be solved by introducing a subtyping discipline, while the second requires lifting constructor information to the term level as a first-class entity. Both solutions address the problem: the former is simpler and more lightweight, whereas the latter is more expressive and can itself be used to encode the subtyping discipline. In fact, the latter approach can also be used to encode other procedures that eliminate additional trivial proof obligations.
 
-We implemented a small proof assistant that supports constructor subsets (signatures), and we developed a small prototype that translates its theory to the Lambdapi framework. We can encode the entire type system in fewer than 600 lines, supporting our claim that the approach is simple and lightweight.
+We present a subtyping discipline for constructor subsets, in which first-class signatures describe which constructors of a family are available. These signatures make the intended subset explicit at the type level, enabling pattern matching to rule out impossible branches without generating spurious obligations. We then elaborate this subtyping discipline into the type theory of Dagand and McBride, in which constructors and type constructors are themselves terms of the theory.
+We further formalize the subtyping discipline and prove its soundness with respect to its elaboration into Dagand and McBride's type theory.
 
 %Edit: Clarified (in the Introduction below) what ``available'' means operationally: signatures constrain the \emph{outermost} constructor observed by pattern matching, which is exactly what removes unreachable branches without forcing deep/recursive constructor closure.
 \end{abstract}
 
 \section{Introduction}
-Subtyping is a fundamental concept across programming languages that enables the specialization of type definitions through hierarchical relationships between supertypes and subtypes. At a high level, a subtype describes a ``smaller'' collection of values than its supertype. While term-level subtyping is extensively implemented in many languages, subtyping between constructors of inductive types remains relatively unexplored, especially in the presence of dependent types.
+Datatypes are a fundamental feature of functional programming languages, they express the nature of data structures.
+In dependently typed settings this nature become even more expressive, as families of datatypes can be indexed by values, allowing the programmer to express invariants on the data. 
+However even playing with simple invariants, such as non-empty lists or vectors of positive length, can lead to boring work for the programmer.
+One has to discard these trivial cases, or in unsafe language leave the function partial. This problem is particularly acute when the data carries indexed information.
 
-A recurring difficulty arises when an inductive datatype is only partially available in a given context. For example, a function may be intended to consume lists that are known to be non-empty, or vectors whose length is positive. In most dependently typed languages the programmer faces a choice: either write an unsafe partial function, or thread propositions through the program and discharge proof obligations stating that certain constructors are impossible. The latter approach leads to unreachable clauses in pattern matches and to proofs that are often routine but cumbersome.
+Early Epigram-like pattern matching would rely on computation to decide which constructors are available: a length-indexed vector is defined by case analysis on the index $n$, so that $n = 0$ exposes \texttt{nil} and $n = \mathsf{suc}\ m$ exposes \texttt{cons}~\cite{mcbride2004view,altenkirch2009indexed,dagand2012elaborating}.
+This approach was abandoned in favor of a more equational indexed style of pattern matching, in which each constructor constrains the indices and the resulting equations are resolved by unification~\cite{coquand1992pattern,sozeau2010equations}.
+Now, one has to deal with the propagation of the indexed information through the context and the goal.
+One common technique is to maintain the original datatype together with a proposition that rules out some constructors. Another approach, illustrated in Figures~\ref{fig:coq-obligation} and~\ref{fig:coq-indexed}, uses indexed datatypes to restrict which constructors may appear. 
+Both techniques have well-known drawbacks. The first ties ordinary programs to logical predicates, complicating function composition and proof reuse. 
+The second introduces additional indices and can interact badly with proof irrelevance and unification; it may also hinder the detection of unreachable branches when constructor information flows through computations.
 
-One common technique is to maintain the original datatype together with a proposition that rules out some constructors. Another approach, illustrated in Figures~\ref{fig:coq-obligation} and~\ref{fig:coq-indexed}, uses indexed datatypes to restrict which constructors may appear. Both techniques have well-known drawbacks. The first ties ordinary programs to logical predicates, complicating function composition and proof reuse. The second introduces additional indices and can interact badly with proof irrelevance and unification; it may also hinder the detection of unreachable branches when constructor information flows through computations.
+In brief, the main problem is even for simple subset invariants, such as non-empty lists or vectors of positive length, the user needs to thread propositions or indexes through the program.
+Subsets can be although be expressed as a subtyping relation between constructors of an inductive family.
+Subtyping is a fundamental concept across programming languages that enables the specialization of type definitions through hierarchical relationships between supertypes and subtypes.
+At a high level, a subtype describes a ``smaller'' collection of values than its supertype. 
+While term-level subtyping is extensively implemented in many languages, subtyping between constructors of inductive types remains relatively unexplored, especially in the presence of dependent types.
 
 Constructor subtyping has been explored in other settings. In O'Haskell~\cite{Nordlander987777}, records and algebraic datatypes can be equipped with an optional subtyping relation inferred from the usage of constructors and fields. For example, a non-empty list type can be extended with an empty constructor to obtain a standard list type. More recent work on zero-cost constructor subtyping in Cedille~\cite{MarmadukeJenkinsStump,jenkins2019elaborating}, on order-sorted inductive types and overloading~\cite{BatheGillesFradeMaria,barthe}, and on algebraic subtyping for extensible records~\cite{MarquesFloridoVasconcelos2024} shows how rich subtyping disciplines can be added to strongly typed systems. However, these systems are tailored to specific core calculi or to non-dependent settings, and do not directly address the combination of constructor subtyping with indexed families in a general dependently typed setting.
+This solution solves the problem elegantly, but it shows a deeper problem: the type system cannot reason computationally about constructors, so you could not write yourself a discarding procedure to remove these minor proof obligations.
+Moreover, other trivials proof obligations can appear in dependently typed programming, so elaborating these problems into a more expressive type theory can be a solution to eliminate them.
 
 %Edit: Clarified the intended meaning of constructor subsets to match the operational goal (coverage of pattern matching) and the later examples.
 In this paper we focus on a simple but expressive fragment of constructor subtyping aimed at eliminating trivial proof obligations. Rather than allowing arbitrary constructor overloading, we work with \emph{constructor subsets}: first-class types of the form $\{T :: \Phi\}$, where $T$ is an inductive family and $\Phi$ is a finite list of its constructors. Intuitively, $\{T :: \Phi\}$ denotes those values of $T$ whose \emph{outermost (head) constructor}, when inspected in canonical form, is drawn from $\Phi$. This is the information that coverage checking for pattern matching consumes directly, and it is exactly what makes types such as ``non-empty lists'' inhabited (the tail may still be empty). 
+Later we show that we can elaborate this subtyping discipline into the type theory of Dagand and McBride~\cite{dagand2012elaborating} with a extra extension. 
 
 Our contributions are as follows.
 \begin{itemize}
 \item We define a subtyping discipline for constructor subsets as a conservative extension of a $\lambda\Pi$-style dependent type theory with inductive families. The system includes typing and subtyping rules for constructor signatures and a dedicated elimination rule for pattern matching on signature types.
 \item We show, through a series of examples, that constructor subsets capture common programming idioms such as non-empty lists and simple invariants on inductive families, while avoiding the proof obligations that arise when these invariants are expressed with explicit propositions.
-\item We describe a two-layer prototype: a Lambdapi backend encoding of constructor signatures and a Haskell transpiler that translates a lightweight surface fragment into signature-aware LambdaPi terms. This architecture keeps programs concise while preserving a direct correspondence with Rules~1--7.
+\item We elaborate the subtyping discipline into the type theory of Dagand and McBride extended.
+\item We prove the soundness of the subtyping discipline with respect to its elaboration, showing that well-typed terms in the subtyping system elaborate to well-typed terms in the target type theory. We prove also the soudness of extended Dagand and McBride's type theory with respect to the original one.
 \end{itemize}
 
 \paragraph*{Structure of the paper.}

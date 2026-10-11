@@ -1,5 +1,13 @@
 \begin{thebibliography}{10}
 
+\bibitem{altenkirch2009indexed}
+Thorsten Altenkirch and Peter Morris.
+\newblock Indexed containers.
+\newblock In {\em Proceedings of the 24th Annual IEEE Symposium on Logic in
+  Computer Science (LICS 2009)}, pages 277--285. IEEE Computer Society, 2009.
+\newblock \href {https://doi.org/10.1109/LICS.2009.33}
+  {\path{doi:10.1109/LICS.2009.33}}.
+
 \bibitem{AspinallCompagnoni}
 D.~Aspinall and A.~Compagnoni.
 \newblock Subtyping dependent types.
@@ -14,8 +22,8 @@ Gilles Barthe.
 \newblock {\em Information and Computation}, 149(1):42--76, 1999.
 \newblock URL:
   \url{https://www.sciencedirect.com/science/article/pii/S0890540198927511},
-  \href {https://doi.org/https://doi.org/10.1006/inco.1998.2751}
-  {\path{doi:https://doi.org/10.1006/inco.1998.2751}}.
+  \href {https://doi.org/10.1006/inco.1998.2751}
+  {\path{doi:10.1006/inco.1998.2751}}.
 
 \bibitem{BatheGillesFradeMaria}
 Gilles Barthe and Maria Jo\~{a}o Frade.
@@ -24,11 +32,24 @@ Gilles Barthe and Maria Jo\~{a}o Frade.
   Languages and Systems}, ESOP '99, page 109–127, Berlin, Heidelberg, 1999.
   Springer-Verlag.
 
+\bibitem{coquand1992pattern}
+Thierry Coquand.
+\newblock Pattern matching with dependent types.
+\newblock In {\em Proceedings of the 1992 Workshop on Types for Proofs and
+  Programs (TYPES '92)}, 1992.
+
+\bibitem{dagand2012elaborating}
+Pierre-{\'E}variste Dagand and Conor McBride.
+\newblock Elaborating inductive definitions.
+\newblock {\em CoRR}, abs/1210.6390, 2012.
+\newblock URL: \url{https://arxiv.org/abs/1210.6390}, \href
+  {https://arxiv.org/abs/1210.6390} {\path{arXiv:1210.6390}}.
+
 \bibitem{fluet2005practical}
 Matthew Fluet and Riccardo Pucella.
 \newblock Practical datatype specializations with phantom types and recursion
   schemes, 2005.
-\newblock \href {http://arxiv.org/abs/cs/0510074} {\path{arXiv:cs/0510074}}.
+\newblock \href {https://arxiv.org/abs/cs/0510074} {\path{arXiv:cs/0510074}}.
 
 \bibitem{mariaJoaoFrade}
 Maria~Jo{\~a}o Frade.
@@ -41,7 +62,7 @@ Maria~Jo{\~a}o Frade.
 Christopher Jenkins, Colin McDonald, and Aaron Stump.
 \newblock Elaborating inductive definitions and course-of-values induction in
   cedille, 2019.
-\newblock \href {http://arxiv.org/abs/1903.08233} {\path{arXiv:1903.08233}}.
+\newblock \href {https://arxiv.org/abs/1903.08233} {\path{arXiv:1903.08233}}.
 
 \bibitem{MarmadukeJenkinsStump}
 Andrew Marmaduke, Christopher Jenkins, and Aaron Stump.
@@ -56,13 +77,20 @@ Andrew Marmaduke, Christopher Jenkins, and Aaron Stump.
 Rodrigo Marques, M{\'a}rio Florido, and Pedro Vasconcelos.
 \newblock Towards algebraic subtyping for extensible records, 2024.
 \newblock URL: \url{https://arxiv.org/abs/2407.06747}, \href
-  {http://arxiv.org/abs/2407.06747} {\path{arXiv:2407.06747}}.
+  {https://arxiv.org/abs/2407.06747} {\path{arXiv:2407.06747}}.
 
 \bibitem{martin2021intuitionistic}
 Per Martin-L{\"o}f.
 \newblock Intuitionistic type theory by per martin-l{\"o}f. notes by giovanni
   sambin of a series of lectures given in padova, june 1980.
 \newblock 2021.
+
+\bibitem{mcbride2004view}
+Conor McBride and James McKinna.
+\newblock The view from the left.
+\newblock {\em Journal of Functional Programming}, 14(1):69--111, 2004.
+\newblock \href {https://doi.org/10.1017/S0956796803004829}
+  {\path{doi:10.1017/S0956796803004829}}.
 
 \bibitem{Nordlander987777}
 Johan Nordlander.
@@ -86,5 +114,13 @@ Ronan Saillard.
   pratique).
 \newblock 2015.
 \newblock URL: \url{https://api.semanticscholar.org/CorpusID:2853829}.
+
+\bibitem{sozeau2010equations}
+Matthieu Sozeau.
+\newblock Equations: A dependent pattern-matching compiler.
+\newblock In {\em Interactive Theorem Proving (ITP 2010)}, volume 6172 of {\em
+  Lecture Notes in Computer Science}, pages 419--434. Springer, 2010.
+\newblock \href {https://doi.org/10.1007/978-3-642-14052-5_29}
+  {\path{doi:10.1007/978-3-642-14052-5_29}}.
 
 \end{thebibliography}
