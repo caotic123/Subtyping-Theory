@@ -1,0 +1,2022 @@
+DIGEST 83710abbe3b9f849d33b16d5f81c2d23
+FSubtyping
+R1707:1712 Stdlib.Strings.String <> <> lib
+R1714:1717 Stdlib.Lists.List <> <> lib
+R1719:1722 Stdlib.Bool.Bool <> <> lib
+R1724:1732 Stdlib.Logic.Eqdep_dec <> <> lib
+R1734:1749 Stdlib.Program.Equality <> <> lib
+R1759:1771 Stdlib.Lists.List ListNotations <> mod
+def 2011:2015 <> cname
+R2027:2032 Stdlib.Strings.String <> string ind
+def 2090:2094 <> vname
+R2106:2111 Stdlib.Strings.String <> string ind
+def 2148:2156 <> cname_eqb
+R2165:2168 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2160:2164 Subtyping <> cname def
+R2174:2177 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2169:2173 Subtyping <> cname def
+R2178:2181 Corelib.Init.Datatypes <> bool ind
+R2186:2195 Stdlib.Strings.String <> eqb def
+def 2209:2217 <> vname_eqb
+R2226:2229 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2221:2225 Subtyping <> vname def
+R2235:2238 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2230:2234 Subtyping <> vname def
+R2239:2242 Corelib.Init.Datatypes <> bool ind
+R2247:2256 Stdlib.Strings.String <> eqb def
+def 2651:2661 <> constr_list
+R2673:2676 Corelib.Init.Datatypes <> list ind
+R2678:2682 Subtyping <> cname def
+def 2751:2766 <> constr_list_incl
+R2780:2790 Subtyping <> constr_list def
+binder 2769:2772 <> Phi':1
+binder 2774:2776 <> Phi:2
+R2795:2798 Corelib.Init.Datatypes <> bool ind
+R2805:2811 Stdlib.Lists.List <> forallb def
+R2850:2853 Subtyping <> Phi':1 var
+binder 2818:2818 <> c:3
+R2823:2829 Stdlib.Lists.List <> existsb def
+R2845:2847 Subtyping <> Phi:2 var
+R2832:2840 Subtyping <> cname_eqb def
+R2842:2842 Subtyping <> c:3 var
+ind 4079:4082 <> term
+constr 4096:4098 <> Var
+constr 4119:4121 <> Cst
+constr 4189:4192 <> Sort
+constr 4248:4250 <> App
+constr 4272:4274 <> Lam
+constr 4306:4307 <> Pi
+constr 4413:4418 <> Constr
+constr 4485:4489 <> Match
+constr 4593:4600 <> Notation
+R4110:4114 Subtyping <> vname def
+binder 4106:4106 <> x:6
+R4133:4137 Subtyping <> cname def
+binder 4129:4129 <> c:7
+R4264:4267 Subtyping <> term:4 ind
+binder 4258:4258 <> f:8
+binder 4260:4260 <> a:9
+R4286:4290 Subtyping <> vname def
+binder 4282:4282 <> x:10
+R4298:4301 Subtyping <> term:4 ind
+binder 4294:4294 <> e:11
+R4324:4327 Corelib.Init.Datatypes <> list ind
+R4335:4337 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R4330:4334 Subtyping <> vname def
+R4338:4341 Subtyping <> term:4 ind
+binder 4316:4320 <> Delta:12
+R4361:4364 Subtyping <> term:4 ind
+binder 4357:4357 <> B:13
+R4427:4430 Subtyping <> term:4 ind
+binder 4423:4423 <> T:14
+R4440:4450 Subtyping <> constr_list def
+binder 4434:4436 <> Phi:15
+R4499:4502 Subtyping <> term:4 ind
+binder 4495:4495 <> e:16
+R4510:4513 Subtyping <> term:4 ind
+binder 4506:4506 <> Q:17
+R4539:4542 Corelib.Init.Datatypes <> list ind
+R4550:4552 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R4545:4549 Subtyping <> cname def
+R4553:4556 Subtyping <> term:4 ind
+binder 4528:4535 <> branches:18
+R4609:4612 Subtyping <> term:4 ind
+binder 4603:4603 <> e:19
+binder 4605:4605 <> T:20
+scheme 4079:4082 <> term_rect
+scheme 4079:4082 <> term_ind
+scheme 4079:4082 <> term_rec
+scheme 4079:4082 <> term_sind
+def 4835:4843 <> telescope
+R4855:4858 Corelib.Init.Datatypes <> list ind
+R4866:4868 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R4861:4865 Subtyping <> vname def
+R4869:4872 Subtyping <> term ind
+def 4887:4893 <> indexes
+R4905:4908 Corelib.Init.Datatypes <> list ind
+R4910:4913 Subtyping <> term ind
+def 5013:5025 <> apply_indexes
+R5032:5035 Subtyping <> term ind
+binder 5028:5028 <> T:21
+R5045:5051 Subtyping <> indexes def
+binder 5039:5041 <> idx:22
+R5056:5059 Subtyping <> term ind
+R5066:5074 Stdlib.Lists.List <> fold_left def
+R5084:5084 Subtyping <> T:21 var
+R5080:5082 Subtyping <> idx:22 var
+R5076:5078 Subtyping <> App constr
+def 5235:5237 <> tPi
+R5248:5256 Subtyping <> telescope def
+binder 5240:5244 <> Delta:23
+R5264:5267 Subtyping <> term ind
+binder 5260:5260 <> B:24
+R5272:5275 Subtyping <> term ind
+R5288:5292 Subtyping <> Delta:23 var
+R5303:5304 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R5309:5309 Subtyping <> B:24 var
+R5316:5319 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5325:5326 Subtyping <> Pi constr
+R5328:5332 Subtyping <> Delta:23 var
+R5334:5334 Subtyping <> B:24 var
+def 5457:5465 <> spine_rec
+R5472:5475 Subtyping <> term ind
+binder 5468:5468 <> t:26
+R5485:5491 Subtyping <> indexes def
+binder 5479:5481 <> acc:27
+R5500:5502 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R5496:5499 Subtyping <> term ind
+R5503:5509 Subtyping <> indexes def
+R5522:5522 Subtyping <> t:26 var
+R5533:5535 Subtyping <> App constr
+R5544:5552 Subtyping <> spine_rec:28 def
+R5558:5561 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5562:5564 Subtyping <> acc:27 var
+R5576:5576 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5578:5579 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5583:5583 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5577:5577 Subtyping <> t:26 var
+R5580:5582 Subtyping <> acc:27 var
+def 5604:5608 <> spine
+R5615:5618 Subtyping <> term ind
+binder 5611:5611 <> t:30
+R5627:5629 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R5623:5626 Subtyping <> term ind
+R5630:5636 Subtyping <> indexes def
+R5641:5649 Subtyping <> spine_rec def
+R5651:5651 Subtyping <> t:30 var
+R5653:5654 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+def 5712:5719 <> head_cst
+R5726:5729 Subtyping <> term ind
+binder 5722:5722 <> t:31
+R5734:5739 Corelib.Init.Datatypes <> option ind
+R5741:5745 Subtyping <> cname def
+R5758:5758 Subtyping <> t:31 var
+R5769:5771 Subtyping <> Cst constr
+R5778:5781 Corelib.Init.Datatypes <> Some constr
+R5789:5791 Subtyping <> App constr
+R5800:5807 Subtyping <> head_cst:32 def
+R5820:5823 Corelib.Init.Datatypes <> None constr
+rec 6022:6028 <> pi_type
+proj 6055:6060 <> pt_tel
+proj 6081:6089 <> pt_target
+R6067:6075 Subtyping <> telescope def
+R6093:6096 Subtyping <> term ind
+def 6115:6126 <> pi_type_term
+R6133:6139 Subtyping <> pi_type rec
+binder 6129:6129 <> p:37
+R6144:6147 Subtyping <> term ind
+R6154:6156 Subtyping <> tPi def
+R6159:6164 Subtyping <> pt_tel proj
+R6166:6166 Subtyping <> p:37 var
+R6170:6178 Subtyping <> pt_target proj
+R6180:6180 Subtyping <> p:37 var
+def 6740:6745 <> symbol
+R6757:6763 Subtyping <> pi_type rec
+def 6777:6786 <> symbol_ctx
+R6798:6801 Corelib.Init.Datatypes <> list ind
+R6809:6811 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R6804:6808 Subtyping <> cname def
+R6812:6817 Subtyping <> symbol def
+def 6874:6884 <> symbol_type
+R6894:6897 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R6888:6893 Subtyping <> symbol def
+R6898:6901 Subtyping <> term ind
+R6906:6917 Subtyping <> pi_type_term def
+def 6981:6993 <> is_family_sym
+R7000:7005 Subtyping <> symbol def
+binder 6996:6996 <> t:38
+R7010:7013 Corelib.Init.Datatypes <> bool ind
+R7026:7034 Subtyping <> pt_target proj
+R7036:7036 Subtyping <> t:38 var
+R7043:7046 Subtyping <> Sort constr
+R7051:7054 Corelib.Init.Datatypes <> true constr
+R7063:7067 Corelib.Init.Datatypes <> false constr
+def 7223:7235 <> constr_target
+R7242:7247 Subtyping <> symbol def
+binder 7238:7238 <> t:39
+R7252:7257 Corelib.Init.Datatypes <> option ind
+R7265:7267 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R7260:7264 Subtyping <> cname def
+R7268:7274 Subtyping <> indexes def
+R7288:7292 Subtyping <> spine def
+R7295:7303 Subtyping <> pt_target proj
+R7305:7305 Subtyping <> t:39 var
+R7317:7317 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7323:7324 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7329:7329 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7318:7320 Subtyping <> Cst constr
+R7334:7337 Corelib.Init.Datatypes <> Some constr
+R7339:7339 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7341:7342 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7347:7347 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7358:7361 Corelib.Init.Datatypes <> None constr
+def 7444:7456 <> lookup_symbol
+R7466:7475 Subtyping <> symbol_ctx def
+binder 7459:7462 <> Call:40
+R7483:7487 Subtyping <> cname def
+binder 7479:7479 <> c:41
+R7492:7497 Corelib.Init.Datatypes <> option ind
+R7499:7504 Subtyping <> symbol def
+R7517:7520 Subtyping <> Call:40 var
+R7531:7532 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R7537:7540 Corelib.Init.Datatypes <> None constr
+R7553:7556 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R7546:7546 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7549:7550 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7552:7552 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R7569:7577 Subtyping <> cname_eqb def
+R7582:7582 Subtyping <> c:41 var
+R7625:7637 Subtyping <> lookup_symbol:42 def
+R7645:7645 Subtyping <> c:41 var
+R7589:7592 Corelib.Init.Datatypes <> Some constr
+def 7719:7731 <> lookup_constr
+R7741:7750 Subtyping <> symbol_ctx def
+binder 7734:7737 <> Call:44
+R7758:7762 Subtyping <> cname def
+binder 7754:7754 <> c:45
+R7767:7772 Corelib.Init.Datatypes <> option ind
+R7774:7779 Subtyping <> symbol def
+R7792:7804 Subtyping <> lookup_symbol def
+R7806:7809 Subtyping <> Call:44 var
+R7811:7811 Subtyping <> c:45 var
+R7822:7825 Corelib.Init.Datatypes <> Some constr
+R7838:7850 Subtyping <> constr_target def
+R7875:7878 Corelib.Init.Datatypes <> Some constr
+R7885:7888 Corelib.Init.Datatypes <> Some constr
+R7908:7911 Corelib.Init.Datatypes <> None constr
+R7916:7919 Corelib.Init.Datatypes <> None constr
+R7943:7946 Corelib.Init.Datatypes <> None constr
+R7951:7954 Corelib.Init.Datatypes <> None constr
+def 8072:8085 <> is_constructor
+R8095:8104 Subtyping <> symbol_ctx def
+binder 8088:8091 <> Call:46
+R8112:8116 Subtyping <> cname def
+binder 8108:8108 <> c:47
+R8121:8124 Corelib.Init.Datatypes <> bool ind
+R8137:8149 Subtyping <> lookup_constr def
+R8151:8154 Subtyping <> Call:46 var
+R8156:8156 Subtyping <> c:47 var
+R8167:8170 Corelib.Init.Datatypes <> Some constr
+R8177:8180 Corelib.Init.Datatypes <> true constr
+R8186:8189 Corelib.Init.Datatypes <> None constr
+R8194:8198 Corelib.Init.Datatypes <> false constr
+def 9160:9172 <> occurs_family
+R9179:9183 Subtyping <> cname def
+binder 9175:9175 <> F:48
+R9191:9194 Subtyping <> term ind
+binder 9187:9187 <> t:49
+R9199:9202 Corelib.Init.Datatypes <> bool ind
+R9215:9215 Subtyping <> t:49 var
+R9226:9228 Subtyping <> Var constr
+R9234:9237 Subtyping <> Sort constr
+R9242:9246 Corelib.Init.Datatypes <> false constr
+R9242:9246 Corelib.Init.Datatypes <> false constr
+R9252:9254 Subtyping <> Cst constr
+R9261:9269 Subtyping <> cname_eqb def
+R9273:9273 Subtyping <> F:48 var
+R9279:9281 Subtyping <> App constr
+R9307:9310 Corelib.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R9290:9302 Subtyping <> occurs_family:50 def
+R9304:9304 Subtyping <> F:48 var
+R9311:9323 Subtyping <> occurs_family:50 def
+R9325:9325 Subtyping <> F:48 var
+R9333:9335 Subtyping <> Lam constr
+R9344:9356 Subtyping <> occurs_family:50 def
+R9358:9358 Subtyping <> F:48 var
+R9366:9367 Subtyping <> Pi constr
+R9434:9443 Corelib.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R9386:9392 Stdlib.Lists.List <> existsb def
+binder 9399:9399 <> b:52
+R9404:9416 Subtyping <> occurs_family:50 def
+R9421:9423 Corelib.Init.Datatypes <> snd def
+R9425:9425 Subtyping <> b:52 var
+R9418:9418 Subtyping <> F:48 var
+R9444:9456 Subtyping <> occurs_family:50 def
+R9458:9458 Subtyping <> F:48 var
+R9466:9471 Subtyping <> Constr constr
+R9480:9492 Subtyping <> occurs_family:50 def
+R9494:9494 Subtyping <> F:48 var
+R9502:9506 Subtyping <> Match constr
+R9563:9572 Corelib.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R9542:9545 Corelib.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R9525:9537 Subtyping <> occurs_family:50 def
+R9539:9539 Subtyping <> F:48 var
+R9546:9558 Subtyping <> occurs_family:50 def
+R9560:9560 Subtyping <> F:48 var
+R9573:9579 Stdlib.Lists.List <> existsb def
+binder 9586:9586 <> b:53
+R9591:9603 Subtyping <> occurs_family:50 def
+R9608:9610 Corelib.Init.Datatypes <> snd def
+R9612:9612 Subtyping <> b:53 var
+R9605:9605 Subtyping <> F:48 var
+R9624:9631 Subtyping <> Notation constr
+R9657:9660 Corelib.Init.Datatypes <> ::bool_scope:x_'||'_x not
+R9640:9652 Subtyping <> occurs_family:50 def
+R9654:9654 Subtyping <> F:48 var
+R9661:9673 Subtyping <> occurs_family:50 def
+R9675:9675 Subtyping <> F:48 var
+def 9766:9779 <> positive_field
+R9786:9790 Subtyping <> cname def
+binder 9782:9782 <> F:54
+R9798:9801 Subtyping <> term ind
+binder 9794:9794 <> A:55
+R9806:9809 Corelib.Init.Datatypes <> bool ind
+R9822:9822 Subtyping <> A:55 var
+R9833:9834 Subtyping <> Pi constr
+R9908:9917 Corelib.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R9853:9859 Stdlib.Lists.List <> forallb def
+binder 9866:9866 <> b:58
+R9871:9874 Corelib.Init.Datatypes <> negb def
+R9877:9889 Subtyping <> occurs_family def
+R9891:9891 Subtyping <> F:54 var
+R9894:9896 Corelib.Init.Datatypes <> snd def
+R9898:9898 Subtyping <> b:58 var
+R9918:9931 Subtyping <> positive_field:56 def
+R9933:9933 Subtyping <> F:54 var
+R9941:9946 Subtyping <> Constr constr
+R9967:9971 Subtyping <> spine def
+R9988:9988 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9994:9995 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10000:10000 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9989:9991 Subtyping <> Cst constr
+R10005:10011 Stdlib.Lists.List <> forallb def
+binder 10018:10018 <> a:59
+R10023:10026 Corelib.Init.Datatypes <> negb def
+R10029:10041 Subtyping <> occurs_family def
+R10043:10043 Subtyping <> F:54 var
+R10045:10045 Subtyping <> a:59 var
+R10067:10070 Corelib.Init.Datatypes <> negb def
+R10073:10085 Subtyping <> occurs_family def
+R10087:10087 Subtyping <> F:54 var
+R10111:10114 Corelib.Init.Datatypes <> negb def
+R10117:10129 Subtyping <> occurs_family def
+R10131:10131 Subtyping <> F:54 var
+R10133:10133 Subtyping <> A:55 var
+def 10268:10276 <> wf_symbol
+R10283:10288 Subtyping <> symbol def
+binder 10279:10279 <> p:60
+R10293:10296 Corelib.Init.Datatypes <> bool ind
+R10309:10317 Subtyping <> pt_target proj
+R10319:10319 Subtyping <> p:60 var
+R10330:10333 Subtyping <> Sort constr
+R10338:10341 Corelib.Init.Datatypes <> true constr
+R10364:10376 Subtyping <> constr_target def
+R10378:10378 Subtyping <> p:60 var
+R10393:10396 Corelib.Init.Datatypes <> Some constr
+R10398:10398 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10400:10401 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10403:10403 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10418:10424 Stdlib.Lists.List <> forallb def
+R10463:10468 Subtyping <> pt_tel proj
+R10470:10470 Subtyping <> p:60 var
+binder 10431:10431 <> b:61
+R10436:10449 Subtyping <> positive_field def
+R10454:10456 Corelib.Init.Datatypes <> snd def
+R10458:10458 Subtyping <> b:61 var
+R10481:10484 Corelib.Init.Datatypes <> None constr
+R10489:10493 Corelib.Init.Datatypes <> false constr
+def 10524:10536 <> wf_symbol_ctx
+R10546:10555 Subtyping <> symbol_ctx def
+binder 10539:10542 <> Call:62
+R10560:10563 Corelib.Init.Datatypes <> bool ind
+R10570:10576 Stdlib.Lists.List <> forallb def
+R10607:10610 Subtyping <> Call:62 var
+binder 10583:10583 <> d:63
+R10588:10596 Subtyping <> wf_symbol def
+R10599:10601 Corelib.Init.Datatypes <> snd def
+R10603:10603 Subtyping <> d:63 var
+def 11095:11110 <> all_constructors
+R11120:11129 Subtyping <> symbol_ctx def
+binder 11113:11116 <> Call:64
+R11138:11148 Subtyping <> constr_list def
+binder 11133:11134 <> cs:65
+R11153:11156 Corelib.Init.Datatypes <> bool ind
+R11163:11169 Stdlib.Lists.List <> forallb def
+R11193:11194 Subtyping <> cs:65 var
+R11172:11185 Subtyping <> is_constructor def
+R11187:11190 Subtyping <> Call:64 var
+rec 11205:11213 <> signature
+proj 11262:11272 <> sig_constrs
+proj 11293:11304 <> sig_declared
+R11223:11232 Subtyping <> symbol_ctx def
+binder 11216:11219 <> Call:66
+R11277:11287 Subtyping <> constr_list def
+R11341:11343 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R11308:11323 Subtyping <> all_constructors def
+R11325:11328 Subtyping <> Call:66 var
+R11330:11340 Subtyping <> sig_constrs:68 meth
+R11344:11347 Corelib.Init.Datatypes <> true constr
+R11365:11376 Subtyping <> mk_signature constr
+R11407:11417 Subtyping <> sig_constrs proj
+R11407:11417 Subtyping <> sig_constrs proj
+R11439:11450 Subtyping <> sig_declared proj
+R11439:11450 Subtyping <> sig_declared proj
+def 11539:11553 <> check_signature
+R11563:11572 Subtyping <> symbol_ctx def
+binder 11556:11559 <> Call:70
+R11581:11591 Subtyping <> constr_list def
+binder 11576:11577 <> cs:71
+R11598:11603 Corelib.Init.Datatypes <> option ind
+R11606:11614 Subtyping <> signature rec
+R11616:11619 Subtyping <> Call:70 var
+R11631:11646 Subtyping <> all_constructors def
+R11648:11651 Subtyping <> Call:70 var
+R11653:11654 Subtyping <> cs:71 var
+R11702:11705 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R11698:11700 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R11674:11689 Subtyping <> all_constructors def
+R11691:11694 Subtyping <> Call:70 var
+R11696:11697 Subtyping <> cs:71 var
+R11701:11701 Subtyping <> b:72 var
+R11706:11711 Corelib.Init.Datatypes <> option ind
+R11714:11722 Subtyping <> signature rec
+R11724:11727 Subtyping <> Call:70 var
+R11794:11797 Corelib.Init.Datatypes <> None constr
+binder 11742:11742 <> H:73
+R11747:11750 Corelib.Init.Datatypes <> Some constr
+R11753:11764 Subtyping <> mk_signature constr
+R11766:11769 Subtyping <> Call:70 var
+R11771:11772 Subtyping <> cs:71 var
+R11774:11774 Subtyping <> H:73 var
+R11800:11806 Corelib.Init.Logic <> eq_refl constr
+def 11873:11886 <> signature_incl
+R11896:11905 Subtyping <> symbol_ctx def
+binder 11889:11892 <> Call:74
+R11916:11924 Subtyping <> signature rec
+R11926:11929 Subtyping <> Call:74 var
+binder 11909:11910 <> s':75
+binder 11912:11912 <> s:76
+R11934:11937 Corelib.Init.Datatypes <> bool ind
+R11944:11959 Subtyping <> constr_list_incl def
+R11962:11972 Subtyping <> sig_constrs proj
+R11974:11975 Subtyping <> s':75 var
+R11979:11989 Subtyping <> sig_constrs proj
+R11991:11991 Subtyping <> s:76 var
+def 12151:12153 <> ctx
+R12165:12168 Corelib.Init.Datatypes <> list ind
+R12176:12178 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R12171:12175 Subtyping <> vname def
+R12179:12182 Subtyping <> term ind
+def 12198:12206 <> empty_ctx
+R12210:12212 Subtyping <> ctx def
+R12217:12218 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+def 12233:12240 <> ctx_cons
+R12247:12251 Subtyping <> vname def
+binder 12243:12243 <> x:77
+R12259:12262 Subtyping <> term ind
+binder 12255:12255 <> A:78
+R12274:12276 Subtyping <> ctx def
+binder 12266:12270 <> Gamma:79
+R12281:12283 Subtyping <> ctx def
+R12296:12299 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R12290:12290 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12292:12293 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12295:12295 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12291:12291 Subtyping <> x:77 var
+R12294:12294 Subtyping <> A:78 var
+R12300:12304 Subtyping <> Gamma:79 var
+def 12317:12326 <> lookup_var
+R12337:12339 Subtyping <> ctx def
+binder 12329:12333 <> Gamma:80
+R12347:12351 Subtyping <> vname def
+binder 12343:12343 <> x:81
+R12356:12361 Corelib.Init.Datatypes <> option ind
+R12363:12366 Subtyping <> term ind
+R12379:12383 Subtyping <> Gamma:80 var
+R12394:12395 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R12400:12403 Corelib.Init.Datatypes <> None constr
+R12415:12418 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R12409:12409 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12411:12412 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12414:12414 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12432:12440 Subtyping <> vname_eqb def
+R12444:12444 Subtyping <> x:81 var
+R12487:12496 Subtyping <> lookup_var:82 def
+R12505:12505 Subtyping <> x:81 var
+R12451:12454 Corelib.Init.Datatypes <> Some constr
+def 13105:13109 <> subst
+R13116:13120 Subtyping <> vname def
+binder 13112:13112 <> x:84
+R13128:13131 Subtyping <> term ind
+binder 13124:13124 <> s:85
+R13139:13142 Subtyping <> term ind
+binder 13135:13135 <> t:86
+R13147:13150 Subtyping <> term ind
+R13163:13163 Subtyping <> t:86 var
+R13174:13176 Subtyping <> Var constr
+R13186:13194 Subtyping <> vname_eqb def
+R13196:13196 Subtyping <> x:84 var
+R13212:13214 Subtyping <> Var constr
+R13205:13205 Subtyping <> s:85 var
+R13222:13224 Subtyping <> Cst constr
+R13231:13233 Subtyping <> Cst constr
+R13241:13244 Subtyping <> Sort constr
+R13249:13252 Subtyping <> Sort constr
+R13258:13260 Subtyping <> App constr
+R13269:13271 Subtyping <> App constr
+R13274:13278 Subtyping <> subst:87 def
+R13282:13282 Subtyping <> s:85 var
+R13280:13280 Subtyping <> x:84 var
+R13288:13292 Subtyping <> subst:87 def
+R13296:13296 Subtyping <> s:85 var
+R13294:13294 Subtyping <> x:84 var
+R13305:13307 Subtyping <> Lam constr
+R13319:13327 Subtyping <> vname_eqb def
+R13329:13329 Subtyping <> x:84 var
+R13351:13353 Subtyping <> Lam constr
+R13358:13362 Subtyping <> subst:87 def
+R13366:13366 Subtyping <> s:85 var
+R13364:13364 Subtyping <> x:84 var
+R13338:13340 Subtyping <> Lam constr
+R13375:13376 Subtyping <> Pi constr
+R13422:13425 Corelib.Init.Datatypes <> list ind
+R13433:13435 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R13428:13432 Subtyping <> vname def
+R13436:13439 Subtyping <> term ind
+binder 13414:13418 <> Delta:89
+R13476:13478 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R13457:13460 Corelib.Init.Datatypes <> list ind
+R13468:13470 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R13463:13467 Subtyping <> vname def
+R13471:13474 Subtyping <> term ind
+R13479:13482 Corelib.Init.Datatypes <> bool ind
+R13501:13505 Subtyping <> Delta:89 var
+R13522:13523 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R13528:13528 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13531:13532 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13537:13537 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13529:13530 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R13533:13536 Corelib.Init.Datatypes <> true constr
+R13555:13558 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13549:13549 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13551:13552 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13554:13554 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13584:13592 Subtyping <> vname_eqb def
+R13594:13594 Subtyping <> x:84 var
+R13679:13687 Subtyping <> subst_tel:90 var
+binder 13661:13667 <> Delta'':92
+binder 13670:13673 <> free:93
+R13716:13716 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13744:13745 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13750:13750 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13733:13736 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13717:13717 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13719:13720 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13732:13732 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13721:13725 Subtyping <> subst:87 def
+R13729:13729 Subtyping <> s:85 var
+R13727:13727 Subtyping <> x:84 var
+R13737:13743 Subtyping <> Delta'':92 var
+R13746:13749 Subtyping <> free:93 var
+R13603:13603 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13630:13631 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13637:13637 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13620:13623 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13604:13604 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13606:13607 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13619:13619 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13608:13612 Subtyping <> subst:87 def
+R13616:13616 Subtyping <> s:85 var
+R13614:13614 Subtyping <> x:84 var
+R13632:13636 Corelib.Init.Datatypes <> false constr
+binder 13403:13411 <> subst_tel:94
+R13795:13803 Subtyping <> subst_tel:94 var
+binder 13778:13783 <> Delta':95
+binder 13786:13789 <> free:96
+R13820:13821 Subtyping <> Pi constr
+R13823:13828 Subtyping <> Delta':95 var
+R13834:13837 Subtyping <> free:96 var
+R13844:13848 Subtyping <> subst:87 def
+R13852:13852 Subtyping <> s:85 var
+R13850:13850 Subtyping <> x:84 var
+R13868:13873 Subtyping <> Constr constr
+R13884:13889 Subtyping <> Constr constr
+R13892:13896 Subtyping <> subst:87 def
+R13900:13900 Subtyping <> s:85 var
+R13898:13898 Subtyping <> x:84 var
+R13913:13917 Subtyping <> Match constr
+R13936:13940 Subtyping <> Match constr
+R13943:13947 Subtyping <> subst:87 def
+R13951:13951 Subtyping <> s:85 var
+R13949:13949 Subtyping <> x:84 var
+R13957:13961 Subtyping <> subst:87 def
+R13965:13965 Subtyping <> s:85 var
+R13963:13963 Subtyping <> x:84 var
+R13979:13981 Corelib.Lists.ListDef <> map def
+R13989:13989 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13991:13992 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13994:13994 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 13993:13993 <> N:97
+binder 13990:13990 <> c:98
+binder 13989:13994 <> pat:99
+R13999:13999 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14001:14002 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14014:14014 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14000:14000 Subtyping <> c:98 var
+R14003:14007 Subtyping <> subst:87 def
+R14013:14013 Subtyping <> N:97 var
+R14011:14011 Subtyping <> s:85 var
+R14009:14009 Subtyping <> x:84 var
+R14026:14033 Subtyping <> Notation constr
+R14042:14049 Subtyping <> Notation constr
+R14052:14056 Subtyping <> subst:87 def
+R14060:14060 Subtyping <> s:85 var
+R14058:14058 Subtyping <> x:84 var
+R14066:14070 Subtyping <> subst:87 def
+R14074:14074 Subtyping <> s:85 var
+R14072:14072 Subtyping <> x:84 var
+ind 14322:14326 <> value
+constr 14348:14351 <> VLam
+constr 14388:14394 <> VCstApp
+constr 14660:14664 <> VSort
+constr 14683:14685 <> VPi
+constr 14730:14736 <> VConstr
+R14334:14337 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R14330:14333 Subtyping <> term ind
+binder 14365:14365 <> x:102
+binder 14367:14367 <> e:103
+R14370:14374 Subtyping <> value:100 ind
+R14377:14379 Subtyping <> Lam constr
+R14381:14381 Subtyping <> x:102 var
+R14383:14383 Subtyping <> e:103 var
+binder 14405:14405 <> c:104
+binder 14407:14408 <> us:105
+R14426:14441 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R14411:14416 Corelib.Lists.ListDef <> Forall ind
+R14424:14425 Subtyping <> us:105 var
+R14418:14422 Subtyping <> value:100 ind
+R14442:14446 Subtyping <> value:100 ind
+R14449:14461 Subtyping <> apply_indexes def
+R14464:14466 Subtyping <> Cst constr
+R14468:14468 Subtyping <> c:104 var
+R14471:14472 Subtyping <> us:105 var
+R14670:14674 Subtyping <> value:100 ind
+R14676:14679 Subtyping <> Sort constr
+binder 14700:14704 <> Delta:106
+binder 14706:14706 <> B:107
+R14709:14713 Subtyping <> value:100 ind
+R14716:14717 Subtyping <> Pi constr
+R14719:14723 Subtyping <> Delta:106 var
+R14725:14725 Subtyping <> B:107 var
+binder 14747:14747 <> T:108
+binder 14749:14751 <> Phi:109
+R14754:14758 Subtyping <> value:100 ind
+R14761:14766 Subtyping <> Constr constr
+R14768:14768 Subtyping <> T:108 var
+R14770:14772 Subtyping <> Phi:109 var
+scheme 14322:14326 <> value_ind
+scheme 14322:14326 <> value_sind
+def 14972:14977 <> inertb
+R14984:14987 Subtyping <> term ind
+binder 14980:14980 <> t:110
+R14992:14995 Corelib.Init.Datatypes <> bool ind
+R15008:15008 Subtyping <> t:110 var
+R15019:15021 Subtyping <> Var constr
+R15027:15029 Subtyping <> Cst constr
+R15035:15038 Subtyping <> Sort constr
+R15042:15044 Subtyping <> Lam constr
+R15052:15053 Subtyping <> Pi constr
+R15061:15066 Subtyping <> Constr constr
+R15075:15078 Corelib.Init.Datatypes <> true constr
+R15075:15078 Corelib.Init.Datatypes <> true constr
+R15075:15078 Corelib.Init.Datatypes <> true constr
+R15075:15078 Corelib.Init.Datatypes <> true constr
+R15075:15078 Corelib.Init.Datatypes <> true constr
+R15075:15078 Corelib.Init.Datatypes <> true constr
+R15084:15086 Subtyping <> App constr
+R15107:15114 Subtyping <> head_cst def
+R15131:15134 Corelib.Init.Datatypes <> Some constr
+R15149:15152 Corelib.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R15141:15146 Subtyping <> inertb:111 def
+R15153:15158 Subtyping <> inertb:111 def
+R15170:15173 Corelib.Init.Datatypes <> None constr
+R15178:15182 Corelib.Init.Datatypes <> false constr
+R15198:15202 Subtyping <> Match constr
+R15212:15219 Subtyping <> Notation constr
+R15228:15232 Corelib.Init.Datatypes <> false constr
+R15228:15232 Corelib.Init.Datatypes <> false constr
+def 15411:15423 <> lookup_branch
+R15432:15435 Corelib.Init.Datatypes <> list ind
+R15443:15445 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15438:15442 Subtyping <> cname def
+R15446:15449 Subtyping <> term ind
+binder 15426:15428 <> brs:113
+R15458:15462 Subtyping <> cname def
+binder 15454:15454 <> c:114
+R15469:15474 Corelib.Init.Datatypes <> option ind
+R15476:15479 Subtyping <> term ind
+R15492:15494 Subtyping <> brs:113 var
+R15505:15506 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R15511:15514 Corelib.Init.Datatypes <> None constr
+R15527:15530 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15520:15520 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15523:15524 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15526:15526 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15542:15550 Subtyping <> cname_eqb def
+R15555:15555 Subtyping <> c:114 var
+R15597:15609 Subtyping <> lookup_branch:115 def
+R15616:15616 Subtyping <> c:114 var
+R15562:15565 Corelib.Init.Datatypes <> Some constr
+ind 16073:16076 <> step
+constr 16106:16112 <> Xi_app1
+constr 16174:16180 <> Xi_app2
+constr 16257:16263 <> Xi_beta
+constr 16334:16340 <> Xi_case
+constr 16418:16425 <> Xi_case'
+constr 16622:16632 <> Xi_notation
+R16084:16087 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16080:16083 Subtyping <> term ind
+R16092:16095 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16088:16091 Subtyping <> term ind
+R16694:16697 Subtyping <> step:118 ind
+binder 16123:16123 <> L:119
+binder 16125:16126 <> L':120
+binder 16128:16128 <> M:121
+R16143:16150 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16136:16140 Subtyping <> :::x_'-->'_x not
+R16135:16135 Subtyping <> L:119 var
+R16141:16142 Subtyping <> L':120 var
+R16158:16162 Subtyping <> :::x_'-->'_x not
+R16151:16153 Subtyping <> App constr
+R16155:16155 Subtyping <> L:119 var
+R16157:16157 Subtyping <> M:121 var
+R16163:16165 Subtyping <> App constr
+R16167:16168 Subtyping <> L':120 var
+R16170:16170 Subtyping <> M:121 var
+binder 16191:16191 <> V:122
+binder 16193:16193 <> M:123
+binder 16195:16196 <> M':124
+R16210:16217 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16203:16207 Subtyping <> value ind
+R16209:16209 Subtyping <> V:122 var
+R16226:16233 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16219:16223 Subtyping <> :::x_'-->'_x not
+R16218:16218 Subtyping <> M:123 var
+R16224:16225 Subtyping <> M':124 var
+R16241:16245 Subtyping <> :::x_'-->'_x not
+R16234:16236 Subtyping <> App constr
+R16238:16238 Subtyping <> V:122 var
+R16240:16240 Subtyping <> M:123 var
+R16246:16248 Subtyping <> App constr
+R16250:16250 Subtyping <> V:122 var
+R16252:16253 Subtyping <> M':124 var
+binder 16274:16274 <> x:125
+binder 16276:16276 <> N:126
+binder 16278:16278 <> V:127
+R16292:16299 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16285:16289 Subtyping <> value ind
+R16291:16291 Subtyping <> V:127 var
+R16315:16319 Subtyping <> :::x_'-->'_x not
+R16300:16302 Subtyping <> App constr
+R16305:16307 Subtyping <> Lam constr
+R16309:16309 Subtyping <> x:125 var
+R16311:16311 Subtyping <> N:126 var
+R16314:16314 Subtyping <> V:127 var
+R16320:16324 Subtyping <> subst def
+R16326:16326 Subtyping <> x:125 var
+R16328:16328 Subtyping <> V:127 var
+R16330:16330 Subtyping <> N:126 var
+binder 16351:16351 <> e:128
+binder 16353:16354 <> e':129
+binder 16356:16356 <> Q:130
+binder 16358:16360 <> brs:131
+R16375:16382 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16368:16372 Subtyping <> :::x_'-->'_x not
+R16367:16367 Subtyping <> e:128 var
+R16373:16374 Subtyping <> e':129 var
+R16396:16400 Subtyping <> :::x_'-->'_x not
+R16383:16387 Subtyping <> Match constr
+R16389:16389 Subtyping <> e:128 var
+R16391:16391 Subtyping <> Q:130 var
+R16393:16395 Subtyping <> brs:131 var
+R16401:16405 Subtyping <> Match constr
+R16407:16408 Subtyping <> e':129 var
+R16410:16410 Subtyping <> Q:130 var
+R16412:16414 Subtyping <> brs:131 var
+binder 16436:16436 <> c:132
+binder 16438:16439 <> us:133
+binder 16441:16441 <> Q:134
+binder 16443:16445 <> brs:135
+binder 16447:16447 <> N:136
+R16469:16476 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16454:16459 Corelib.Lists.ListDef <> Forall ind
+R16467:16468 Subtyping <> us:133 var
+R16461:16465 Subtyping <> value ind
+R16505:16512 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16496:16498 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R16477:16489 Subtyping <> lookup_branch def
+R16491:16493 Subtyping <> brs:135 var
+R16495:16495 Subtyping <> c:132 var
+R16499:16502 Corelib.Init.Datatypes <> Some constr
+R16504:16504 Subtyping <> N:136 var
+R16551:16555 Subtyping <> :::x_'-->'_x not
+R16513:16517 Subtyping <> Match constr
+R16520:16532 Subtyping <> apply_indexes def
+R16535:16537 Subtyping <> Cst constr
+R16539:16539 Subtyping <> c:132 var
+R16542:16543 Subtyping <> us:133 var
+R16546:16546 Subtyping <> Q:134 var
+R16548:16550 Subtyping <> brs:135 var
+R16556:16568 Subtyping <> apply_indexes def
+R16570:16570 Subtyping <> N:136 var
+R16572:16573 Subtyping <> us:133 var
+binder 16643:16643 <> e:137
+binder 16645:16645 <> T:138
+R16664:16668 Subtyping <> :::x_'-->'_x not
+R16652:16659 Subtyping <> Notation constr
+R16661:16661 Subtyping <> e:137 var
+R16663:16663 Subtyping <> T:138 var
+R16669:16669 Subtyping <> e:137 var
+scheme 16073:16076 <> step_ind
+scheme 16073:16076 <> step_sind
+R16694:16697 Subtyping <> step ind
+not 16677:16677 <> :::x_'-->'_x
+ind 16801:16809 <> multistep
+constr 16839:16848 <> multi_refl
+constr 16873:16882 <> multi_step
+R16817:16820 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16813:16816 Subtyping <> term ind
+R16825:16828 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16821:16824 Subtyping <> term ind
+R16956:16964 Subtyping <> multistep:140 ind
+binder 16859:16859 <> t:141
+R16863:16868 Subtyping <> :::x_'-->*'_x not
+R16862:16862 Subtyping <> t:141 var
+R16869:16869 Subtyping <> t:141 var
+binder 16893:16893 <> t:142
+binder 16895:16895 <> u:143
+binder 16897:16897 <> v:144
+R16907:16910 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16901:16905 Subtyping <> :::x_'-->'_x not
+R16900:16900 Subtyping <> t:142 var
+R16906:16906 Subtyping <> u:143 var
+R16919:16922 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R16912:16917 Subtyping <> :::x_'-->*'_x not
+R16911:16911 Subtyping <> u:143 var
+R16918:16918 Subtyping <> v:144 var
+R16924:16929 Subtyping <> :::x_'-->*'_x not
+R16923:16923 Subtyping <> t:142 var
+R16930:16930 Subtyping <> v:144 var
+scheme 16801:16809 <> multistep_ind
+scheme 16801:16809 <> multistep_sind
+R16956:16964 Subtyping <> multistep ind
+not 16938:16938 <> :::x_'-->*'_x
+def 17196:17210 <> subst_telescope
+R17217:17221 Subtyping <> vname def
+binder 17213:17213 <> x:145
+R17229:17232 Subtyping <> term ind
+binder 17225:17225 <> s:146
+R17244:17252 Subtyping <> telescope def
+binder 17236:17240 <> Delta:147
+R17268:17270 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R17259:17267 Subtyping <> telescope def
+R17271:17274 Corelib.Init.Datatypes <> bool ind
+R17287:17291 Subtyping <> Delta:147 var
+R17302:17303 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R17308:17308 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17311:17312 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17317:17317 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17309:17310 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R17313:17316 Corelib.Init.Datatypes <> true constr
+R17329:17332 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R17323:17323 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17325:17326 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17328:17328 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17352:17360 Subtyping <> vname_eqb def
+R17362:17362 Subtyping <> x:145 var
+R17441:17455 Subtyping <> subst_telescope:148 def
+R17459:17459 Subtyping <> s:146 var
+R17457:17457 Subtyping <> x:145 var
+binder 17423:17429 <> Delta'':150
+binder 17432:17435 <> free:151
+R17482:17482 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17510:17511 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17516:17516 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17499:17502 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R17483:17483 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17485:17486 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17498:17498 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17487:17491 Subtyping <> subst def
+R17493:17493 Subtyping <> x:145 var
+R17495:17495 Subtyping <> s:146 var
+R17503:17509 Subtyping <> Delta'':150 var
+R17512:17515 Subtyping <> free:151 var
+R17371:17371 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17398:17399 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17405:17405 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17388:17391 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R17372:17372 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17374:17375 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17387:17387 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R17376:17380 Subtyping <> subst def
+R17382:17382 Subtyping <> x:145 var
+R17384:17384 Subtyping <> s:146 var
+R17400:17404 Corelib.Init.Datatypes <> false constr
+def 17669:17675 <> pi_inst
+R17682:17686 Subtyping <> vname def
+binder 17678:17678 <> x:152
+R17694:17697 Subtyping <> term ind
+binder 17690:17690 <> u:153
+R17709:17717 Subtyping <> telescope def
+binder 17701:17705 <> Delta:154
+R17725:17728 Subtyping <> term ind
+binder 17721:17721 <> B:155
+R17735:17738 Subtyping <> term ind
+R17767:17781 Subtyping <> subst_telescope def
+R17783:17783 Subtyping <> x:152 var
+R17785:17785 Subtyping <> u:153 var
+R17787:17791 Subtyping <> Delta:154 var
+binder 17750:17755 <> Delta':156
+binder 17758:17761 <> free:157
+R17798:17800 Subtyping <> tPi def
+R17802:17807 Subtyping <> Delta':156 var
+R17813:17816 Subtyping <> free:157 var
+R17840:17840 Subtyping <> B:155 var
+R17823:17827 Subtyping <> subst def
+R17829:17829 Subtyping <> x:152 var
+R17831:17831 Subtyping <> u:153 var
+R17833:17833 Subtyping <> B:155 var
+def 17920:17927 <> ctx_push
+R17938:17940 Subtyping <> ctx def
+binder 17930:17934 <> Gamma:158
+R17952:17960 Subtyping <> telescope def
+binder 17944:17948 <> Delta:159
+R17965:17967 Subtyping <> ctx def
+R17980:17984 Subtyping <> Delta:159 var
+R17995:17996 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R18001:18005 Subtyping <> Gamma:158 var
+R18017:18020 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R18011:18011 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18013:18014 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18016:18016 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R18031:18038 Subtyping <> ctx_push:160 def
+R18041:18048 Subtyping <> ctx_cons def
+R18054:18058 Subtyping <> Gamma:158 var
+def 18579:18585 <> against
+R18594:18597 Subtyping <> term ind
+binder 18588:18588 <> p:162
+binder 18590:18590 <> t:163
+R18602:18605 Corelib.Init.Datatypes <> bool ind
+R18621:18621 Subtyping <> t:163 var
+R18618:18618 Subtyping <> p:162 var
+R18632:18634 Subtyping <> App constr
+R18641:18643 Subtyping <> App constr
+R18684:18691 Subtyping <> head_cst def
+R18694:18696 Subtyping <> App constr
+R18664:18671 Subtyping <> head_cst def
+R18674:18676 Subtyping <> App constr
+R18716:18719 Corelib.Init.Datatypes <> Some constr
+R18724:18727 Corelib.Init.Datatypes <> Some constr
+R18748:18756 Subtyping <> cname_eqb def
+R18800:18804 Corelib.Init.Datatypes <> false constr
+R18779:18782 Corelib.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R18768:18774 Subtyping <> against:164 def
+R18783:18789 Subtyping <> against:164 def
+R18822:18825 Corelib.Init.Datatypes <> true constr
+R18873:18880 Subtyping <> head_cst def
+R18882:18882 Subtyping <> t:163 var
+R18861:18868 Subtyping <> head_cst def
+R18870:18870 Subtyping <> p:162 var
+R18897:18900 Corelib.Init.Datatypes <> Some constr
+R18905:18908 Corelib.Init.Datatypes <> Some constr
+R18916:18924 Subtyping <> cname_eqb def
+R18947:18950 Corelib.Init.Datatypes <> true constr
+def 19115:19128 <> constructor_of
+R19138:19147 Subtyping <> symbol_ctx def
+binder 19131:19134 <> Call:167
+R19157:19161 Subtyping <> cname def
+binder 19151:19151 <> c:168
+binder 19153:19153 <> F:169
+R19166:19169 Corelib.Init.Datatypes <> bool ind
+R19182:19194 Subtyping <> lookup_symbol def
+R19196:19199 Subtyping <> Call:167 var
+R19201:19201 Subtyping <> c:168 var
+R19212:19215 Corelib.Init.Datatypes <> Some constr
+R19228:19240 Subtyping <> constr_target def
+R19265:19268 Corelib.Init.Datatypes <> Some constr
+R19270:19270 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19273:19274 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19276:19276 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19281:19289 Subtyping <> cname_eqb def
+R19294:19294 Subtyping <> F:169 var
+R19312:19315 Corelib.Init.Datatypes <> None constr
+R19320:19324 Corelib.Init.Datatypes <> false constr
+R19348:19351 Corelib.Init.Datatypes <> None constr
+R19356:19360 Corelib.Init.Datatypes <> false constr
+def 19567:19580 <> ok_constructor
+R19590:19599 Subtyping <> symbol_ctx def
+binder 19583:19586 <> Call:170
+R19607:19611 Subtyping <> cname def
+binder 19603:19603 <> F:171
+R19621:19627 Subtyping <> indexes def
+binder 19615:19617 <> idx:172
+R19639:19643 Subtyping <> cname def
+binder 19635:19635 <> c:173
+R19648:19651 Corelib.Init.Datatypes <> bool ind
+R19664:19676 Subtyping <> lookup_symbol def
+R19678:19681 Subtyping <> Call:170 var
+R19683:19683 Subtyping <> c:173 var
+R19694:19697 Corelib.Init.Datatypes <> Some constr
+R19716:19728 Subtyping <> constr_target def
+R19745:19748 Corelib.Init.Datatypes <> Some constr
+R19750:19750 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19753:19754 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19758:19758 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19787:19801 Corelib.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R19936:19936 Corelib.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R19773:19781 Subtyping <> cname_eqb def
+R19786:19786 Subtyping <> F:171 var
+R19805:19811 Corelib.Init.Nat <> eqb def
+R19814:19819 Stdlib.Lists.List <> length abbrev
+R19821:19823 Subtyping <> idx:172 var
+R19827:19832 Stdlib.Lists.List <> length abbrev
+R19932:19935 Corelib.Init.Datatypes <> true constr
+R19855:19861 Stdlib.Lists.List <> forallb def
+R19899:19905 Stdlib.Lists.List <> combine def
+R19907:19909 Subtyping <> idx:172 var
+binder 19868:19868 <> a:174
+R19873:19879 Subtyping <> against def
+R19882:19884 Corelib.Init.Datatypes <> fst def
+R19886:19886 Subtyping <> a:174 var
+R19890:19892 Corelib.Init.Datatypes <> snd def
+R19894:19894 Subtyping <> a:174 var
+R19946:19949 Corelib.Init.Datatypes <> None constr
+R19954:19958 Corelib.Init.Datatypes <> false constr
+R19974:19977 Corelib.Init.Datatypes <> None constr
+R19982:19986 Corelib.Init.Datatypes <> false constr
+def 20080:20088 <> prune_sig
+R20098:20107 Subtyping <> symbol_ctx def
+binder 20091:20094 <> Call:175
+R20115:20118 Subtyping <> term ind
+binder 20111:20111 <> T:176
+R20128:20138 Subtyping <> constr_list def
+binder 20122:20124 <> Phi:177
+R20145:20155 Subtyping <> constr_list def
+R20168:20172 Subtyping <> spine def
+R20174:20174 Subtyping <> T:176 var
+R20185:20185 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20191:20192 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20196:20196 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20186:20188 Subtyping <> Cst constr
+R20201:20206 Stdlib.Lists.List <> filter def
+R20236:20238 Subtyping <> Phi:177 var
+R20209:20222 Subtyping <> ok_constructor def
+R20224:20227 Subtyping <> Call:175 var
+R20249:20251 Subtyping <> Phi:177 var
+def 20607:20621 <> canonical_guard
+R20631:20640 Subtyping <> symbol_ctx def
+binder 20624:20627 <> Call:178
+R20650:20653 Subtyping <> term ind
+binder 20644:20644 <> M:179
+binder 20646:20646 <> A:180
+R20658:20661 Corelib.Init.Datatypes <> bool ind
+R20674:20674 Subtyping <> A:180 var
+R20685:20690 Subtyping <> Constr constr
+R20713:20717 Subtyping <> spine def
+R20719:20719 Subtyping <> M:179 var
+R20734:20734 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20740:20741 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20743:20743 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20735:20737 Subtyping <> Cst constr
+R20748:20754 Stdlib.Lists.List <> existsb def
+R20771:20779 Subtyping <> prune_sig def
+R20781:20784 Subtyping <> Call:178 var
+R20757:20765 Subtyping <> cname_eqb def
+R20801:20801 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20809:20810 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20813:20813 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20802:20804 Subtyping <> Lam constr
+R20811:20812 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R20817:20817 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20822:20823 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20826:20826 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20818:20821 Subtyping <> Sort constr
+R20824:20825 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R20830:20830 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20837:20838 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20841:20841 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20831:20832 Subtyping <> Pi constr
+R20839:20840 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R20845:20845 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20856:20857 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20860:20860 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20846:20851 Subtyping <> Constr constr
+R20858:20859 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R20865:20869 Corelib.Init.Datatypes <> false constr
+R20865:20869 Corelib.Init.Datatypes <> false constr
+R20865:20869 Corelib.Init.Datatypes <> false constr
+R20865:20869 Corelib.Init.Datatypes <> false constr
+R20884:20887 Corelib.Init.Datatypes <> true constr
+R20908:20911 Corelib.Init.Datatypes <> true constr
+def 20932:20945 <> callable_guard
+R20952:20955 Subtyping <> term ind
+binder 20948:20948 <> M:182
+R20960:20963 Corelib.Init.Datatypes <> bool ind
+R20976:20980 Subtyping <> spine def
+R20982:20982 Subtyping <> M:182 var
+R20993:20993 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20999:21000 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21002:21002 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20994:20996 Subtyping <> Cst constr
+R21007:21010 Corelib.Init.Datatypes <> true constr
+R21016:21016 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21024:21025 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21028:21028 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21017:21019 Subtyping <> Lam constr
+R21026:21027 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R21033:21036 Corelib.Init.Datatypes <> true constr
+R21042:21042 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21047:21048 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21051:21051 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21043:21046 Subtyping <> Sort constr
+R21049:21050 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R21055:21055 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21062:21063 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21066:21066 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21056:21057 Subtyping <> Pi constr
+R21064:21065 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R21070:21070 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21081:21082 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21085:21085 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21071:21076 Subtyping <> Constr constr
+R21083:21084 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R21090:21094 Corelib.Init.Datatypes <> false constr
+R21090:21094 Corelib.Init.Datatypes <> false constr
+R21090:21094 Corelib.Init.Datatypes <> false constr
+R21105:21108 Corelib.Init.Datatypes <> true constr
+def 21129:21145 <> application_guard
+R21155:21164 Subtyping <> symbol_ctx def
+binder 21148:21151 <> Call:183
+R21176:21179 Subtyping <> term ind
+binder 21168:21168 <> t:184
+binder 21170:21170 <> u:185
+binder 21172:21172 <> R:186
+R21184:21187 Corelib.Init.Datatypes <> bool ind
+R21226:21229 Corelib.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R21194:21208 Subtyping <> canonical_guard def
+R21210:21213 Subtyping <> Call:183 var
+R21216:21218 Subtyping <> App constr
+R21220:21220 Subtyping <> t:184 var
+R21222:21222 Subtyping <> u:185 var
+R21225:21225 Subtyping <> R:186 var
+R21230:21243 Subtyping <> callable_guard def
+R21245:21245 Subtyping <> t:184 var
+ind 21887:21890 <> conv
+constr 21940:21948 <> conv_refl
+constr 22028:22035 <> conv_phi
+constr 22120:22127 <> conv_sym
+constr 22178:22187 <> conv_trans
+R21900:21909 Subtyping <> symbol_ctx def
+binder 21893:21896 <> Call:187
+R21918:21921 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R21914:21917 Subtyping <> term ind
+R21926:21929 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R21922:21925 Subtyping <> term ind
+binder 21960:21960 <> t:190
+R21963:21966 Subtyping <> conv:188 ind
+R21975:21975 Subtyping <> t:190 var
+R21973:21973 Subtyping <> t:190 var
+R21968:21971 Subtyping <> Call:187 var
+binder 22048:22048 <> T:191
+binder 22050:22052 <> Phi:192
+R22059:22062 Subtyping <> conv:188 ind
+R22085:22090 Subtyping <> Constr constr
+R22092:22092 Subtyping <> T:191 var
+R22095:22103 Subtyping <> prune_sig def
+R22105:22108 Subtyping <> Call:187 var
+R22110:22110 Subtyping <> T:191 var
+R22112:22114 Subtyping <> Phi:192 var
+R22070:22075 Subtyping <> Constr constr
+R22077:22077 Subtyping <> T:191 var
+R22079:22081 Subtyping <> Phi:192 var
+R22064:22067 Subtyping <> Call:187 var
+binder 22140:22140 <> t:193
+binder 22142:22142 <> u:194
+R22158:22161 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R22145:22148 Subtyping <> conv:188 ind
+R22157:22157 Subtyping <> u:194 var
+R22155:22155 Subtyping <> t:193 var
+R22150:22153 Subtyping <> Call:187 var
+R22162:22165 Subtyping <> conv:188 ind
+R22174:22174 Subtyping <> t:193 var
+R22172:22172 Subtyping <> u:194 var
+R22167:22170 Subtyping <> Call:187 var
+binder 22198:22198 <> t:195
+binder 22200:22200 <> u:196
+binder 22202:22202 <> v:197
+R22222:22225 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R22209:22212 Subtyping <> conv:188 ind
+R22221:22221 Subtyping <> u:196 var
+R22219:22219 Subtyping <> t:195 var
+R22214:22217 Subtyping <> Call:187 var
+R22239:22242 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R22226:22229 Subtyping <> conv:188 ind
+R22238:22238 Subtyping <> v:197 var
+R22236:22236 Subtyping <> u:196 var
+R22231:22234 Subtyping <> Call:187 var
+R22243:22246 Subtyping <> conv:188 ind
+R22255:22255 Subtyping <> v:197 var
+R22253:22253 Subtyping <> t:195 var
+R22248:22251 Subtyping <> Call:187 var
+scheme 21887:21890 <> conv_ind
+scheme 21887:21890 <> conv_sind
+sec 23198:23203 <> Typing
+var 23216:23219 Typing Call
+R23223:23232 Subtyping <> symbol_ctx def
+ind 23246:23253 <> has_type
+constr 23322:23327 <> T_Sort
+constr 23392:23396 <> T_Var
+constr 23538:23542 <> T_Cst
+constr 23740:23744 <> T_App
+constr 24117:24121 <> T_Lam
+constr 24306:24309 <> T_Pi
+constr 24469:24478 <> T_Notation
+constr 24628:24635 <> T_Expand
+constr 24798:24803 <> T_Conv
+constr 25062:25066 <> T_Sub
+constr 25367:25371 <> T_Sig
+constr 25595:25604 <> T_SigIntro
+constr 26121:26129 <> T_SigCase
+ind 26581:26586 <> wf_tel
+constr 26620:26629 <> wf_tel_nil
+constr 26669:26679 <> wf_tel_cons
+ind 26871:26883 <> branches_type
+constr 26935:26940 <> bt_nil
+constr 26991:26997 <> bt_cons
+ind 27188:27194 <> subtype
+constr 27311:27318 <> Sub_Conv
+constr 27385:27393 <> Sub_Trans
+constr 27531:27541 <> Sub_SigBase
+constr 27735:27741 <> Sub_Sig
+constr 27958:27963 <> Sub_Pi
+R23260:23263 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R23257:23259 Subtyping <> ctx def
+R23268:23271 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R23264:23267 Subtyping <> term ind
+R23276:23279 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R23272:23275 Subtyping <> term ind
+R26593:26596 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26590:26592 Subtyping <> ctx def
+R26606:26609 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26597:26605 Subtyping <> telescope def
+R26890:26893 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26887:26889 Subtyping <> ctx def
+R26913:26916 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26894:26897 Corelib.Init.Datatypes <> list ind
+R26905:26907 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R26900:26904 Subtyping <> cname def
+R26908:26911 Subtyping <> term ind
+R26921:26924 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26917:26920 Subtyping <> term ind
+R27201:27204 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27198:27200 Subtyping <> ctx def
+R27209:27212 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27205:27208 Subtyping <> term ind
+R27217:27220 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27213:27216 Subtyping <> term ind
+binder 23338:23342 <> Gamma:208
+R23349:23356 Subtyping <> has_type:200 ind
+R23369:23372 Subtyping <> Sort constr
+R23364:23367 Subtyping <> Sort constr
+R23358:23362 Subtyping <> Gamma:208 var
+binder 23407:23411 <> Gamma:209
+binder 23413:23413 <> x:210
+binder 23415:23415 <> A:211
+R23449:23456 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R23440:23442 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R23422:23431 Subtyping <> lookup_var def
+R23433:23437 Subtyping <> Gamma:209 var
+R23439:23439 Subtyping <> x:210 var
+R23443:23446 Corelib.Init.Datatypes <> Some constr
+R23448:23448 Subtyping <> A:211 var
+R23457:23464 Subtyping <> has_type:200 ind
+R23480:23480 Subtyping <> A:211 var
+R23473:23475 Subtyping <> Var constr
+R23477:23477 Subtyping <> x:210 var
+R23466:23470 Subtyping <> Gamma:209 var
+binder 23553:23557 <> Gamma:212
+binder 23559:23559 <> c:213
+binder 23561:23561 <> p:214
+R23597:23604 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R23588:23590 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R23568:23580 Subtyping <> lookup_symbol def
+R23582:23585 Subtyping <> Typing.Call var
+R23587:23587 Subtyping <> c:213 var
+R23591:23594 Corelib.Init.Datatypes <> Some constr
+R23596:23596 Subtyping <> p:214 var
+R23623:23630 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R23616:23618 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R23605:23613 Subtyping <> wf_symbol def
+R23615:23615 Subtyping <> p:214 var
+R23619:23622 Corelib.Init.Datatypes <> true constr
+R23631:23638 Subtyping <> has_type:200 ind
+R23655:23665 Subtyping <> symbol_type def
+R23667:23667 Subtyping <> p:214 var
+R23647:23649 Subtyping <> Cst constr
+R23651:23651 Subtyping <> c:213 var
+R23640:23644 Subtyping <> Gamma:212 var
+binder 23755:23759 <> Gamma:215
+binder 23761:23761 <> t:216
+binder 23763:23763 <> u:217
+binder 23765:23765 <> x:218
+binder 23767:23767 <> A:219
+binder 23769:23773 <> Delta:220
+binder 23775:23775 <> B:221
+R23823:23830 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R23782:23789 Subtyping <> has_type:200 ind
+R23800:23801 Subtyping <> Pi constr
+R23810:23813 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R23804:23804 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23806:23807 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23809:23809 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23805:23805 Subtyping <> x:218 var
+R23808:23808 Subtyping <> A:219 var
+R23814:23818 Subtyping <> Delta:220 var
+R23821:23821 Subtyping <> B:221 var
+R23797:23797 Subtyping <> t:216 var
+R23791:23795 Subtyping <> Gamma:215 var
+R23849:23856 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R23831:23838 Subtyping <> has_type:200 ind
+R23848:23848 Subtyping <> A:219 var
+R23846:23846 Subtyping <> u:217 var
+R23840:23844 Subtyping <> Gamma:215 var
+R23912:23919 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R23905:23907 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R23857:23873 Subtyping <> application_guard def
+R23875:23878 Subtyping <> Typing.Call var
+R23880:23880 Subtyping <> t:216 var
+R23882:23882 Subtyping <> u:217 var
+R23885:23891 Subtyping <> pi_inst def
+R23893:23893 Subtyping <> x:218 var
+R23895:23895 Subtyping <> u:217 var
+R23897:23901 Subtyping <> Delta:220 var
+R23903:23903 Subtyping <> B:221 var
+R23908:23911 Corelib.Init.Datatypes <> true constr
+R23920:23920 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R23993:24001 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+binder 23928:23928 <> v:222
+R23944:23954 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R23938:23942 Subtyping <> :::x_'-->'_x not
+R23931:23933 Subtyping <> App constr
+R23935:23935 Subtyping <> t:216 var
+R23937:23937 Subtyping <> u:217 var
+R23943:23943 Subtyping <> v:222 var
+R23955:23962 Subtyping <> has_type:200 ind
+R23973:23979 Subtyping <> pi_inst def
+R23981:23981 Subtyping <> x:218 var
+R23983:23983 Subtyping <> u:217 var
+R23985:23989 Subtyping <> Delta:220 var
+R23991:23991 Subtyping <> B:221 var
+R23970:23970 Subtyping <> v:222 var
+R23964:23968 Subtyping <> Gamma:215 var
+R24002:24009 Subtyping <> has_type:200 ind
+R24028:24034 Subtyping <> pi_inst def
+R24036:24036 Subtyping <> x:218 var
+R24038:24038 Subtyping <> u:217 var
+R24040:24044 Subtyping <> Delta:220 var
+R24046:24046 Subtyping <> B:221 var
+R24018:24020 Subtyping <> App constr
+R24022:24022 Subtyping <> t:216 var
+R24024:24024 Subtyping <> u:217 var
+R24011:24015 Subtyping <> Gamma:215 var
+binder 24132:24136 <> Gamma:223
+binder 24138:24138 <> x:224
+binder 24140:24140 <> A:225
+binder 24142:24142 <> e:226
+binder 24144:24148 <> Delta:227
+binder 24150:24150 <> B:228
+R24178:24185 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24157:24164 Subtyping <> has_type:200 ind
+R24174:24177 Subtyping <> Sort constr
+R24172:24172 Subtyping <> A:225 var
+R24166:24170 Subtyping <> Gamma:223 var
+R24231:24238 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24186:24193 Subtyping <> has_type:200 ind
+R24219:24221 Subtyping <> tPi def
+R24223:24227 Subtyping <> Delta:227 var
+R24229:24229 Subtyping <> B:228 var
+R24216:24216 Subtyping <> e:226 var
+R24196:24203 Subtyping <> ctx_cons def
+R24205:24205 Subtyping <> x:224 var
+R24207:24207 Subtyping <> A:225 var
+R24209:24213 Subtyping <> Gamma:223 var
+R24239:24246 Subtyping <> has_type:200 ind
+R24265:24266 Subtyping <> Pi constr
+R24275:24278 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R24269:24269 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R24271:24272 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R24274:24274 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R24270:24270 Subtyping <> x:224 var
+R24273:24273 Subtyping <> A:225 var
+R24279:24283 Subtyping <> Delta:227 var
+R24286:24286 Subtyping <> B:228 var
+R24255:24257 Subtyping <> Lam constr
+R24259:24259 Subtyping <> x:224 var
+R24261:24261 Subtyping <> e:226 var
+R24248:24252 Subtyping <> Gamma:223 var
+binder 24320:24324 <> Gamma:229
+binder 24326:24330 <> Delta:230
+binder 24332:24332 <> B:231
+R24357:24364 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24339:24344 Subtyping <> wf_tel:201 ind
+R24352:24356 Subtyping <> Delta:230 var
+R24346:24350 Subtyping <> Gamma:229 var
+R24403:24410 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24365:24372 Subtyping <> has_type:200 ind
+R24399:24402 Subtyping <> Sort constr
+R24397:24397 Subtyping <> B:231 var
+R24375:24382 Subtyping <> ctx_push def
+R24384:24388 Subtyping <> Gamma:229 var
+R24390:24394 Subtyping <> Delta:230 var
+R24411:24418 Subtyping <> has_type:200 ind
+R24439:24442 Subtyping <> Sort constr
+R24427:24428 Subtyping <> Pi constr
+R24430:24434 Subtyping <> Delta:230 var
+R24436:24436 Subtyping <> B:231 var
+R24420:24424 Subtyping <> Gamma:229 var
+binder 24489:24493 <> Gamma:232
+binder 24495:24495 <> e:233
+binder 24497:24497 <> T:234
+R24522:24529 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24504:24511 Subtyping <> has_type:200 ind
+R24521:24521 Subtyping <> T:234 var
+R24519:24519 Subtyping <> e:233 var
+R24513:24517 Subtyping <> Gamma:232 var
+R24530:24537 Subtyping <> has_type:200 ind
+R24560:24560 Subtyping <> T:234 var
+R24546:24553 Subtyping <> Notation constr
+R24555:24555 Subtyping <> e:233 var
+R24557:24557 Subtyping <> T:234 var
+R24539:24543 Subtyping <> Gamma:232 var
+binder 24646:24650 <> Gamma:235
+binder 24652:24652 <> t:236
+binder 24654:24655 <> t':237
+binder 24657:24657 <> A:238
+R24683:24690 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24664:24671 Subtyping <> has_type:200 ind
+R24682:24682 Subtyping <> A:238 var
+R24679:24680 Subtyping <> t':237 var
+R24673:24677 Subtyping <> Gamma:235 var
+R24699:24706 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24692:24696 Subtyping <> :::x_'-->'_x not
+R24691:24691 Subtyping <> t:236 var
+R24697:24698 Subtyping <> t':237 var
+R24707:24714 Subtyping <> has_type:200 ind
+R24724:24724 Subtyping <> A:238 var
+R24722:24722 Subtyping <> t:236 var
+R24716:24720 Subtyping <> Gamma:235 var
+binder 24814:24818 <> Gamma:239
+binder 24820:24820 <> t:240
+binder 24822:24822 <> A:241
+binder 24824:24824 <> B:242
+R24849:24856 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24831:24838 Subtyping <> has_type:200 ind
+R24848:24848 Subtyping <> A:241 var
+R24846:24846 Subtyping <> t:240 var
+R24840:24844 Subtyping <> Gamma:239 var
+R24878:24885 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24857:24864 Subtyping <> has_type:200 ind
+R24874:24877 Subtyping <> Sort constr
+R24872:24872 Subtyping <> B:242 var
+R24866:24870 Subtyping <> Gamma:239 var
+R24899:24906 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24886:24889 Subtyping <> conv ind
+R24891:24894 Subtyping <> Typing.Call var
+R24896:24896 Subtyping <> A:241 var
+R24898:24898 Subtyping <> B:242 var
+R24938:24945 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24931:24933 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R24907:24921 Subtyping <> canonical_guard def
+R24923:24926 Subtyping <> Typing.Call var
+R24928:24928 Subtyping <> t:240 var
+R24930:24930 Subtyping <> B:242 var
+R24934:24937 Corelib.Init.Datatypes <> true constr
+R24946:24946 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24989:24997 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+binder 24954:24955 <> t':243
+R24966:24969 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R24959:24963 Subtyping <> :::x_'-->'_x not
+R24958:24958 Subtyping <> t:240 var
+R24964:24965 Subtyping <> t':243 var
+R24970:24977 Subtyping <> has_type:200 ind
+R24988:24988 Subtyping <> B:242 var
+R24985:24986 Subtyping <> t':243 var
+R24979:24983 Subtyping <> Gamma:239 var
+R24998:25005 Subtyping <> has_type:200 ind
+R25015:25015 Subtyping <> B:242 var
+R25013:25013 Subtyping <> t:240 var
+R25007:25011 Subtyping <> Gamma:239 var
+binder 25077:25081 <> Gamma:244
+binder 25083:25083 <> t:245
+binder 25085:25085 <> A:246
+binder 25087:25087 <> B:247
+R25112:25119 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25094:25101 Subtyping <> has_type:200 ind
+R25111:25111 Subtyping <> A:246 var
+R25109:25109 Subtyping <> t:245 var
+R25103:25107 Subtyping <> Gamma:244 var
+R25137:25144 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25120:25126 Subtyping <> subtype:203 ind
+R25136:25136 Subtyping <> B:247 var
+R25134:25134 Subtyping <> A:246 var
+R25128:25132 Subtyping <> Gamma:244 var
+R25176:25183 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25169:25171 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R25145:25159 Subtyping <> canonical_guard def
+R25161:25164 Subtyping <> Typing.Call var
+R25166:25166 Subtyping <> t:245 var
+R25168:25168 Subtyping <> B:247 var
+R25172:25175 Corelib.Init.Datatypes <> true constr
+R25184:25184 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25227:25235 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+binder 25192:25193 <> t':248
+R25204:25207 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25197:25201 Subtyping <> :::x_'-->'_x not
+R25196:25196 Subtyping <> t:245 var
+R25202:25203 Subtyping <> t':248 var
+R25208:25215 Subtyping <> has_type:200 ind
+R25226:25226 Subtyping <> B:247 var
+R25223:25224 Subtyping <> t':248 var
+R25217:25221 Subtyping <> Gamma:244 var
+R25236:25243 Subtyping <> has_type:200 ind
+R25253:25253 Subtyping <> B:247 var
+R25251:25251 Subtyping <> t:245 var
+R25245:25249 Subtyping <> Gamma:244 var
+binder 25382:25386 <> Gamma:249
+binder 25388:25388 <> T:250
+binder 25390:25392 <> Phi:251
+binder 25394:25394 <> F:252
+R25422:25429 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25401:25408 Subtyping <> has_type:200 ind
+R25418:25421 Subtyping <> Sort constr
+R25416:25416 Subtyping <> T:250 var
+R25410:25414 Subtyping <> Gamma:249 var
+R25449:25456 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25440:25442 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R25430:25437 Subtyping <> head_cst def
+R25439:25439 Subtyping <> T:250 var
+R25443:25446 Corelib.Init.Datatypes <> Some constr
+R25448:25448 Subtyping <> F:252 var
+R25510:25517 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25503:25505 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R25457:25463 Stdlib.Lists.List <> forallb def
+R25500:25502 Subtyping <> Phi:251 var
+binder 25470:25470 <> c:253
+R25475:25488 Subtyping <> constructor_of def
+R25490:25493 Subtyping <> Typing.Call var
+R25495:25495 Subtyping <> c:253 var
+R25497:25497 Subtyping <> F:252 var
+R25506:25509 Corelib.Init.Datatypes <> true constr
+R25518:25525 Subtyping <> has_type:200 ind
+R25548:25551 Subtyping <> Sort constr
+R25534:25539 Subtyping <> Constr constr
+R25541:25541 Subtyping <> T:250 var
+R25543:25545 Subtyping <> Phi:251 var
+R25527:25531 Subtyping <> Gamma:249 var
+binder 25615:25619 <> Gamma:254
+binder 25621:25621 <> T:255
+binder 25623:25625 <> Phi:256
+binder 25627:25627 <> c:257
+binder 25629:25630 <> us:258
+R25671:25678 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25637:25644 Subtyping <> has_type:200 ind
+R25667:25670 Subtyping <> Sort constr
+R25653:25658 Subtyping <> Constr constr
+R25660:25660 Subtyping <> T:255 var
+R25662:25664 Subtyping <> Phi:256 var
+R25646:25650 Subtyping <> Gamma:254 var
+R25730:25737 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25723:25725 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R25679:25685 Stdlib.Lists.List <> existsb def
+R25702:25710 Subtyping <> prune_sig def
+R25712:25715 Subtyping <> Typing.Call var
+R25717:25717 Subtyping <> T:255 var
+R25719:25721 Subtyping <> Phi:256 var
+R25688:25696 Subtyping <> cname_eqb def
+R25698:25698 Subtyping <> c:257 var
+R25726:25729 Corelib.Init.Datatypes <> true constr
+R25781:25788 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25738:25745 Subtyping <> has_type:200 ind
+R25780:25780 Subtyping <> T:255 var
+R25754:25766 Subtyping <> apply_indexes def
+R25769:25771 Subtyping <> Cst constr
+R25773:25773 Subtyping <> c:257 var
+R25776:25777 Subtyping <> us:258 var
+R25747:25751 Subtyping <> Gamma:254 var
+R25789:25789 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25872:25880 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+binder 25797:25797 <> v:259
+R25830:25840 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R25824:25828 Subtyping <> :::x_'-->'_x not
+R25800:25812 Subtyping <> apply_indexes def
+R25815:25817 Subtyping <> Cst constr
+R25819:25819 Subtyping <> c:257 var
+R25822:25823 Subtyping <> us:258 var
+R25829:25829 Subtyping <> v:259 var
+R25841:25848 Subtyping <> has_type:200 ind
+R25859:25864 Subtyping <> Constr constr
+R25866:25866 Subtyping <> T:255 var
+R25868:25870 Subtyping <> Phi:256 var
+R25856:25856 Subtyping <> v:259 var
+R25850:25854 Subtyping <> Gamma:254 var
+R25881:25888 Subtyping <> has_type:200 ind
+R25924:25929 Subtyping <> Constr constr
+R25931:25931 Subtyping <> T:255 var
+R25933:25935 Subtyping <> Phi:256 var
+R25897:25909 Subtyping <> apply_indexes def
+R25912:25914 Subtyping <> Cst constr
+R25916:25916 Subtyping <> c:257 var
+R25919:25920 Subtyping <> us:258 var
+R25890:25894 Subtyping <> Gamma:254 var
+binder 26140:26144 <> Gamma:260
+binder 26146:26146 <> T:261
+binder 26148:26150 <> Phi:262
+binder 26152:26152 <> M:263
+binder 26154:26154 <> Q:264
+binder 26156:26158 <> brs:265
+R26199:26206 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26165:26172 Subtyping <> has_type:200 ind
+R26195:26198 Subtyping <> Sort constr
+R26181:26186 Subtyping <> Constr constr
+R26188:26188 Subtyping <> T:261 var
+R26190:26192 Subtyping <> Phi:262 var
+R26174:26178 Subtyping <> Gamma:260 var
+R26228:26235 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26207:26214 Subtyping <> has_type:200 ind
+R26224:26227 Subtyping <> Sort constr
+R26222:26222 Subtyping <> Q:264 var
+R26216:26220 Subtyping <> Gamma:260 var
+R26267:26274 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26236:26243 Subtyping <> has_type:200 ind
+R26254:26259 Subtyping <> Constr constr
+R26261:26261 Subtyping <> T:261 var
+R26263:26265 Subtyping <> Phi:262 var
+R26251:26251 Subtyping <> M:263 var
+R26245:26249 Subtyping <> Gamma:260 var
+R26335:26342 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26328:26330 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R26275:26290 Subtyping <> constr_list_incl def
+R26293:26301 Subtyping <> prune_sig def
+R26303:26306 Subtyping <> Typing.Call var
+R26308:26308 Subtyping <> T:261 var
+R26310:26312 Subtyping <> Phi:262 var
+R26316:26318 Corelib.Lists.ListDef <> map def
+R26324:26326 Subtyping <> brs:265 var
+R26320:26322 Corelib.Init.Datatypes <> fst def
+R26331:26334 Corelib.Init.Datatypes <> true constr
+R26384:26391 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26377:26379 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R26343:26358 Subtyping <> constr_list_incl def
+R26361:26363 Corelib.Lists.ListDef <> map def
+R26369:26371 Subtyping <> brs:265 var
+R26365:26367 Corelib.Init.Datatypes <> fst def
+R26374:26376 Subtyping <> Phi:262 var
+R26380:26383 Corelib.Init.Datatypes <> true constr
+R26417:26424 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26392:26404 Subtyping <> branches_type:202 ind
+R26416:26416 Subtyping <> Q:264 var
+R26412:26414 Subtyping <> brs:265 var
+R26406:26410 Subtyping <> Gamma:260 var
+R26425:26425 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26477:26485 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+binder 26433:26433 <> v:266
+R26455:26458 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26449:26453 Subtyping <> :::x_'-->'_x not
+R26436:26440 Subtyping <> Match constr
+R26442:26442 Subtyping <> M:263 var
+R26444:26444 Subtyping <> Q:264 var
+R26446:26448 Subtyping <> brs:265 var
+R26454:26454 Subtyping <> v:266 var
+R26459:26466 Subtyping <> has_type:200 ind
+R26476:26476 Subtyping <> Q:264 var
+R26474:26474 Subtyping <> v:266 var
+R26468:26472 Subtyping <> Gamma:260 var
+R26486:26493 Subtyping <> has_type:200 ind
+R26517:26517 Subtyping <> Q:264 var
+R26502:26506 Subtyping <> Match constr
+R26508:26508 Subtyping <> M:263 var
+R26510:26510 Subtyping <> Q:264 var
+R26512:26514 Subtyping <> brs:265 var
+R26495:26499 Subtyping <> Gamma:260 var
+binder 26640:26644 <> Gamma:267
+R26651:26656 Subtyping <> wf_tel:201 ind
+R26664:26665 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R26658:26662 Subtyping <> Gamma:267 var
+binder 26690:26694 <> Gamma:268
+binder 26696:26696 <> x:269
+binder 26698:26698 <> A:270
+binder 26700:26704 <> Delta:271
+R26732:26739 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26711:26718 Subtyping <> has_type:200 ind
+R26728:26731 Subtyping <> Sort constr
+R26726:26726 Subtyping <> A:270 var
+R26720:26724 Subtyping <> Gamma:268 var
+R26773:26780 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R26740:26745 Subtyping <> wf_tel:201 ind
+R26768:26772 Subtyping <> Delta:271 var
+R26748:26755 Subtyping <> ctx_cons def
+R26757:26757 Subtyping <> x:269 var
+R26759:26759 Subtyping <> A:270 var
+R26761:26765 Subtyping <> Gamma:268 var
+R26781:26786 Subtyping <> wf_tel:201 ind
+R26801:26804 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R26795:26795 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R26797:26798 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R26800:26800 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R26796:26796 Subtyping <> x:269 var
+R26799:26799 Subtyping <> A:270 var
+R26805:26809 Subtyping <> Delta:271 var
+R26788:26792 Subtyping <> Gamma:268 var
+binder 26951:26955 <> Gamma:272
+binder 26957:26957 <> Q:273
+R26964:26976 Subtyping <> branches_type:202 ind
+R26987:26987 Subtyping <> Q:273 var
+R26984:26985 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R26978:26982 Subtyping <> Gamma:272 var
+binder 27008:27012 <> Gamma:274
+binder 27014:27014 <> c:275
+binder 27016:27016 <> N:276
+binder 27018:27020 <> brs:277
+binder 27022:27022 <> Q:278
+binder 27024:27024 <> p:279
+R27060:27067 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27051:27053 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R27031:27043 Subtyping <> lookup_constr def
+R27045:27048 Subtyping <> Typing.Call var
+R27050:27050 Subtyping <> c:275 var
+R27054:27057 Corelib.Init.Datatypes <> Some constr
+R27059:27059 Subtyping <> p:279 var
+R27103:27110 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27068:27075 Subtyping <> has_type:200 ind
+R27086:27088 Subtyping <> tPi def
+R27091:27096 Subtyping <> pt_tel proj
+R27098:27098 Subtyping <> p:279 var
+R27101:27101 Subtyping <> Q:278 var
+R27083:27083 Subtyping <> N:276 var
+R27077:27081 Subtyping <> Gamma:274 var
+R27136:27143 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27111:27123 Subtyping <> branches_type:202 ind
+R27135:27135 Subtyping <> Q:278 var
+R27131:27133 Subtyping <> brs:277 var
+R27125:27129 Subtyping <> Gamma:274 var
+R27144:27156 Subtyping <> branches_type:202 ind
+R27180:27180 Subtyping <> Q:278 var
+R27171:27174 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R27165:27165 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27167:27168 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27170:27170 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R27166:27166 Subtyping <> c:275 var
+R27169:27169 Subtyping <> N:276 var
+R27175:27177 Subtyping <> brs:277 var
+R27158:27162 Subtyping <> Gamma:274 var
+binder 27329:27333 <> Gamma:280
+binder 27335:27335 <> A:281
+binder 27337:27337 <> B:282
+R27357:27364 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27344:27347 Subtyping <> conv ind
+R27349:27352 Subtyping <> Typing.Call var
+R27354:27354 Subtyping <> A:281 var
+R27356:27356 Subtyping <> B:282 var
+R27365:27371 Subtyping <> subtype:203 ind
+R27381:27381 Subtyping <> B:282 var
+R27379:27379 Subtyping <> A:281 var
+R27373:27377 Subtyping <> Gamma:280 var
+binder 27404:27408 <> Gamma:283
+binder 27410:27410 <> A:284
+binder 27412:27412 <> B:285
+binder 27414:27414 <> C:286
+R27438:27445 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27421:27427 Subtyping <> subtype:203 ind
+R27437:27437 Subtyping <> B:285 var
+R27435:27435 Subtyping <> A:284 var
+R27429:27433 Subtyping <> Gamma:283 var
+R27463:27470 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27446:27452 Subtyping <> subtype:203 ind
+R27462:27462 Subtyping <> C:286 var
+R27460:27460 Subtyping <> B:285 var
+R27454:27458 Subtyping <> Gamma:283 var
+R27471:27477 Subtyping <> subtype:203 ind
+R27487:27487 Subtyping <> C:286 var
+R27485:27485 Subtyping <> A:284 var
+R27479:27483 Subtyping <> Gamma:283 var
+binder 27552:27556 <> Gamma:287
+binder 27558:27558 <> T:288
+binder 27560:27562 <> Phi:289
+R27590:27597 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27569:27576 Subtyping <> has_type:200 ind
+R27586:27589 Subtyping <> Sort constr
+R27584:27584 Subtyping <> T:288 var
+R27578:27582 Subtyping <> Gamma:287 var
+R27598:27598 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27628:27636 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27599:27605 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R27607:27608 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 27606:27606 <> F:290
+R27619:27621 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R27609:27616 Subtyping <> head_cst def
+R27618:27618 Subtyping <> T:288 var
+R27622:27625 Corelib.Init.Datatypes <> Some constr
+R27627:27627 Subtyping <> F:290 var
+R27637:27643 Subtyping <> subtype:203 ind
+R27666:27666 Subtyping <> T:288 var
+R27652:27657 Subtyping <> Constr constr
+R27659:27659 Subtyping <> T:288 var
+R27661:27663 Subtyping <> Phi:289 var
+R27645:27649 Subtyping <> Gamma:287 var
+binder 27752:27756 <> Gamma:291
+binder 27758:27758 <> T:292
+binder 27760:27761 <> T':293
+binder 27763:27765 <> Phi:294
+binder 27767:27770 <> Phi':295
+R27791:27798 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27777:27780 Subtyping <> conv ind
+R27782:27785 Subtyping <> Typing.Call var
+R27787:27787 Subtyping <> T:292 var
+R27789:27790 Subtyping <> T':293 var
+R27831:27838 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R27824:27826 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R27799:27814 Subtyping <> constr_list_incl def
+R27816:27819 Subtyping <> Phi':295 var
+R27821:27823 Subtyping <> Phi:294 var
+R27827:27830 Corelib.Init.Datatypes <> true constr
+R27839:27845 Subtyping <> subtype:203 ind
+R27871:27876 Subtyping <> Constr constr
+R27878:27878 Subtyping <> T:292 var
+R27880:27882 Subtyping <> Phi:294 var
+R27854:27859 Subtyping <> Constr constr
+R27861:27862 Subtyping <> T':293 var
+R27864:27867 Subtyping <> Phi':295 var
+R27847:27851 Subtyping <> Gamma:291 var
+binder 27974:27978 <> Gamma:296
+binder 27980:27980 <> x:297
+binder 27982:27982 <> A:298
+binder 27984:27985 <> A':299
+binder 27987:27991 <> Delta:300
+binder 27993:27993 <> B:301
+binder 27995:28000 <> Delta':302
+binder 28002:28003 <> B':303
+R28028:28035 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R28010:28016 Subtyping <> subtype:203 ind
+R28027:28027 Subtyping <> A:298 var
+R28024:28025 Subtyping <> A':299 var
+R28018:28022 Subtyping <> Gamma:296 var
+R28095:28102 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R28036:28042 Subtyping <> subtype:203 ind
+R28081:28083 Subtyping <> tPi def
+R28085:28090 Subtyping <> Delta':302 var
+R28092:28093 Subtyping <> B':303 var
+R28067:28069 Subtyping <> tPi def
+R28071:28075 Subtyping <> Delta:300 var
+R28077:28077 Subtyping <> B:301 var
+R28045:28052 Subtyping <> ctx_cons def
+R28054:28054 Subtyping <> x:297 var
+R28056:28057 Subtyping <> A':299 var
+R28059:28063 Subtyping <> Gamma:296 var
+R28103:28109 Subtyping <> subtype:203 ind
+R28143:28144 Subtyping <> Pi constr
+R28154:28157 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R28147:28147 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R28149:28150 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R28153:28153 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R28148:28148 Subtyping <> x:297 var
+R28151:28152 Subtyping <> A':299 var
+R28158:28163 Subtyping <> Delta':302 var
+R28166:28167 Subtyping <> B':303 var
+R28118:28119 Subtyping <> Pi constr
+R28128:28131 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R28122:28122 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R28124:28125 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R28127:28127 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R28123:28123 Subtyping <> x:297 var
+R28126:28126 Subtyping <> A:298 var
+R28132:28136 Subtyping <> Delta:300 var
+R28139:28139 Subtyping <> B:301 var
+R28111:28115 Subtyping <> Gamma:296 var
+scheme 23246:23253 <> has_type_ind
+scheme 23246:23253 <> has_type_sind
+scheme 26581:26586 <> wf_tel_ind
+scheme 26581:26586 <> wf_tel_sind
+scheme 26871:26883 <> branches_type_ind
+scheme 26871:26883 <> branches_type_sind
+scheme 27188:27194 <> subtype_ind
+scheme 27188:27194 <> subtype_sind
+R28176:28181 Subtyping Typing <> sec
+prf 28735:28753 <> canonical_forms_sig
+R28763:28772 Subtyping <> symbol_ctx def
+binder 28756:28759 <> Call:304
+R28782:28785 Subtyping <> term ind
+binder 28776:28776 <> M:305
+binder 28778:28778 <> T:306
+R28799:28809 Subtyping <> constr_list def
+binder 28793:28795 <> Phi:307
+R28856:28861 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R28816:28823 Subtyping <> has_type ind
+R28830:28838 Subtyping <> empty_ctx def
+R28840:28840 Subtyping <> M:305 var
+R28843:28848 Subtyping <> Constr constr
+R28850:28850 Subtyping <> T:306 var
+R28852:28854 Subtyping <> Phi:307 var
+R28825:28828 Subtyping <> Call:304 var
+R28869:28874 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R28862:28866 Subtyping <> value ind
+R28868:28868 Subtyping <> M:305 var
+R28875:28881 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R28886:28891 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 28882:28882 <> c:308
+binder 28884:28885 <> us:309
+R28920:28927 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R28893:28895 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R28892:28892 Subtyping <> M:305 var
+R28896:28908 Subtyping <> apply_indexes def
+R28911:28913 Subtyping <> Cst constr
+R28915:28915 Subtyping <> c:308 var
+R28918:28919 Subtyping <> us:309 var
+R28943:28950 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R28928:28933 Corelib.Lists.ListDef <> Forall ind
+R28941:28942 Subtyping <> us:309 var
+R28935:28939 Subtyping <> value ind
+R28951:28952 Stdlib.Lists.List <> In def
+R28957:28965 Subtyping <> prune_sig def
+R28967:28970 Subtyping <> Call:304 var
+R28972:28972 Subtyping <> T:306 var
+R28974:28976 Subtyping <> Phi:307 var
+R28954:28954 Subtyping <> c:308 var
+prf 29097:29104 <> progress
+R29114:29123 Subtyping <> symbol_ctx def
+binder 29107:29110 <> Call:310
+R29133:29136 Subtyping <> term ind
+binder 29127:29127 <> M:311
+binder 29129:29129 <> T:312
+R29146:29156 Subtyping <> constr_list def
+binder 29140:29142 <> Phi:313
+R29203:29208 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R29163:29170 Subtyping <> has_type ind
+R29177:29185 Subtyping <> empty_ctx def
+R29187:29187 Subtyping <> M:311 var
+R29190:29195 Subtyping <> Constr constr
+R29197:29197 Subtyping <> T:312 var
+R29199:29201 Subtyping <> Phi:313 var
+R29172:29175 Subtyping <> Call:310 var
+R29216:29219 Corelib.Init.Logic <> ::type_scope:x_'\/'_x not
+R29209:29213 Subtyping <> value ind
+R29215:29215 Subtyping <> M:311 var
+R29220:29226 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R29229:29230 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 29227:29228 <> M':314
+R29232:29236 Subtyping <> :::x_'-->'_x not
+R29231:29231 Subtyping <> M:311 var
+R29237:29238 Subtyping <> M':314 var
+prf 29323:29334 <> preservation
+R29344:29353 Subtyping <> symbol_ctx def
+binder 29337:29340 <> Call:315
+R29365:29367 Subtyping <> ctx def
+binder 29357:29361 <> Gamma:316
+R29380:29383 Subtyping <> term ind
+binder 29371:29371 <> M:317
+binder 29373:29374 <> M':318
+binder 29376:29376 <> R:319
+R29413:29418 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R29390:29397 Subtyping <> has_type ind
+R29404:29408 Subtyping <> Gamma:316 var
+R29410:29410 Subtyping <> M:317 var
+R29412:29412 Subtyping <> R:319 var
+R29399:29402 Subtyping <> Call:315 var
+R29427:29432 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R29420:29424 Subtyping <> :::x_'-->'_x not
+R29419:29419 Subtyping <> M:317 var
+R29425:29426 Subtyping <> M':318 var
+R29433:29440 Subtyping <> has_type ind
+R29447:29451 Subtyping <> Gamma:316 var
+R29453:29454 Subtyping <> M':318 var
+R29456:29456 Subtyping <> R:319 var
+R29442:29445 Subtyping <> Call:315 var
+prf 29680:29688 <> soundness
+R29698:29707 Subtyping <> symbol_ctx def
+binder 29691:29694 <> Call:320
+R29720:29723 Subtyping <> term ind
+binder 29711:29711 <> M:321
+binder 29713:29714 <> M':322
+binder 29716:29716 <> T:323
+R29733:29743 Subtyping <> constr_list def
+binder 29727:29729 <> Phi:324
+R29790:29795 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R29750:29757 Subtyping <> has_type ind
+R29764:29772 Subtyping <> empty_ctx def
+R29774:29774 Subtyping <> M:321 var
+R29777:29782 Subtyping <> Constr constr
+R29784:29784 Subtyping <> T:323 var
+R29786:29788 Subtyping <> Phi:324 var
+R29759:29762 Subtyping <> Call:320 var
+R29805:29810 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R29797:29802 Subtyping <> :::x_'-->*'_x not
+R29796:29796 Subtyping <> M:321 var
+R29803:29804 Subtyping <> M':322 var
+R29819:29822 Corelib.Init.Logic <> ::type_scope:x_'\/'_x not
+R29811:29815 Subtyping <> value ind
+R29817:29818 Subtyping <> M':322 var
+R29823:29829 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R29833:29834 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 29830:29832 <> M'':325
+R29837:29841 Subtyping <> :::x_'-->'_x not
+R29835:29836 Subtyping <> M':322 var
+R29842:29844 Subtyping <> M'':325 var

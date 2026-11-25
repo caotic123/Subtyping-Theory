@@ -1,0 +1,19 @@
+\begin{abstract}
+Pattern matching is a foundation of functional and dependently typed languages, yet it often forces programmers to handle clauses that can never be reached.
+Programmers must then either write unsafe partial functions or, in safe settings, discharge tedious proof obligations for these trivial cases.
+The problem is particularly critical when programs operate on subsets of an inductive datatype.
+Standard encodings pair data with propositions or refactor datatypes into indexed families, but both approaches complicate composition and proof automation.
+
+The problem has two causes:
+(1)~the type system cannot express the intended subset of the data, so it generates trivial obligations, and
+(2)~it cannot reason computationally about constructors, so ultimately no procedure can be written to discharge them.
+A subtyping discipline addresses the first; the second requires lifting constructors to the term level, which is more expressive and can itself encode the subtyping discipline.
+In fact, the latter approach can also be used to encode other procedures that eliminate additional trivial proof obligations.
+
+We present a subtyping discipline for \emph{constructor subsets}, where first-class signatures track which constructors of a family are available, so that pattern matching rules out impossible branches without spurious obligations.
+We elaborate it into the type theory of Dagand and McBride, in which constructors are themselves terms, and we prove that our elaboration is sound.
+
+Our results show that constructor subsets are expressive enough to capture common programming idioms, and that extending a dependently typed language with them is simple.
+Through the elaboration, constructor subsets can be expressed in a purely computational setting, which enables reusing constructors in different type constructors, deciding about constructors, and even set-based operations on signatures.
+We implement the discipline in Lambdapi and mechanize the elaborated calculus in Rocq.
+\end{abstract}

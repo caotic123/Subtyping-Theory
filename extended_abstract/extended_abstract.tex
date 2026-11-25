@@ -1,0 +1,156 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{mathpartir}
+\usepackage{stmaryrd}
+\usepackage{listings}
+\usepackage{upquote}
+
+\lstdefinelanguage{Rocq}{
+  morekeywords={Definition,Inductive,match,with,end,fun,Type},
+  sensitive=true
+}
+\lstset{
+  language=Rocq,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\bfseries,
+  columns=flexible,
+  keepspaces=true,
+  upquote=true,
+  aboveskip=0pt,
+  belowskip=0pt
+}
+
+\sloppy
+\renewcommand{\inst}[1]{}
+
+\title{Elaborating First-Class Constructor Subsets\\ on Indexed Families (Extended Abstract)}
+
+\author{Tiago Campos}
+
+\address{Departamento de Ciência da Computação\\
+  Universidade Federal de Minas Gerais (UFMG)\\
+  Belo Horizonte -- MG -- Brazil
+  \email{tiagocampos@dcc.ufmg.br}
+}
+
+\newcommand{\TODO}[1]{{\raggedright\textit{TODO: #1}\par}}
+\newtheorem{theorem}{Theorem}
+\newcommand{\op}[1]{\mathsf{#1}}
+
+\begin{document}
+
+\maketitle
+
+% Abstract of the full paper (../paper/subtyping_paper.tex), kept for reference.
+% Its text is now the starting point of the Introduction.
+% TODO: write the short abstract (SBC: at most 10 lines; two pages in total).
+% \begin{abstract}
+% (Dependent) pattern matching is a powerful feature of functional and dependently typed languages, yet programmers often encounter unreachable clauses. This either leads to unsafe partial functions or, in safe settings, to proof obligations that require the tedious resolution of trivial cases. The problem is particularly acute when programs operate on subsets of an inductive datatype. Standard encodings pair data with propositions or refactor datatypes into indexed families, but both approaches complicate composition and proof automation.
+%
+% The problem arises from two main factors: (1) the type system generates trivial obligations because it cannot express the intended nature of the data, and (2) the type system cannot reason computationally about constructors, so you could not write a procedure to remove these minor proof obligations.
+% The first problem can be solved by introducing a subtyping discipline, while the second requires lifting constructor information to the term level as a first-class entity. Both solutions address the problem: the former is simpler and more lightweight, whereas the latter is more expressive and can itself be used to encode the subtyping discipline. In fact, the latter approach can also be used to encode other procedures that eliminate additional trivial proof obligations.
+%
+% We present a subtyping discipline for constructor subsets, in which first-class signatures describe which constructors of a family are available. These signatures make the intended subset explicit at the type level, enabling pattern matching to rule out impossible branches without generating spurious obligations. We then elaborate this subtyping discipline into the type theory of Dagand and McBride, in which constructors and type constructors are themselves terms of the theory.
+% We further formalize the subtyping discipline and prove its soundness with respect to its elaboration into Dagand and McBride's type theory.
+%
+% Our results show that constructor subsets are expressive enough to capture common programming idioms, and that extending a dependently typed language with them is simple.
+% Through the elaboration, constructor subsets can be expressed in a purely computational setting, which enables reusing constructors in different type constructors, deciding about constructors, and even set-based operations on signatures.
+% We implement the subtyping discipline in Lambdapi and test it against a fragment of the type system, and we formalize its elaboration into Dagand and McBride's extended type theory in Rocq.
+% \end{abstract}
+
+\section{Introduction}
+Pattern matching is a foundation of functional and dependently typed languages, yet it often forces programmers to handle clauses that can never be reached.
+Programmers must then either write unsafe partial functions or, in safe settings, discharge tedious proof obligations for these trivial cases.
+The problem is particularly critical when programs operate on subsets of an inductive datatype.
+Standard encodings pair data with propositions or refactor datatypes into indexed families, but both approaches complicate composition and proof automation.
+Figure~\ref{fig:rocq} shows the head of a non-empty list encoded in the Rocq proof assistant~\cite{paulin1993inductive}.
+
+\begin{figure}[ht]
+\centering
+\begin{minipage}[t]{0.45\textwidth}
+\begin{lstlisting}
+Definition head {A} (l : list A)
+  : l <> nil -> A :=
+  match l with
+  | cons x _ => fun _ => x
+  | nil => fun p =>
+      match p eq_refl with end
+  end.
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.52\textwidth}
+\begin{lstlisting}
+Inductive nelist A : bool -> Type :=
+| nnil : nelist A false
+| ncons {b} : A -> nelist A b
+              -> nelist A true.
+Definition head' {A}
+  (l : nelist A true) : A :=
+  match l with ncons _ x _ => x end.
+\end{lstlisting}
+\end{minipage}
+\caption{Excluding \texttt{nil} in Rocq: by a proposition (left) and by an index (right).}
+\label{fig:rocq}
+\end{figure}
+
+The problem has two causes:
+(1)~the type system cannot express the intended subset of the data, so it generates trivial obligations, and
+(2)~it cannot reason computationally about constructors, so ultimately no internal procedure can be written to discharge them.
+A subtyping discipline addresses the first; the second requires lifting constructors to the term level, which is more expressive and can itself encode the subtyping discipline.
+
+We present a subtyping discipline for \emph{constructor subsets}, where first-class signatures track which constructors of a family are available, so that pattern matching rules out impossible branches without spurious obligations.
+We elaborate it into the type theory of~\cite{dagand2012elaborating}, in which constructors are themselves terms, and we prove that our elaboration is sound.
+We implement the discipline in Lambdapi and mechanize the elaborated calculus in Rocq.
+
+\section{Constructor Subsets}
+Constructor subsets are a form of \emph{constructor subtyping}, in which an inductive type is a subtype of another with more constructors~\cite{BatheGillesFradeMaria,MarmadukeJenkinsStump}; they are based on a first-class, term-level representation of sets of constructors.
+Usually, constructors are fixed by the declaration of their type constructor~\cite{coquand,paulin1993inductive}; however, constructor subsets let us select which constructors are available.
+For example, $\{\text{List}\:A :: |\text{cons}\}$ restricts only the outermost constructor.
+The function $\text{head} : \{\text{List}\:A :: |\text{cons}\} \to A$ is defined by a single $\text{cons}$ clause, with no proof or indexing and without the need for a new datatype as in Figure~\ref{fig:rocq}.
+A \emph{constructor subset} $\{T\,\Delta^{*} :: \Phi\}$ restricts the inductive family $T$, with indices $\Delta^{*}$, to the values whose outermost constructor belongs to the signature $\Phi$.
+A constructor application $C\:\overrightarrow{u} : T\,\Delta^{*}$ has type $\{T\,\Delta^{*} :: \Phi\}$ when $C \in \Phi$, and subsets are ordered by inclusion:
+\[
+\{T\,\Delta^{*} :: \Phi'\} \sqsubseteq \{T\,\Delta^{*} :: \Phi\} \sqsubseteq T\,\Delta^{*}
+\qquad \text{whenever } \Phi' \subseteq \Phi.
+\]
+Futhermore, the $\phi$-normalization step, removes trivial incompatible constructors from signatures; for instance, $\{\text{Vec}\:A\:(\text{suc}\:n) :: |\text{nil}\:|\text{cons}\}$ reduces to $\{\text{Vec}\:A\:(\text{suc}\:n) :: |\text{cons}\}$.
+The simplicity of the type system is justified since we adapt a simple $\lambda\Pi$-style type theory~\cite{harper1993framework} with just a few type rules for constructor subtyping.
+
+\section{Elaboration}\label{sec:elaboration}
+The type theory of~\cite{dagand2012elaborating} elaborates inductive definitions into codes of a universe of datatypes, so that procedures inside the theory can reason about constructors.
+For instance, one could create a procedure exploiting acyclicity: an equation $x \equiv C\:\overrightarrow{u}$ with $x$ constructor-guarded in $\overrightarrow{u}$ has no solution, and the corresponding case could be discarded automatically~\cite{mcbride2006constructions}.
+
+We elaborate constructor subsets into Dagand and McBride's type theory.
+We extend it with an empty description code for uninhabited constructor payloads, which is interpreted as $\bot$.
+We represent signatures as maps from labels to payload descriptions, so a constructor has its own identity and can be reused across signatures, even of unrelated datatypes.
+A constructor subset $\{T\,\Delta^{*} :: \Phi\}$ elaborates to $\llbracket T\,\Delta^{*} :: \Phi \rrbracket$, whose constructors are those of $\Phi$ and whose recursive (strictly positive) positions use the full definition of $T$.
+Subtyping, written $\Gamma \vdash A \sqsubseteq B \rightsquigarrow c$, elaborates to a coercion $c$ that only relabels the outermost constructor, and checking $\Gamma \vdash e \Leftarrow A \rightsquigarrow t$ elaborates a source term $e$ to a core term $t$.
+
+\begin{theorem}[Elaboration soundness]\label{thm:soundness}
+If $\Gamma \vdash e \Leftarrow A \rightsquigarrow t$, then $\Gamma \vdash t : A$.\newline
+If \mbox{$\Gamma \vdash \llbracket T\,\Delta^{*} :: \Phi' \rrbracket \sqsubseteq \llbracket T\,\Delta^{*} :: \Phi \rrbracket \rightsquigarrow c$}, then \mbox{$\Gamma \vdash c : \llbracket T\,\Delta^{*} :: \Phi' \rrbracket \to \llbracket T\,\Delta^{*} :: \Phi \rrbracket$}.
+\end{theorem}
+
+\section{Consistency}
+Our elaborated calculus is proved to be confluent and strongly normalizing, and evaluation preserves types; all results are mechanized in Rocq without axioms.\footnote{LLM disclaimer: some large and tedious proofs were automated using the Claude (Anthropic) LLM.}
+
+\begin{theorem}[Consistency]\label{thm:consistency}
+For every term $t$, $\varnothing \nvdash t : \llbracket T\,\Delta^{*} :: (\,) \rrbracket$.
+\end{theorem}
+
+Likewise, the empty enumeration~\cite[Fig.~2]{dagand2012elaborating} \mbox{$\bot := \op{EnumT}\,\op{nilE}$} has no closed inhabitant in our extended Dagand and McBride's type theory.
+Both two types maps each other, we can conclude that normalization and preservation would evaluate $t$ to a value of type $\bot$, and there is none.
+
+\begin{theorem}[Canonical forms]\label{thm:canonical}
+If $\varnothing \vdash t : \llbracket T\,\Delta^{*} :: \Phi \rrbracket$, then $t$ evaluates to $C\:\overrightarrow{u}$ for some $C \in \Phi$.
+\end{theorem}
+
+\bibliographystyle{sbc}
+\bibliography{references}
+
+\end{document}

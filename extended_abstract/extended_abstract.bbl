@@ -1,0 +1,43 @@
+\begin{thebibliography}{}
+
+\bibitem[Barthe and Frade 1999]{BatheGillesFradeMaria}
+Barthe, G. and Frade, M.~J. (1999).
+\newblock Constructor subtyping.
+\newblock In {\em Programming Languages and Systems (ESOP '99)}, volume 1576 of
+  {\em Lecture Notes in Computer Science}, pages 109--127. Springer.
+
+\bibitem[Coquand and Paulin 1990]{coquand}
+Coquand, T. and Paulin, C. (1990).
+\newblock Inductively defined types.
+\newblock In {\em COLOG-88}, volume 417 of {\em Lecture Notes in Computer
+  Science}, pages 50--66. Springer.
+
+\bibitem[Dagand and McBride 2012]{dagand2012elaborating}
+Dagand, P.-{\'E}. and McBride, C. (2012).
+\newblock Elaborating inductive definitions.
+\newblock {\em CoRR}, abs/1210.6390.
+
+\bibitem[Harper et~al. 1993]{harper1993framework}
+Harper, R., Honsell, F., and Plotkin, G. (1993).
+\newblock A framework for defining logics.
+\newblock {\em Journal of the ACM}, 40(1):143--184.
+
+\bibitem[Marmaduke et~al. 2020]{MarmadukeJenkinsStump}
+Marmaduke, A., Jenkins, C., and Stump, A. (2020).
+\newblock Zero-cost constructor subtyping.
+\newblock In {\em Implementation and Application of Functional Languages (IFL
+  2020)}, pages 93--103. ACM.
+
+\bibitem[McBride et~al. 2006]{mcbride2006constructions}
+McBride, C., Goguen, H., and McKinna, J. (2006).
+\newblock A few constructions on constructors.
+\newblock In {\em Types for Proofs and Programs (TYPES 2004)}, volume 3839 of
+  {\em Lecture Notes in Computer Science}, pages 186--200. Springer.
+
+\bibitem[Paulin-Mohring 1993]{paulin1993inductive}
+Paulin-Mohring, C. (1993).
+\newblock Inductive definitions in the system {Coq}: Rules and properties.
+\newblock In {\em Typed Lambda Calculi and Applications (TLCA)}, volume 664 of
+  {\em Lecture Notes in Computer Science}, pages 328--345. Springer.
+
+\end{thebibliography}
